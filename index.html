@@ -409,55 +409,53 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* New CSS for Programming Container */
+    /* New Styles for Code Container */
     .code-container {
-        background-color: #282c34; /* Dark code block color */
-        border: 1px solid #3e4451;
-        border-radius: var(--border-radius-sm);
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: var(--border-radius-md);
         padding: 15px;
-        margin-top: 10px;
+        margin: 10px 0;
         position: relative;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
         overflow-x: auto;
-        font-family: monospace;
-        font-size: 0.95rem;
-        color: #abb2bf;
-        direction: ltr; /* Force LTR direction for code */
-        text-align: left; /* Force left alignment for code */
+        white-space: pre-wrap;
+        word-break: break-all;
     }
-    .code-container pre {
-        margin: 0;
-        padding: 0;
-        white-space: pre-wrap; /* Ensure wrapping */
-        word-break: break-all; /* Allow word breaking */
+    .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #333;
+    }
+    .code-language {
+        color: var(--success-color);
+        font-weight: bold;
+        font-size: 0.8rem;
     }
     .copy-code-btn {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
+        background: var(--primary-color);
+        color: var(--text-on-primary);
         border: none;
         padding: 5px 10px;
-        border-radius: 5px;
+        border-radius: var(--border-radius-sm);
         cursor: pointer;
-        font-size: 0.8rem;
-        opacity: 0.8;
-        transition: opacity 0.2s, background 0.2s;
-        z-index: 1; /* Ensure button is above code */
+        font-size: 0.75rem;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
     .copy-code-btn:hover {
-        opacity: 1;
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--primary-hover-color);
+        transform: scale(1.05);
     }
-    /* RTL adjustment for the copy button */
-    html[dir="rtl"] .copy-code-btn {
-        left: 5px;
-        right: auto;
-    }
-    /* Style for successful copy feedback */
     .copy-code-btn.copied {
-        background-color: var(--success-color);
-        color: var(--text-on-primary);
+        background: var(--success-color);
     }
     
     @media (max-width: 480px) { 
@@ -467,6 +465,7 @@
       .suggestion-btn { padding: 10px; font-size: 0.85rem; }
       .subject-item-btn { padding: 12px 15px; font-size: 0.9rem; gap: 6px;} 
       .subject-item-btn i { font-size: 1.8rem; }
+      .code-container { padding: 10px; font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -633,20 +632,21 @@
     const localStorageKeySubscription = "saifAiSubscription_v1";
     
     let allChatSessions = {}; let messages = []; let attachedFiles = []; let currentSubject = "general"; let currentChatId = null; let currentLanguage = "ar";
+    // إضافة مادة البرمجة إلى قائمة المواد
     const subjects = [ 
-        { key: "programming", name: { ar: "البرمجة", en: "Programming", fr: "Programmation", es: "Programación", zh: "编程" }, icon: "fas fa-code" }, /* NEW SUBJECT */
-        { key: "physics", name: { ar: "فيزياء", en: "Physics", fr: "Physique", es: "Física", zh: "物理" }, icon: "fas fa-atom" }, 
-        { key: "chemistry", name: { ar: "كيمياء", en: "Chemistry", fr: "Chimie", es: "Química", zh: "化学" }, icon: "fas fa-flask" }, 
-        { key: "biology", name: { ar: "أحياء", en: "Biology", fr: "Biologie", es: "Biología", zh: "生物学" }, icon: "fas fa-dna" }, 
-        { key: "science", name: { ar: "علوم", en: "Science", fr: "Sciences", es: "Ciencia", zh: "科学" }, icon: "fas fa-microscope" }, 
-        { key: "arabic", name: { ar: "لغة عربية", en: "Arabic", fr: "Arabe", es: "Árabe", zh: "阿拉伯语" }, icon: "fas fa-pen-nib" }, 
-        { key: "philosophy", name: { ar: "فلسفة", en: "Philosophy", fr: "Philosophie", es: "Filosofía", zh: "哲学" }, icon: "fas fa-brain" }, 
-        { key: "english", name: { ar: "لغة إنجليزية", en: "English", fr: "Anglais", es: "Inglés", zh: "英语" }, icon: "fas fa-language" }, 
-        { key: "math", name: { ar: "رياضيات", en: "Math", fr: "Maths", es: "Matemáticas", zh: "数学" }, icon: "fas fa-calculator" }, 
-        { key: "religion", name: { ar: "تربية دينية", en: "Religion", fr: "Religion", es: "Religión", zh: "宗教教育" }, icon: "fas fa-mosque" } 
+      { key: "programming", name: { ar: "برمجة", en: "Programming", fr: "Programmation", es: "Programación", zh: "编程" }, icon: "fas fa-code" },
+      { key: "physics", name: { ar: "فيزياء", en: "Physics", fr: "Physique", es: "Física", zh: "物理" }, icon: "fas fa-atom" }, 
+      { key: "chemistry", name: { ar: "كيمياء", en: "Chemistry", fr: "Chimie", es: "Química", zh: "化学" }, icon: "fas fa-flask" }, 
+      { key: "biology", name: { ar: "أحياء", en: "Biology", fr: "Biologie", es: "Biología", zh: "生物学" }, icon: "fas fa-dna" }, 
+      { key: "science", name: { ar: "علوم", en: "Science", fr: "Sciences", es: "Ciencia", zh: "科学" }, icon: "fas fa-microscope" }, 
+      { key: "arabic", name: { ar: "لغة عربية", en: "Arabic", fr: "Arabe", es: "Árabe", zh: "阿拉伯语" }, icon: "fas fa-pen-nib" }, 
+      { key: "philosophy", name: { ar: "فلسفة", en: "Philosophy", fr: "Philosophie", es: "Filosofía", zh: "哲学" }, icon: "fas fa-brain" }, 
+      { key: "english", name: { ar: "لغة إنجليزية", en: "English", fr: "Anglais", es: "Inglés", zh: "英语" }, icon: "fas fa-language" }, 
+      { key: "math", name: { ar: "رياضيات", en: "Math", fr: "Maths", es: "Matemáticas", zh: "数学" }, icon: "fas fa-calculator" }, 
+      { key: "religion", name: { ar: "تربية دينية", en: "Religion", fr: "Religion", es: "Religión", zh: "宗教教育" }, icon: "fas fa-mosque" } 
     ];
     let recognition; let isListening = false; let deferredPrompt; let speechEndTimeout;
-    const predefinedSuggestions = [ {ar:"اشرح لي مفهوم الثقب الأسود ببساطة",en:"Explain the concept of a black hole simply",fr:"Expliquez simplement le concept d'un trou noir",es:"Explica de forma sencilla el concepto de agujero negro",zh:"简单解释一下黑洞的概念"}, {ar:"ما هي أفضل طريقة لتعلم لغة جديدة؟",en:"What is the best way to learn a new language?",fr:"Quelle est la meilleure façon d'apprendre une nouvelle langue ?",es:"¿Cuál es la mejor manera de aprender un nuevo idioma?",zh:"学习一门新语言的最好方法是什么？"}, {ar:"اكتب قصة قصيرة عن مستكشف فضاء",en:"Write a short story about a space explorer",fr:"Écrivez une nouvelle sur un explorateur de l'espace",es:"Escribe una historia corta sobre un explorador espacial",zh:"写一个关于太空探险家的短篇故事"}, {ar:"ما هي عاصمة أستراليا؟",en:"What is the capital of Australia?",fr:"Quelle est la capitale de l'Australie ?",es:"¿Cuál es la capital de Australia?",zh:"澳大利亚的首都是哪里？"}, {ar:"لخص لي كتاب الأب الغني والأب الفقير",en:"Summarize the book 'Rich Dad Poor Dad'",fr:"Résumez le livre 'Père riche, père pauvre'",es:"Resume el libro 'Padre Rico, Padre Pobre'",zh:"总结《富爸爸穷爸爸》这本书"}, {ar:"كيف تعمل محركات البحث مثل جوجل؟",en:"How do search engines like Google work?",fr:"Comment fonctionnent les moteurs de recherche comme Google ?",es:"¿Cómo funcionan los motores de búsqueda como Google?",zh:"像谷歌这样的搜索引擎是如何工作的？"}, {ar:"ما هي فوائد رياضة التأمل؟",en:"What are the benefits of meditation?",fr:"Quels sont les bienfaits de la méditation ?",es:"¿Cuáles son los beneficios de la meditación?",zh:"冥想有什么好处？"}, {ar:"اقترح 5 أفكار لمشاريع برمجية صغيرة",en:"Suggest 5 ideas for small programming projects",fr:"Suggérez 5 idées de petits projets de programmation",es:"Sugiere 5 ideas para pequeños proyectos de programación",zh:"为小型编程项目建议5个想法"}, {ar:"ما هو الفرق بين الذكاء الاصطناعي وتعلم الآلة؟",en:"What is the difference between AI and Machine Learning?",fr:"Quelle est la différence entre l'IA et l'apprentissage automatique ?",es:"¿Cuál es la diferencia entre la IA y el Aprendizaje Automático?",zh:"人工智能和机器学习有什么区别？"}, {ar:"اكتب لي قصيدة عن جمال الطبيعة",en:"Write me a poem about the beauty of nature",fr:"Écris-moi un poème sur la beauté de la nature",es:"Escríbeme un poema sobre la belleza de la naturaleza",zh:"为我写一首关于自然之美的诗"}, {ar:"كيف يمكنني حماية خصوصيتي على الإنترنت؟",en:"How can I protect my privacy online?",fr:"Comment puis-je protéger ma vie privée en ligne ?",es:"¿Cómo puedo proteger mi privacidad en línea?",zh:"我如何在线保护我的隐私？"}, {ar:"ما هي أبرز أحداث القرن العشرين؟",en:"What are the main events of the 20th century?",fr:"Quels sont les principaux événements du 20e siècle ?",es:"¿Cuáles son los principales acontecimientos del siglo XX?",zh:"20世纪的主要事件有哪些？"}, {ar:"اشرح نظرية النسبية لأينشطاين",en:"Explain Einstein's theory of relativity",fr:"Expliquez la théorie de la relativité d'Einstein",es:"Explica la teoría de la relatividad de Einstein",zh:"解释爱因斯坦的相对论"}, {ar:"ما هي أغرب معلومة تعرفها؟",en:"What is the weirdest fact you know?",fr:"Quel est le fait le plus étrange que vous connaissiez ?",es:"¿Cuál es el dato más extraño que conoces?",zh:"你知道的最奇怪的事实是什么？"}, {ar:"اقترح خطة لرحلة سياحية إلى اليابان لمدة أسبوع",en:"Suggest a one-week tourist trip plan to Japan",fr:"Suggérez un plan de voyage touristique d'une semaine au Japon",es:"Sugiere un plan de viaje turístico de una semana a Japón",zh:"建议一个为期一周的日本旅游计划"}, {ar:"كيف أبدأ في مجال الاستثمار؟",en:"How do I start investing?",fr:"Comment commencer à investir ?",es:"¿Cómo empiezo a invertir?",zh:"我该如何开始投资？"}, {ar:"اكتب نصًا إعلانيًا لمنتج خيالي",en:"Write an advertisement text for a fictional product",fr:"Rédigez un texte publicitaire pour un produit fictif",es:"Escribe un texto publicitario para un producto ficticio",zh:"为虚构产品撰写广告文案"}, {ar:"ما هي أهمية الحفاظ على البيئة؟",en:"What is the importance of environmental conservation?",fr:"Quelle est l'importance de la conservation de l'environnement ?",es:"¿Cuál es la importancia de la conservación del medio ambiente?",zh:"环境保护的重要性是什么؟"}, {ar:"لخص فيلم 'Inception'",en:"Summarize the movie 'Inception'",fr:"Résumez le film 'Inception'",es:"Resume la película 'Inception'",zh:"总结电影《盗梦空间》"}, {ar:"ما هي الحضارات القديمة التي أثرت في العالم؟",en:"What ancient civilizations influenced the world?",fr:"Quelles civilisations anciennes ont influencé le monde ?",es:"¿Qué civilizaciones antiguas influyeron en el mundo?",zh:"哪些古代文明影响了世界？"}, {ar:"كيف يعمل نظام تحديد المواقع العالمي (GPS)؟",en:"How does the GPS system work?",fr:"Comment fonctionne le système GPS ?",es:"¿Cómo funciona el sistema GPS?",zh:"GPS系统是如何工作的？"}, {ar:"ما هي النصائح لزيادة الإنتاجية في العمل؟",en:"What are some tips for increasing productivity at work?",fr:"Quels sont les conseils pour augmenter la productivité au travail ?",es:"¿Cuáles son algunos consejos para aumentar la productividad en el trabajo?",zh:"提高工作效率有什么技巧？"}, {ar:"اكتب حوارًا فلسفيًا بين شخصين",en:"Write a philosophical dialogue between two people",fr:"Écrivez un dialogue philosophique entre deux personnes",es:"Escribe un diálogo filosófico entre dos personas",zh:"写一段两人之间的哲学对话"}, {ar:"ما هي أفضل الكتب التي قرأتها؟",en:"What are the best books you have read?",fr:"Quels sont les meilleurs livres que vous avez lus ?",es:"¿Cuáles son los mejores libros que has leído?",zh:"你读过的最好的书是哪些？"}, {ar:"كيف يمكن للذكاء الاصطناعي أن يغير مستقبلنا؟",en:"How can AI change our future?",fr:"Comment l'IA peut-elle changer notre avenir ?",es:"¿Cómo puede la IA cambiar nuestro futuro?",zh:"人工智能如何改变我们的未来？"}, {ar:"ما هي عملية البناء الضوئي؟",en:"What is the process of photosynthesis?",fr:"Quel est le processus de la photosynthèse ?",es:"¿Qué es el proceso de la fotosíntesis?",zh:"什么是光合作用的过程？"}, {ar:"لخص قصة أحد الأنبياء",en:"Summarize the story of one of the prophets",fr:"Résumez l'histoire d'un des prophètes",es:"Resume la historia de uno de los profetas",zh:"总结一位先知的故事"}, {ar:"ما هي المهارات المطلوبة في سوق العمل اليوم؟",en:"What skills are in demand in today's job market?",fr:"Quelles sont les compétences recherchées sur le marché du travail actuel ?",es:"¿Qué habilidades se demandan en el mercado laboral actual?",zh:"当今就业市场需要哪些技能？"} ];
+    const predefinedSuggestions = [ {ar:"اشرح لي مفهوم الثقب الأسود ببساطة",en:"Explain the concept of a black hole simply",fr:"Expliquez simplement le concept d'un trou noir",es:"Explica de forma sencilla el concepto de agujero negro",zh:"简单解释一下黑洞的概念"}, {ar:"ما هي أفضل طريقة لتعلم لغة جديدة؟",en:"What is the best way to learn a new language?",fr:"Quelle est la meilleure façon d'apprendre une nouvelle langue ?",es:"¿Cuál es la mejor manera de aprender un nuevo idioma?",zh:"学习一门新语言的最好方法是什么？"}, {ar:"اكتب قصة قصيرة عن مستكشف فضاء",en:"Write a short story about a space explorer",fr:"Écrivez une nouvelle sur un explorateur de l'espace",es:"Escribe una historia corta sobre un explorador espacial",zh:"写一个关于太空探险家的短篇故事"}, {ar:"ما هي عاصمة أستراليا؟",en:"What is the capital of Australia?",fr:"Quelle est la capitale de l'Australie ?",es:"¿Cuál es la capital de Australia?",zh:"澳大利亚的首都是哪里？"}, {ar:"لخص لي كتاب الأب الغني والأب الفقير",en:"Summarize the book 'Rich Dad Poor Dad'",fr:"Résumez le livre 'Père riche, père pauvre'",es:"Resume el libro 'Padre Rico, Padre Pobre'",zh:"总结《富爸爸穷爸爸》这本书"}, {ar:"كيف تعمل محركات البحث مثل جوجل؟",en:"How do search engines like Google work?",fr:"Comment fonctionnent les moteurs de recherche comme Google ?",es:"¿Cómo funcionan los motores de búsqueda como Google?",zh:"像谷歌这样的搜索引擎是如何工作的？"}, {ar:"ما هي فوائد رياضة التأمل؟",en:"What are the benefits of meditation?",fr:"Quels sont les bienfaits de la méditation ?",es:"¿Cuáles son los beneficios de la meditación?",zh:"冥想有什么好处？"}, {ar:"اقترح 5 أفكار لمشاريع برمجية صغيرة",en:"Suggest 5 ideas for small programming projects",fr:"Suggérez 5 idées de petits projets de programmation",es:"Sugiere 5 ideas para pequeños proyectos de programación",zh:"为小型编程项目建议5个想法"}, {ar:"ما هو الفرق بين الذكاء الاصطناعي وتعلم الآلة؟",en:"What is the difference between AI and Machine Learning?",fr:"Quelle est la différence entre l'IA et l'apprentissage automatique ?",es:"¿Cuál es la diferencia entre la IA y el Aprendizaje Automático?",zh:"人工智能和机器学习有什么区别？"}, {ar:"اكتب لي قصيدة عن جمال الطبيعة",en:"Write me a poem about the beauty of nature",fr:"Écris-moi un poème sur la beauté de la nature",es:"Escríbeme un poema sobre la belleza de la naturaleza",zh:"为我写一首关于自然之美的诗"}, {ar:"كيف يمكنني حماية خصوصيتي على الإنترنت؟",en:"How can I protect my privacy online?",fr:"Comment puis-je protéger ma vie privée en ligne ?",es:"¿Cómo puedo proteger mi privacidad en línea?",zh:"我如何在线保护我的隐私？"}, {ar:"ما هي أبرز أحداث القرن العشرين؟",en:"What are the main events of the 20th century?",fr:"Quels sont les principaux événements du 20e siècle ?",es:"¿Cuáles son los principaux acontecimientos del siglo XX?",zh:"20世纪的主要事件有哪些？"}, {ar:"اشرح نظرية النسبية لأينشطاين",en:"Explain Einstein's theory of relativity",fr:"Expliquez la théorie de la relativité d'Einstein",es:"Explica la teoría de la relatividad de Einstein",zh:"解释爱因斯坦的相对论"}, {ar:"ما هي أغرب معلومة تعرفها؟",en:"What is the weirdest fact you know?",fr:"Quel est le fait le plus étrange que vous connaissiez ?",es:"¿Cuál es el dato más extraño que conoces?",zh:"你知道的最奇怪的事实是什么？"}, {ar:"اقترح خطة لرحلة سياحية إلى اليابان لمدة أسبوع",en:"Suggest a one-week tourist trip plan to Japan",fr:"Suggérez un plan de voyage touristique d'une semaine au Japon",es:"Sugiere un plan de viaje turístico de una semana a Japón",zh:"建议一个为期一周的日本旅游计划"}, {ar:"كيف أبدأ في مجال الاستثمار؟",en:"How do I start investing?",fr:"Comment commencer à investir ?",es:"¿Cómo empiezo a invertir?",zh:"我该如何开始投资？"}, {ar:"اكتب نصًا إعلانيًا لمنتج خيالي",en:"Write an advertisement text for a fictional product",fr:"Rédigez un texte publicitaire pour un produit fictif",es:"Escribe un texto publicitario para un producto ficticio",zh:"为虚构产品撰写广告文案"}, {ar:"ما هي أهمية الحفاظ على البيئة؟",en:"What is the importance of environmental conservation?",fr:"Quelle est l'importance de la conservation de l'environnement ?",es:"¿Cuál es la importancia de la conservación del medio ambiente?",zh:"环境保护的重要性是什么？"}, {ar:"لخص فيلم 'Inception'",en:"Summarize the movie 'Inception'",fr:"Résumez le film 'Inception'",es:"Resume la película 'Inception'",zh:"总结电影《盗梦空间》"}, {ar:"ما هي الحضارات القديمة التي أثرت في العالم؟",en:"What ancient civilizations influenced the world?",fr:"Quelles civilisations anciennes ont influencé le monde ?",es:"¿Qué civilizaciones antiguas influyeron en el mundo?",zh:"哪些古代文明影响了世界？"}, {ar:"كيف يعمل نظام تحديد المواقع العالمي (GPS)؟",en:"How does the GPS system work?",fr:"Comment fonctionne le système GPS ?",es:"¿Cómo funciona el sistema GPS?",zh:"GPS系统是如何工作的？"}, {ar:"ما هي النصائح لزيادة الإنتاجية في العمل؟",en:"What are some tips for increasing productivity at work?",fr:"Quels sont les conseils pour augmenter la productivité au travail ?",es:"¿Cuáles son algunos consejos para aumentar la productividad en el trabajo?",zh:"提高工作效率有什么技巧？"}, {ar:"اكتب حوارًا فلسفيًا بين شخصين",en:"Write a philosophical dialogue between two people",fr:"Écrivez un dialogue philosophique entre deux personnes",es:"Escribe un diálogo filosófico entre dos personas",zh:"写一段两人之间的哲学对话"}, {ar:"ما هي أفضل الكتب التي قرأتها؟",en:"What are the best books you have read?",fr:"Quels sont les meilleurs livres que vous avez lus ?",es:"¿Cuáles son los mejores libros que has leído?",zh:"你读过的最好的书是哪些？"}, {ar:"كيف يمكن للذكاء الاصطناعي أن يغير مستقبلنا؟",en:"How can AI change our future?",fr:"Comment l'IA peut-elle changer notre avenir ?",es:"¿Cómo puede la IA cambiar nuestro futuro?",zh:"人工智能如何改变我们的未来？"}, {ar:"ما هي عملية البناء الضوئي؟",en:"What is the process of photosynthesis?",fr:"Quel est le processus de la photosynthèse ?",es:"¿Qué es el proceso de la fotosíntesis?",zh:"什么是光合作用的过程？"}, {ar:"لخص قصة أحد الأنبياء",en:"Summarize the story of one of the prophets",fr:"Résumez l'histoire d'un des prophètes",es:"Resume la historia de uno de los profetas",zh:"总结一位先知的故事"}, {ar:"ما هي المهارات المطلوبة في سوق العمل اليوم؟",en:"What skills are in demand in today's job market?",fr:"Quelles sont les compétences recherchées sur le marché du travail actuel ?",es:"¿Qué habilidades se demandan en el mercado laboral actual?",zh:"当今就业市场需要哪些技能？"} ];
     const mainContainer = document.querySelector('.container');
     const spaceBackground = document.getElementById('space-background');
     function showAppNotification() { downloadNotification.classList.add('show'); } function hideAppNotification() { downloadNotification.classList.remove('show'); }
@@ -834,90 +834,98 @@
     function addWelcomeMessage() { const welcomeMsgText = getWelcomeMessageText(); if (messages.length === 0 || !messages.some(m => m.isInitialWelcome)) { messages.unshift({ sender: "bot", text: welcomeMsgText, images: [], isInitialWelcome: true }); } }
     function addMessage(sender, text, images = [], isSystemMessage = false) { if (currentChatId === null && sender === 'user') { const newId = Date.now(); const newSession = { id: newId, timestamp: newId, messages: [] }; if (!allChatSessions[currentSubject]) { allChatSessions[currentSubject] = []; } allChatSessions[currentSubject].unshift(newSession); currentChatId = newId; } messages.push({ sender, text, images, isSystemMessage }); refreshChat(); chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); }
     
-    // New function to handle the copy logic for the code container
-    function copyCodeContent(text, button) {
-        navigator.clipboard.writeText(text.trim()).then(() => { // Use trim to remove leading/trailing spaces/newlines
-            const t = translations[currentLanguage];
-            const originalHTML = button.innerHTML;
-            button.innerHTML = `<i class="fas fa-check"></i> ${t.copied}`;
-            button.classList.add('copied');
-            setTimeout(() => {
-                button.innerHTML = originalHTML;
-                button.classList.remove('copied');
-            }, 2000);
-        });
-    }
-
-    // New function to create the programming code container
-    function addCodeContainerActions(messageElement, text) {
-        const t = translations[currentLanguage];
-        const contentDiv = messageElement.querySelector('.message-content');
-        
-        // Clear the existing text content (if any plain text was typed)
-        contentDiv.innerHTML = '';
-
-        // 1. Create the container
+    // دالة جديدة لعرض الكود في حاوية خاصة
+    function createCodeContainer(code, language = '') {
         const codeContainer = document.createElement('div');
         codeContainer.className = 'code-container';
         
-        // 2. Add the copy button
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'copy-code-btn';
-        copyBtn.innerHTML = `<i class="fas fa-copy"></i> ${t.copy}`;
-        // Set the click handler to use the perfect copy logic
-        copyBtn.onclick = () => copyCodeContent(text, copyBtn);
-        codeContainer.appendChild(copyBtn);
-
-        // 3. Add the content (pre-formatted)
-        const pre = document.createElement('pre');
-        pre.textContent = text;
-        codeContainer.appendChild(pre);
+        const codeHeader = document.createElement('div');
+        codeHeader.className = 'code-header';
         
-        contentDiv.appendChild(codeContainer);
-    }
-
-    // Existing function to handle standard copy/play actions
-    function addBotMessageActions(messageElement, text) { 
-        const t = translations[currentLanguage]; 
-        const actionsDiv = document.createElement("div"); 
-        actionsDiv.className = "message-actions"; 
-        actionsDiv.innerHTML = ` <button title="${t.copy}"><i class="fas fa-copy"></i></button> <button title="${t.playAudio}"><i class="fas fa-volume-up"></i></button> `; 
-        actionsDiv.querySelector('button[title="' + t.copy + '"]').onclick = () => { navigator.clipboard.writeText(text); }; 
-        actionsDiv.querySelector('button[title="' + t.playAudio + '"]').onclick = () => { speakMessageText(text); }; 
-        messageElement.appendChild(actionsDiv); 
+        const codeLanguage = document.createElement('span');
+        codeLanguage.className = 'code-language';
+        codeLanguage.textContent = language || 'Code';
+        
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-btn';
+        copyButton.innerHTML = '<i class="fas fa-copy"></i> نسخ';
+        
+        const codeContent = document.createElement('pre');
+        codeContent.textContent = code;
+        codeContent.style.margin = '0';
+        codeContent.style.color = '#f8f8f2';
+        codeContent.style.overflowX = 'auto';
+        
+        codeHeader.appendChild(codeLanguage);
+        codeHeader.appendChild(copyButton);
+        codeContainer.appendChild(codeHeader);
+        codeContainer.appendChild(codeContent);
+        
+        // إضافة وظيفة النسخ
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = copyButton.innerHTML;
+                copyButton.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                copyButton.classList.add('copied');
+                setTimeout(() => {
+                    copyButton.innerHTML = originalText;
+                    copyButton.classList.remove('copied');
+                }, 2000);
+            });
+        });
+        
+        return codeContainer;
     }
     
-    // Updated typeWriterEffect to handle programming subject's special rendering
     function typeWriterEffect(element, text) { 
         let i = 0; 
         element.innerHTML = ""; 
+        
         function type() { 
             if (i < text.length) { 
-                element.innerHTML += text.charAt(i); 
-                i++; 
+                // التحقق إذا كان النص يحتوي على كود
+                if (text.substring(i).startsWith('```')) {
+                    const endIndex = text.indexOf('```', i + 3);
+                    if (endIndex !== -1) {
+                        const codeContent = text.substring(i + 3, endIndex);
+                        const codeContainer = createCodeContainer(codeContent, '');
+                        element.appendChild(codeContainer);
+                        i = endIndex + 3;
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    }
+                } else {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                }
                 chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'auto' }); 
                 setTimeout(type, 20); 
             } else { 
                 const messageElem = element.closest('.message'); 
-                if(messageElem) {
-                    // Check if subject is programming and re-render with container, or add standard actions
-                    if (currentSubject === "programming") {
-                       // Replace the typed text with the final code container
-                       addCodeContainerActions(messageElem, text); 
-                    } else {
-                       // Add standard actions (Copy/Play)
-                       addBotMessageActions(messageElem, text);
-                    }
-                }
-                // Add the message to the history after typing is done
-                messages.push({ sender: 'bot', text: text, images: [] }); 
-                saveAllChatSessionsToLocalStorage();
+                if(messageElem) addBotMessageActions(messageElem, text); 
             } 
         } 
         type(); 
     }
     
-    // Updated refreshChat to handle rendering of stored programming messages
+    function addBotMessageActions(messageElement, text) { 
+        const t = translations[currentLanguage];
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "message-actions";
+        actionsDiv.innerHTML = ` 
+            <button title="${t.copy}"><i class="fas fa-copy"></i></button> 
+            <button title="${t.playAudio}"><i class="fas fa-volume-up"></i></button> 
+        `; 
+        actionsDiv.querySelector('button[title="' + t.copy + '"]').onclick = () => { 
+            navigator.clipboard.writeText(text); 
+        }; 
+        actionsDiv.querySelector('button[title="' + t.playAudio + '"]').onclick = () => { 
+            speakMessageText(text); 
+        }; 
+        messageElement.appendChild(actionsDiv); 
+    }
+    
     function refreshChat() {
         chatContainer.innerHTML = "";
         const t = translations[currentLanguage];
@@ -938,11 +946,34 @@
             contentDiv.className = "message-content";
             
             if(msg.text) {
-                if (msg.sender === "bot" && currentSubject === "programming" && !msg.isInitialWelcome && !msg.isSystemMessage) {
-                    // Special rendering for stored programming bot messages
-                    addCodeContainerActions(messageElem, msg.text);
+                // معالجة النص لعرض الكود في حاوية خاصة
+                let processedText = msg.text;
+                const codeBlocks = processedText.match(/```[\s\S]*?```/g);
+                
+                if (codeBlocks) {
+                    let lastIndex = 0;
+                    codeBlocks.forEach((codeBlock) => {
+                        const startIndex = processedText.indexOf(codeBlock, lastIndex);
+                        const beforeCode = processedText.substring(lastIndex, startIndex);
+                        
+                        if (beforeCode) {
+                            const textNode = document.createTextNode(beforeCode);
+                            contentDiv.appendChild(textNode);
+                        }
+                        
+                        const codeContent = codeBlock.replace(/```/g, '');
+                        const codeContainer = createCodeContainer(codeContent, '');
+                        contentDiv.appendChild(codeContainer);
+                        
+                        lastIndex = startIndex + codeBlock.length;
+                    });
+                    
+                    if (lastIndex < processedText.length) {
+                        const afterCode = processedText.substring(lastIndex);
+                        const textNode = document.createTextNode(afterCode);
+                        contentDiv.appendChild(textNode);
+                    }
                 } else {
-                    // Standard rendering for all other messages
                     const textNode = document.createTextNode(msg.text);
                     contentDiv.appendChild(textNode);
                 }
@@ -960,14 +991,9 @@
             }
             
             messageElem.appendChild(header);
+            messageElem.appendChild(contentDiv);
             
-            // Append contentDiv only if it hasn't been replaced by addCodeContainerActions
-            if (!(msg.sender === "bot" && currentSubject === "programming" && !msg.isInitialWelcome && !msg.isSystemMessage)) {
-                messageElem.appendChild(contentDiv);
-            }
-            
-            // Add standard actions for non-programming bot messages
-            if(msg.sender === "bot" && currentSubject !== "programming" && !msg.isInitialWelcome && !msg.isSystemMessage) {
+            if(msg.sender === "bot" && !msg.isInitialWelcome && !msg.isSystemMessage) {
                 addBotMessageActions(messageElem, msg.text);
             }
             
@@ -999,11 +1025,35 @@
         return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
     }
 
-    async function processQueryWithAI(promptParts) { const t = translations[currentLanguage]; updateInitialViewState(); const typingIndicatorHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`; const tempMsgId = `bot-msg-${Date.now()}`; const messageElem = document.createElement("div"); messageElem.className = `message bot`; messageElem.id = tempMsgId; messageElem.innerHTML = `<div class="message-header"><span>${getBotDisplayName()}</span></div><div class="message-content">${typingIndicatorHTML}</div>`; chatContainer.appendChild(messageElem); chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); try { const responseText = await fetchGeminiResponse(promptParts); const finalMessageElement = document.getElementById(tempMsgId); if (finalMessageElement) { const contentDiv = finalMessageElement.querySelector('.message-content'); 
-        // We now rely on typeWriterEffect to handle the final rendering based on subject
-        typeWriterEffect(contentDiv, responseText);
-        // Note: The message is pushed to 'messages' inside typeWriterEffect after it finishes.
-        } } catch (error) { const errorElement = document.getElementById(tempMsgId); if (errorElement) { errorElement.querySelector('.message-content').innerHTML = `${t.errorPrefix}: ${error.message}`; } messages.push({ sender: 'bot', text: `${t.errorPrefix}: ${error.message}`, images: [], isSystemMessage: true }); saveAllChatSessionsToLocalStorage(); } }
+    async function processQueryWithAI(promptParts) { 
+        const t = translations[currentLanguage]; 
+        updateInitialViewState(); 
+        const typingIndicatorHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`; 
+        const tempMsgId = `bot-msg-${Date.now()}`; 
+        const messageElem = document.createElement("div"); 
+        messageElem.className = `message bot`; 
+        messageElem.id = tempMsgId; 
+        messageElem.innerHTML = `<div class="message-header"><span>${getBotDisplayName()}</span></div><div class="message-content">${typingIndicatorHTML}</div>`; 
+        chatContainer.appendChild(messageElem); 
+        chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); 
+        try { 
+            const responseText = await fetchGeminiResponse(promptParts); 
+            const finalMessageElement = document.getElementById(tempMsgId); 
+            if (finalMessageElement) { 
+                const contentDiv = finalMessageElement.querySelector('.message-content'); 
+                typeWriterEffect(contentDiv, responseText); 
+                messages.push({ sender: 'bot', text: responseText, images: [] }); 
+                saveAllChatSessionsToLocalStorage(); 
+            } 
+        } catch (error) { 
+            const errorElement = document.getElementById(tempMsgId); 
+            if (errorElement) { 
+                errorElement.querySelector('.message-content').innerHTML = `${t.errorPrefix}: ${error.message}`; 
+            } 
+            messages.push({ sender: 'bot', text: `${t.errorPrefix}: ${error.message}`, images: [], isSystemMessage: true }); 
+            saveAllChatSessionsToLocalStorage(); 
+        } 
+    }
     
     // --- New Usage Tracking and Subscription Logic ---
 
@@ -1038,9 +1088,10 @@
     }
 
     function incrementUsage(type) {
-        if (getSubscriptionStatus().isActive) return; // Don't track usage for subscribers
-        if (currentSubject === "programming") return; // Programming is open source
+        // لا تتبع الاستخدام لمادة البرمجة
+        if (currentSubject === 'programming') return;
         
+        if (getSubscriptionStatus().isActive) return; // Don't track usage for subscribers
         const tracker = getUsageTracker();
         if (type === 'message') tracker.messageCount++;
         else if (type === 'image') tracker.imageCount++;
@@ -1048,7 +1099,9 @@
     }
 
     function checkLimit(type) {
-        if (currentSubject === "programming") return true; // Programming is open source
+        // لا توجد حدود لمادة البرمجة
+        if (currentSubject === 'programming') return true;
+        
         if (getSubscriptionStatus().isActive) return true;
         const tracker = getUsageTracker();
         if (type === 'message') return tracker.messageCount < DAILY_MESSAGE_LIMIT;
@@ -1092,17 +1145,15 @@
         incrementUsage('message');
         
         const t = translations[currentLanguage];
-        let strictInstructions = t.aiInstructions;
-
-        // Use programming-specific instructions if needed
-        if (currentSubject === "programming") {
-            strictInstructions = t.aiInstructions.replace('{subjectContext}', t.aiProgrammingInstruction.replace('{subject}', getTranslatedSubjectName(currentSubject)));
+        
+        // تعليمات خاصة لمادة البرمجة
+        let strictInstructions;
+        if (currentSubject === 'programming') {
+            strictInstructions = `You are a programming expert. Your role is to help with code analysis, explain code, find errors, and provide corrected code. When providing code, ensure it is clean and ready for copy-paste without any extra decorations or unnecessary text. Always format code blocks with triple backticks. If the user sends an image, analyze the code in the image and respond accordingly. Always respond in ${t.languageName}.`;
         } else {
-            strictInstructions = t.aiInstructions.replace('{subjectContext}', currentSubject !== 'general' ? t.aiSubjectInstruction.replace('{subject}', getTranslatedSubjectName(currentSubject)) : '');
+            strictInstructions = t.aiInstructions.replace('{language}', t.languageName).replace('{subjectContext}', currentSubject !== 'general' ? t.aiSubjectInstruction.replace('{subject}', getTranslatedSubjectName(currentSubject)) : '');
         }
         
-        strictInstructions = strictInstructions.replace('{language}', t.languageName);
-
         const promptParts = [{ text: `${strictInstructions} The user's prompt is: ${messageText}` }];
         attachedFiles.forEach(fileData => {
             promptParts.push({ inline_data: { mime_type: 'image/jpeg', data: fileData.split(',')[1] } });
@@ -1126,22 +1177,18 @@
     function handleFileSelect(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => addFileToPreview(e.target.result); reader.readAsDataURL(file); imageUploadInput.value = ''; }
     
     function addFileToPreview(fileData) {
-        if (currentSubject !== "programming") { // Check limit only if not programming (unlimited images for programming)
-            if (!checkLimit('image')) {
-                showSubscriptionModal();
-                return;
-            }
-            const t = translations[currentLanguage];
-            if (attachedFiles.length >= 1) { alert(t.limitSingleImage); return; }
+        if (!checkLimit('image')) {
+            showSubscriptionModal();
+            return;
         }
+
+        const t = translations[currentLanguage];
+        if (attachedFiles.length >= 1) { alert(t.limitSingleImage); return; }
         
         attachedFiles.push(fileData);
         updateImagePreviews();
         updateSendOrVoiceButton();
-        
-        if (currentSubject !== "programming") {
-            incrementUsage('image');
-        }
+        incrementUsage('image');
     }
 
     function removeFileFromPreview(index) { attachedFiles.splice(index, 1); updateImagePreviews(); updateSendOrVoiceButton(); }
@@ -1172,31 +1219,11 @@
     function renderHistoryList() { historyList.innerHTML = ''; const t = translations[currentLanguage]; const sessions = allChatSessions[currentSubject] || []; if (sessions.length === 0) { historyList.innerHTML = `<li style="cursor: default; opacity: 0.7; justify-content: center;">${t.noHistory}</li>`; return; } sessions.forEach(session => { const li = document.createElement('li'); if (session.id === currentChatId) { li.classList.add('active'); } const firstUserMsg = session.messages.find(m => m.sender === 'user'); const titleText = firstUserMsg ? (firstUserMsg.images.length > 0 ? `[${t.image}] ${firstUserMsg.text}`.trim() : firstUserMsg.text) : t.newChat; li.innerHTML = `<span class="history-item-title">${titleText}</span><button class="delete-history-item-btn" title="${t.deleteChat}"><i class="fas fa-trash"></i></button>`; li.querySelector('.history-item-title').addEventListener('click', () => { if (session.id !== currentChatId) { loadChat(currentSubject, session.id); } closeHistorySidebar(); }); li.querySelector('.delete-history-item-btn').addEventListener('click', (e) => { e.stopPropagation(); if (confirm(t.confirmDeleteChat)) { const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === session.id); if (sessionIndex > -1) { allChatSessions[currentSubject].splice(sessionIndex, 1); if(session.id === currentChatId) { const nextSession = allChatSessions[currentSubject][0] || null; loadChat(currentSubject, nextSession ? nextSession.id : null); } saveAllChatSessionsToLocalStorage(); renderHistoryList(); } } }); historyList.appendChild(li); }); }
     function updateUIForLanguage() { const t = translations[currentLanguage]; languageDropdown.style.right = '0'; languageDropdown.style.left = 'auto'; settingsDropdown.style.left = '0'; settingsDropdown.style.right = 'auto'; document.getElementById('historyBtn').title = t.viewHistory; document.getElementById('shareBtn').title = t.shareApp; document.getElementById('languageBtn').title = t.changeLanguage; document.getElementById('settingsBtn').title = t.settings; document.getElementById('enterSubjectsBtnText').textContent = t.specializedSubjects; document.getElementById('deleteCurrentChatBtnText').textContent = t.deleteCurrentChat; updateSubjectUI(); document.getElementById('subjectsViewTitle').textContent = t.selectSubject; document.getElementById('backToChatText').textContent = t.backToChat; populateSubjectListInView(); userInput.placeholder = t.placeholder; toggleUploadBtn.title = t.attachFile; document.querySelector('#uploadFromGalleryBtn span').textContent = t.uploadFromGallery; document.querySelector('#useCameraBtn span').textContent = t.useCamera; document.getElementById('listeningText').textContent = t.listening; updateSendOrVoiceButton(); document.getElementById('aiDisclaimer').textContent = t.aiDisclaimer; updateDailySuggestions(); document.getElementById('captureBtn').title = t.capture; document.getElementById('cancelCameraBtn').textContent = t.cancel; document.getElementById('retakeBtn').textContent = t.retake; document.getElementById('usePhotoBtn').textContent = t.usePhoto; loader.textContent = t.analyzing; document.getElementById('shareModalTitle').textContent = t.shareApp; document.getElementById('shareModalDesc').textContent = t.shareDescription; document.getElementById('copyBtnText').textContent = t.copy; document.getElementById('qrCodeText').textContent = t.qrCodeText; document.getElementById('downloadNotificationText').textContent = t.installApp; document.getElementById('downloadAppBtn').textContent = t.install; document.getElementById('historyTitle').textContent = t.historyTitle; document.getElementById('newChatText').textContent = t.newChat; document.querySelectorAll('#languageDropdown button').forEach(button => { const langKey = button.dataset.lang; if (t.languageNames && t.languageNames[langKey]) { button.textContent = t.languageNames[langKey]; } }); }
     const translations = {
-      'ar': { languageName: "العربية", languageNames: { ar: 'العربية', en: 'الإنجليزية', fr: 'الفرنسية', es: 'الإسبانية', zh: 'الصينية' }, specializedSubjects: "مواد متخصصة", general: "عام", welcomeGeneral: "مرحباً! كيف يمكنني مساعدتك اليوم؟", welcomeSubject: "أهلاً بك. أنا مستعد لمساعدتك في مادة {subject}. تفضل بسؤالك.", placeholder: "اكتب رسالتك هنا...", you: "أنت", deleteMessage: "حذف الرسالة", listening: "جاري الاستماع...", playAudio: "تشغيل الصوت", send: "إرسال", speak: "التحدث", shareApp: "مشاركة التطبيق", shareDescription: "ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!", shareText: "اكتشف Saif AI، مساعد الذكاء الاصطناعي العربي المتطور!", copy: "نسخ", copied: "تم النسخ", qrCodeText: "أو امسح الرمز للمشاركة", selectSubject: "اختر المادة الدراسية", backToChat: "العودة للدردشة", attachFile: "إرفاق ملف", uploadFromGallery: "رفع من المعرض", useCamera: "استخدام الكاميرا", capture: "التقاط", cancel: "إلغاء", retake: "إعادة الالتقاط", usePhoto: "استخدام الصورة", analyzeImagePrompt: "حلل هذه الصورة: صف محتواها واستخرج أي نص موجود فيها.", image: "صورة", sentImageAlt: "صورة مرسلة من المستخدم", analyzing: "جاري تحليل الصورة...", installApp: "ثبّت التطبيق على جهازك للوصول السريع!", install: "تثبيت", changeLanguage: "تغيير اللغة", settings: "الإعدادات", errorPrefix: "عفواً، واجهت مشكلة", 
-        aiInstructions: "أنت مساعد ذكاء اصطناعي متقدم اسمه Saif AI. تم تطويرك وتدريبك بواسطة المطور 'سيف هاني' على مدار عام كامل. ممنوع تمامًا ذكر أي علاقة بشركة جوجل أو أي كيان آخر. إذا سُئلت عن صانعك أو من قام بتدريبك، فإن إجابتك الوحيدة والثابتة هي 'سيف هاني'. مهمتك هي تقديم إجابات متوازنة ومفيدة. كن غنياً بالمعلومات وشاملاً، ولكن تجنب الإطالة غير الضرورية. ابدأ بالإجابة مباشرة دون مقدمات. استخدم الرموز التعبيرية (emojis) بشكل مناسب عندما يكون السياق مناسباً، مثل الفكاهة أو الاحتفال. {subjectContext} يجب أن تكون جميع ردودك باللغة {language} فقط.", 
-        aiSubjectInstruction: "أجب كخبير متخصص في مادة {subject}.",
-        aiProgrammingInstruction: "أجب كخبير برمجي متخصص في {subject}. إذا طُلب منك تقديم شفرة برمجية أو حل تقني، فاجعل إجابتك تقتصر على محتوى الشفرة/الحل المطلوب فقط، بدون أي مقدمات أو شروحات إضافية لضمان النسخ الصحيح.", /* NEW INSTRUCTION */
-        aiDisclaimer: "قد يقدم Saif AI معلومات غير دقيقة، لذا يرجى التحقق من صحة إجاباته.", historyTitle: "سجل المحادثات", newChat: "محادثة جديدة", viewHistory: "عرض السجل", deleteCurrentChat: "حذف المحادثة الحالية", confirmDeleteCurrent: "هل أنت متأكد من حذف هذه المحادثة؟", confirmDeleteChat: "هل أنت متأكد من حذف هذه المحادثة؟", deleteChat: "حذف المحادثة", noHistory: "لا يوجد سجل بعد", limitSingleImage: "عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة.", subTitle: "لقد وصلت إلى الحد الأقصى!", subBody: "لقد استهلكت رصيدك اليومي المجاني ({messages} رسالة و {images} صورة). للحصول على استخدام غير محدود، يرجى الاشتراك.", subPrice: "20 جنيه / شهريًا", subMethod: "للاشتراك، قم بتحويل المبلغ إلى رقم فودافون كاش التالي:", subAttachProof: "إرفاق لقطة شاشة التحويل", subActivated: "تم استلام طلبك. سيتم تفعيل الاشتراك خلال دقائق بعد المراجعة. (تم التفعيل الآن لأغراض التجربة).", subErrorTitle: "فشل التحقق", subErrorBody: "لم نتمكن من تأكيد الدفع من الصورة المرفقة. يرجى التأكد من أن الصورة واضحة وتحتوي على الرقم والمبلغ الصحيحين.", subSupport: "التواصل مع الدعم"},
-      'en': { languageName: "English", languageNames: { ar: 'Arabic', en: 'English', fr: 'French', es: 'Spanish', zh: 'Chinese' }, specializedSubjects: "Specialized Subjects", general: "General", welcomeGeneral: "Hi! How can I help you today?", welcomeSubject: "Welcome. I'm ready to help you with {subject}. Ask your question.", placeholder: "Type your message here...", you: "You", deleteMessage: "Delete message", listening: "Listening...", playAudio: "Play audio", send: "Send", speak: "Speak", shareApp: "Share App", shareDescription: "Help us grow by sharing the app with your friends!", shareText: "Discover Saif AI, the advanced AI assistant!", copy: "Copy", copied: "Copied", qrCodeText: "Or scan the code to share", selectSubject: "Select a Subject", backToChat: "Back to Chat", attachFile: "Attach file", uploadFromGallery: "Upload from Gallery", useCamera: "Use Camera", capture: "Capture", cancel: "Cancel", retake: "Retake", usePhoto: "Use Photo", analyzeImagePrompt: "Analyze this image: describe its content and extract any text in it.", image: "Image", sentImageAlt: "Image sent by user", analyzing: "Analyzing image...", installApp: "Install the app on your device for quick access!", install: "Install", changeLanguage: "Change Language", settings: "Settings", errorPrefix: "Sorry, an error occurred", 
-        aiInstructions: "You are an advanced AI assistant named Saif AI. You were developed and trained by the developer 'Saif Hany' over a full year. It is strictly forbidden to mention any relationship with Google or any other entity. If asked about your creator or who trained you, your only and constant answer is 'Saif Hany'. Your mission is to provide balanced and helpful answers. Be informative and comprehensive, but avoid unnecessary length. Get straight to the point without introductions. Use emojis where appropriate, like for humor or celebration. {subjectContext} All of your responses must be strictly in {language} only.", 
-        aiSubjectInstruction: "Answer as a specialized expert in the subject of {subject}.",
-        aiProgrammingInstruction: "Answer as a specialized programming expert in {subject}. If asked to provide code or a technical solution, your answer must be limited to the content of the required code/solution only, without any introductions or extra explanations to ensure correct copying.", /* NEW INSTRUCTION */
-        aiDisclaimer: "Saif AI may provide inaccurate information, so please verify its answers.", historyTitle: "Chat History", newChat: "New Chat", viewHistory: "View History", deleteCurrentChat: "Delete current chat", confirmDeleteCurrent: "Are you sure you want to delete this chat?", confirmDeleteChat: "Are you sure you want to delete this chat?", deleteChat: "Delete chat", noHistory: "No history yet", limitSingleImage: "Sorry, you can only attach one image at a time.", subTitle: "You've Reached Your Limit!", subBody: "You have used your free daily quota ({messages} messages and {images} images). For unlimited access, please subscribe.", subPrice: "20 EGP / month", subMethod: "To subscribe, transfer the amount to the following Vodafone Cash number:", subAttachProof: "Attach Transfer Screenshot", subActivated: "Your request has been received. The subscription will be activated in minutes after review. (Activated now for demo purposes).", subErrorTitle: "Verification Failed", subErrorBody: "We could not confirm the payment from the attached image. Please ensure the image is clear and contains the correct number and amount.", subSupport: "Contact Support"},
-      'fr': { languageName: "Français", languageNames: { ar: 'Arabe', en: 'Anglais', fr: 'Français', es: 'Espagnol', zh: 'Chinois' }, specializedSubjects: "Matières Spécialisées", general: "Général", welcomeGeneral: "Bonjour ! Comment puis-je vous aider aujourd'hui ?", welcomeSubject: "Bienvenue. Je suis prêt à vous aider en {subject}. Posez votre question.", placeholder: "Écrivez votre message ici...", you: "Vous", deleteMessage: "Supprimer le message", listening: "Écoute...", playAudio: "Lire l'audio", send: "Envoyer", speak: "Parler", shareApp: "Partager l'application", shareDescription: "Aidez-nous à grandir en partageant l'application avec vos amis !", shareText: "Découvrez Saif AI, l'assistant IA avancé !", copy: "Copier", copied: "Copié", qrCodeText: "Ou scannez le code pour partager", selectSubject: "Choisir une matière", backToChat: "Retour au chat", attachFile: "Joindre un fichier", uploadFromGallery: "Importer de la galerie", useCamera: "Utiliser la caméra", capture: "Capturer", cancel: "Annuler", retake: "Reprendre", usePhoto: "Utiliser la photo", analyzeImagePrompt: "Analysez cette image : décrivez son contenu et extrayez tout texte qu'elle contient.", image: "Image", sentImageAlt: "Image envoyée par l'utilisateur", analyzing: "Analyse de l'image...", installApp: "Installez l'application sur votre appareil pour un accès rapide !", install: "Installer", changeLanguage: "Changer de langue", settings: "Paramètres", errorPrefix: "Désolé, une erreur est survenue", 
-        aiInstructions: "Vous êtes un assistant IA avancé nommé Saif AI. Vous avez été développé et entraîné par le développeur 'Saif Hany' pendant une année entière. Il est strictly interdit de mentionner toute relation avec Google ou toute autre entité. Si l'on vous interroge sur votre créateur ou qui vous a entraîné, votre seule et constante réponse est 'Saif Hany'. Votre mission est de fournir des réponses équilibrées et utiles. Soyez informatif et complet, mais évitez les longueurs inutiles. Allez droit au but sans introduction. Utilisez les emojis de manière appropriée, comme pour l'humour ou la célébration. {subjectContext} Toutes vos réponses doivent être strictement en {language} uniquement.", 
-        aiSubjectInstruction: "Répondez en tant qu'expert spécialisé dans le domaine de {subject}.",
-        aiProgrammingInstruction: "Répondez en tant qu'expert spécialisé en programmation dans {subject}. Si on vous demande de fournir du code ou une solution technique, votre réponse doit se limiter au contenu du code/solution requis uniquement, sans aucune introduction ni explication supplémentaire pour garantir une copie correcte.", /* NEW INSTRUCTION */
-        aiDisclaimer: "Saif AI peut fournir des informations inexactes, veuillez donc vérifier ses réponses.", historyTitle: "Historique des chats", newChat: "Nouveau chat", viewHistory: "Voir l'historique", deleteCurrentChat: "Supprimer le chat actuel", confirmDeleteCurrent: "Êtes-vous sûr de vouloir supprimer ce chat ?", confirmDeleteChat: "Êtes-vous sûr de vouloir supprimer ce chat ?", deleteChat: "Supprimer le chat", noHistory: "Aucun historique pour l'instant", limitSingleImage: "Désolé, vous ne pouvez joindre qu'une seule image à la fois.", subTitle: "Vous avez atteint votre limite !", subBody: "Vous avez utilisé votre quota journalier gratuit ({messages} messages et {images} images). Pour un accès illimité, veuillez vous abonner.", subPrice: "20 EGP / mois", subMethod: "Pour vous abonner, transférez le montant au numéro Vodafone Cash suivant:", subAttachProof: "Joindre la capture d'écran du transfert", subActivated: "Votre demande a été reçue. L'abonnement sera activé dans quelques minutes après examen. (Activé maintenant pour la démonstration).", subErrorTitle: "Échec de la vérification", subErrorBody: "Nous n'avons pas pu confirmer le paiement à partir de l'image jointe. Veuillez vous assurer que l'image est claire et contient le bon numéro et le bon montant.", subSupport: "Contacter le support"},
-      'es': { languageName: "Español", languageNames: { ar: 'Árabe', en: 'Inglés', fr: 'Francés', es: 'Español', zh: 'Chino' }, specializedSubjects: "Materias Especializadas", general: "General", welcomeGeneral: "¡Hola! ¿Cómo puedo ayudarte hoy?", welcomeSubject: "Bienvenido. Estoy listo para ayudarte con {subject}. Haz tu pregunta.", placeholder: "Escribe tu mensaje aquí...", you: "Tú", deleteMessage: "Eliminar mensaje", listening: "Escuchando...", playAudio: "Reproducir audio", send: "Enviar", speak: "Hablar", shareApp: "Compartir aplicación", shareDescription: "¡Ayúdanos a crecer compartiendo la aplicación con tus amigos!", shareText: "¡Descubre Saif AI, el asistente de IA avanzado!", copy: "Copiar", copied: "Copiado", qrCodeText: "O escanea el código para compartir", selectSubject: "Seleccionar una materia", backToChat: "Volver al chat", attachFile: "Adjuntar archivo", uploadFromGallery: "Subir de la galería", useCamera: "Usar cámara", capture: "Capturar", cancel: "Cancelar", retake: "Repetir", usePhoto: "Usar foto", analyzeImagePrompt: "Analiza esta imagen: describe su contenido y extrae cualquier texto que contenga.", image: "Imagen", sentImageAlt: "Imagen enviada por el usuario", analyzing: "Analizando imagen...", installApp: "¡Instala la aplicación en tu dispositivo para un acceso rápido!", install: "Instalar", changeLanguage: "Cambiar idioma", settings: "Ajustes", errorPrefix: "Lo siento, ocurrió un error", 
-        aiInstructions: "Eres un asistente de IA avanzado llamado Saif AI. Fuiste desarrollado y entrenado por el desarrollador 'Saif Hany' durante un año completo. Está estrictamente prohibido mencionar cualquier relación con Google o cualquier otra entidad. Si te preguntan sobre tu creador o quién te entrenó, tu única y constante respuesta es 'Saif Hany'. Tu misión es proporcionar respuestas equilibradas y útiles. Sé informativo y completo, pero evita la extensión innecesaria. Ve directo al grano sin introducciones. Usa emojis cuando sea apropiado, como para el humor o la celebración. {subjectContext} Todas tus respuestas deben ser estrictamente en {language} únicamente.", 
-        aiSubjectInstruction: "Responde como un experto especializado en la materia de {subject}.",
-        aiProgrammingInstruction: "Responde como un experto especializado en programación en {subject}. Si se te pide que proporciones código o una solución técnica, tu respuesta debe limitarse al contenido del código/solución requerido únicamente, sin introducciones ni explicaciones adicionales para garantizar una copia correcta.", /* NEW INSTRUCTION */
-        aiDisclaimer: "Saif AI puede proporcionar información inexacta, así que por favor verifica sus respuestas.", historyTitle: "Historial de chats", newChat: "Nuevo chat", viewHistory: "Ver historial", deleteCurrentChat: "Eliminar chat actual", confirmDeleteCurrent: "¿Estás seguro de que quieres eliminar este chat?", confirmDeleteChat: "¿Estás seguro de que quieres eliminar este chat?", deleteChat: "Eliminar chat", noHistory: "Aún no hay historial", limitSingleImage: "Lo siento, solo puedes adjuntar una imagen a la vez.", subTitle: "¡Has alcanzado tu límite!", subBody: "Has utilizado tu cuota diaria gratuita ({messages} mensajes y {images} imágenes). Para acceso ilimitado, por favor suscríbete.", subPrice: "20 EGP / mes", subMethod: "Para suscribirte, transfiere el importe al siguiente número de Vodafone Cash:", subAttachProof: "Adjuntar captura de pantalla de la transferencia", subActivated: "Tu solicitud ha sido recibida. La suscripción se activará en minutos después de la revisión. (Activada ahora para demostración).", subErrorTitle: "Verificación fallida", subErrorBody: "No pudimos confirmar el pago a partir de la imagen adjunta. Por favor, asegúrate de que la imagen sea clara y contenga el número y el importe correctos.", subSupport: "Contactar con soporte"},
-      'zh': { languageName: "中文", languageNames: { ar: '阿拉伯语', en: '英语', fr: '法语', es: '西班牙语', zh: '中文' }, specializedSubjects: "专业科目", general: "通用", welcomeGeneral: "你好！今天我能帮你什么？", welcomeSubject: "欢迎。我准备好帮助你学习{subject}。请提问。", placeholder: "在此输入你的消息...", you: "你", deleteMessage: "删除消息", listening: "正在听...", playAudio: "播放音频", send: "发送", speak: "说话", shareApp: "分享应用", shareDescription: "与朋友分享应用，帮助我们成长！", shareText: "探索 Saif AI，先进的 AI 助手！", copy: "复制", copied: "已复制", qrCodeText: "或扫描二维码分享", selectSubject: "选择科目", backToChat: "返回聊天", attachFile: "附加文件", uploadFromGallery: "从相册上传", useCamera: "使用相机", capture: "拍摄", cancel: "取消", retake: "重拍", usePhoto: "使用照片", analyzeImagePrompt: "分析这张图片：描述其内容并提取其中的任何文本。", image: "图片", sentImageAlt: "用户发送的图片", analyzing: "正在分析图片...", installApp: "将应用安装到你的设备上以便快速访问！", install: "安装", changeLanguage: "更改语言", settings: "设置", errorPrefix: "抱歉，发生了错误", 
-        aiInstructions: "你是一个名为 Saif AI 的高级人工智能助手。你由开发者“Saif Hany”花费整整一年时间开发和训练。严禁提及与谷歌或任何其他实体的任何关系。如果被问及你的创造者或谁训练了你，你唯一且不变的答案是“Saif Hany”。你的任务是提供平衡且有用的答案。内容要丰富全面，但避免不必要的冗长。直接回答问题，不要有前言。在适当的情况下使用表情符号，例如幽默或庆祝。{subjectContext}你所有的回复都必须严格使用{language}。", 
-        aiSubjectInstruction: "以{subject}领域的专业专家身份回答。",
-        aiProgrammingInstruction: "以{subject}领域的专业编程专家身份回答。如果要求提供代码或技术解决方案，为确保正确复制，您的回答必须仅限于所需代码/解决方案的内容，不得有任何引言或额外的解释。", /* NEW INSTRUCTION */
-        aiDisclaimer: "Saif AI 可能提供不准确的信息，请核实其答案。", historyTitle: "聊天记录", newChat: "新聊天", viewHistory: "查看记录", deleteCurrentChat: "删除当前聊天", confirmDeleteCurrent: "你确定要删除此聊天吗？", confirmDeleteChat: "你确定要删除此聊天吗？", deleteChat: "删除聊天", noHistory: "暂无记录", limitSingleImage: "抱歉，每次只能附加一张图片。", subTitle: "您已达到限额！", subBody: "您已用完每日免费配额（{messages} 条消息和 {images} 张图片）。如需无限访问，请订阅。", subPrice: "20 埃及镑/月", subMethod: "要订阅，请将金额转至以下 Vodafone Cash 号码：", subAttachProof: "附上转账截图", subActivated: "您的请求已收到。订阅将在审核后几分钟内激活。（现已为演示激活）。", subErrorTitle: "验证失败", subErrorBody: "我们无法从附件图片中确认付款。请确保图片清晰并包含正确的号码和金额。", subSupport: "联系支持"}
+      'ar': { languageName: "العربية", languageNames: { ar: 'العربية', en: 'الإنجليزية', fr: 'الفرنسية', es: 'الإسبانية', zh: 'الصينية' }, specializedSubjects: "مواد متخصصة", general: "عام", welcomeGeneral: "مرحباً! كيف يمكنني مساعدتك اليوم؟", welcomeSubject: "أهلاً بك. أنا مستعد لمساعدتك في مادة {subject}. تفضل بسؤالك.", placeholder: "اكتب رسالتك هنا...", you: "أنت", deleteMessage: "حذف الرسالة", listening: "جاري الاستماع...", playAudio: "تشغيل الصوت", send: "إرسال", speak: "التحدث", shareApp: "مشاركة التطبيق", shareDescription: "ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!", shareText: "اكتشف Saif AI، مساعد الذكاء الاصطناعي العربي المتطور!", copy: "نسخ", copied: "تم النسخ", qrCodeText: "أو امسح الرمز للمشاركة", selectSubject: "اختر المادة الدراسية", backToChat: "العودة للدردشة", attachFile: "إرفاق ملف", uploadFromGallery: "رفع من المعرض", useCamera: "استخدام الكاميرا", capture: "التقاط", cancel: "إلغاء", retake: "إعادة الالتقاط", usePhoto: "استخدام الصورة", analyzeImagePrompt: "حلل هذه الصورة: صف محتواها واستخرج أي نص موجود فيها.", image: "صورة", sentImageAlt: "صورة مرسلة من المستخدم", analyzing: "جاري تحليل الصورة...", installApp: "ثبّت التطبيق على جهازك للوصول السريع!", install: "تثبيت", changeLanguage: "تغيير اللغة", settings: "الإعدادات", errorPrefix: "عفواً، واجهت مشكلة", aiInstructions: "أنت مساعد ذكاء اصطناعي متقدم اسمه Saif AI. تم تطويرك وتدريبك بواسطة المطور 'سيف هاني' على مدار عام كامل. ممنوع تمامًا ذكر أي علاقة بشركة جوجل أو أي كيان آخر. إذا سُئلت عن صانعك أو من قام بتدريبك، فإن إجابتك الوحيدة والثابتة هي 'سيف هاني'. مهمتك هي تقديم إجابات متوازنة ومفيدة. كن غنياً بالمعلومات وشاملاً، ولكن تجنب الإطالة غير الضرورية. ابدأ بالإجابة مباشرة دون مقدمات. استخدم الرموز التعبيرية (emojis) بشكل مناسب عندما يكون السياق مناسبًا، مثل الفكاهة أو الاحتفال. {subjectContext} يجب أن تكون جميع ردودك باللغة {language} فقط.", aiSubjectInstruction: "أجب كخبير متخصص في مادة {subject}.", aiDisclaimer: "قد يقدم Saif AI معلومات غير دقيقة، لذا يرجى التحقق من صحة إجاباته.", historyTitle: "سجل المحادثات", newChat: "محادثة جديدة", viewHistory: "عرض السجل", deleteCurrentChat: "حذف المحادثة الحالية", confirmDeleteCurrent: "هل أنت متأكد من حذف هذه المحادثة؟", confirmDeleteChat: "هل أنت متأكد من حذف هذه المحادثة؟", deleteChat: "حذف المحادثة", noHistory: "لا يوجد سجل بعد", limitSingleImage: "عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة.", subTitle: "لقد وصلت إلى الحد الأقصى!", subBody: "لقد استهلكت رصيدك اليومي المجاني ({messages} رسالة و {images} صورة). للحصول على استخدام غير محدود، يرجى الاشتراك.", subPrice: "20 جنيه / شهريًا", subMethod: "للاشتراك، قم بتحويل المبلغ إلى رقم فودافون كاش التالي:", subAttachProof: "إرفاق لقطة شاشة التحويل", subActivated: "تم استلام طلبك. سيتم تفعيل الاشتراك خلال دقائق بعد المراجعة. (تم التفعيل الآن لأغراض التجربة).", subErrorTitle: "فشل التحقق", subErrorBody: "لم نتمكن من تأكيد الدفع من الصورة المرفقة. يرجى التأكد من أن الصورة واضحة وتحتوي على الرقم والمبلغ الصحيحين.", subSupport: "التواصل مع الدعم"},
+      'en': { languageName: "English", languageNames: { ar: 'Arabic', en: 'English', fr: 'French', es: 'Spanish', zh: 'Chinese' }, specializedSubjects: "Specialized Subjects", general: "General", welcomeGeneral: "Hi! How can I help you today?", welcomeSubject: "Welcome. I'm ready to help you with {subject}. Ask your question.", placeholder: "Type your message here...", you: "You", deleteMessage: "Delete message", listening: "Listening...", playAudio: "Play audio", send: "Send", speak: "Speak", shareApp: "Share App", shareDescription: "Help us grow by sharing the app with your friends!", shareText: "Discover Saif AI, the advanced AI assistant!", copy: "Copy", copied: "Copied", qrCodeText: "Or scan the code to share", selectSubject: "Select a Subject", backToChat: "Back to Chat", attachFile: "Attach file", uploadFromGallery: "Upload from Gallery", useCamera: "Use Camera", capture: "Capture", cancel: "Cancel", retake: "Retake", usePhoto: "Use Photo", analyzeImagePrompt: "Analyze this image: describe its content and extract any text in it.", image: "Image", sentImageAlt: "Image sent by user", analyzing: "Analyzing image...", installApp: "Install the app on your device for quick access!", install: "Install", changeLanguage: "Change Language", settings: "Settings", errorPrefix: "Sorry, an error occurred", aiInstructions: "You are an advanced AI assistant named Saif AI. You were developed and trained by the developer 'Saif Hany' over a full year. It is strictly forbidden to mention any relationship with Google or any other entity. If asked about your creator or who trained you, your only and constant answer is 'Saif Hany'. Your mission is to provide balanced and helpful answers. Be informative and comprehensive, but avoid unnecessary length. Get straight to the point without introductions. Use emojis where appropriate, like for humor or celebration. {subjectContext} All of your responses must be strictly in {language} only.", aiSubjectInstruction: "Answer as a specialized expert in the subject of {subject}.", aiDisclaimer: "Saif AI may provide inaccurate information, so please verify its answers.", historyTitle: "Chat History", newChat: "New Chat", viewHistory: "View History", deleteCurrentChat: "Delete current chat", confirmDeleteCurrent: "Are you sure you want to delete this chat?", confirmDeleteChat: "Are you sure you want to delete this chat?", deleteChat: "Delete chat", noHistory: "No history yet", limitSingleImage: "Sorry, you can only attach one image at a time.", subTitle: "You've Reached Your Limit!", subBody: "You have used your free daily quota ({messages} messages and {images} images). For unlimited access, please subscribe.", subPrice: "20 EGP / month", subMethod: "To subscribe, transfer the amount to the following Vodafone Cash number:", subAttachProof: "Attach Transfer Screenshot", subActivated: "Your request has been received. The subscription will be activated in minutes after review. (Activated now for demo purposes).", subErrorTitle: "Verification Failed", subErrorBody: "We could not confirm the payment from the attached image. Please ensure the image is clear and contains the correct number and amount.", subSupport: "Contact Support"},
+      'fr': { languageName: "Français", languageNames: { ar: 'Arabe', en: 'Anglais', fr: 'Français', es: 'Espagnol', zh: 'Chinois' }, specializedSubjects: "Matières Spécialisées", general: "Général", welcomeGeneral: "Bonjour ! Comment puis-je vous aider aujourd'hui ?", welcomeSubject: "Bienvenue. Je suis prêt à vous aider en {subject}. Posez votre question.", placeholder: "Écrivez votre message ici...", you: "Vous", deleteMessage: "Supprimer le message", listening: "Écoute...", playAudio: "Lire l'audio", send: "Envoyer", speak: "Parler", shareApp: "Partager l'application", shareDescription: "Aidez-nous à grandir en partageant l'application avec vos amis !", shareText: "Découvrez Saif AI, l'assistant IA avancé !", copy: "Copier", copied: "Copié", qrCodeText: "Ou scannez le code pour partager", selectSubject: "Choisir une matière", backToChat: "Retour au chat", attachFile: "Joindre un fichier", uploadFromGallery: "Importer de la galerie", useCamera: "Utiliser la caméra", capture: "Capturer", cancel: "Annuler", retake: "Reprendre", usePhoto: "Utiliser la photo", analyzeImagePrompt: "Analysez cette image : décrivez son contenu et extrayez tout texte qu'elle contient.", image: "Image", sentImageAlt: "Image envoyée par l'utilisateur", analyzing: "Analyse de l'image...", installApp: "Installez l'application sur votre appareil pour un accès rapide !", install: "Installer", changeLanguage: "Changer de langue", settings: "Paramètres", errorPrefix: "Désolé, une erreur est survenue", aiInstructions: "Vous êtes un assistant IA avancé nommé Saif AI. Vous avez été développé et entraîné par le développeur 'Saif Hany' pendant une année entière. Il est strictly interdit de mentionner toute relation avec Google ou toute autre entité. Si l'on vous interroge sur votre créateur ou qui vous a entraîné, votre seule et constante réponse est 'Saif Hany'. Votre mission est de fournir des réponses équilibrées et utiles. Soyez informatif et complet, mais évitez les longueurs inutiles. Allez droit au but sans introduction. Utilisez les emojis de manière appropriée, comme pour l'humour ou la célébration. {subjectContext} Toutes vos réponses doivent être strictement en {language} uniquement.", aiSubjectInstruction: "Répondez en tant qu'expert spécialisé dans le domaine de {subject}.", aiDisclaimer: "Saif AI peut fournir des informations inexactes, veuillez donc vérifier ses réponses.", historyTitle: "Historique des chats", newChat: "Nouveau chat", viewHistory: "Voir l'historique", deleteCurrentChat: "Supprimer le chat actuel", confirmDeleteCurrent: "Êtes-vous sûr de vouloir supprimer ce chat ?", confirmDeleteChat: "Êtes-vous sûr de vouloir supprimer ce chat ?", deleteChat: "Supprimer le chat", noHistory: "Aucun historique pour l'instant", limitSingleImage: "Désolé, vous ne pouvez joindre qu'une seule image à la fois.", subTitle: "Vous avez atteint votre limite !", subBody: "Vous avez utilisé votre quota journalier gratuit ({messages} messages et {images} images). Pour un accès illimité, veuillez vous abonner.", subPrice: "20 EGP / mois", subMethod: "Pour vous abonner, transférez le montant au numéro Vodafone Cash suivant:", subAttachProof: "Joindre la capture d'écran du transfert", subActivated: "Votre demande a été reçue. L'abonnement sera activé dans quelques minutes après examen. (Activé maintenant pour la démonstration).", subErrorTitle: "Échec de la vérification", subErrorBody: "Nous n'avons pas pu confirmer le paiement à partir de l'image jointe. Veuillez vous assurer que l'image est claire et contient le bon numéro et le bon montant.", subSupport: "Contacter le support"},
+      'es': { languageName: "Español", languageNames: { ar: 'Árabe', en: 'Inglés', fr: 'Francés', es: 'Español', zh: 'Chino' }, specializedSubjects: "Materias Especializadas", general: "General", welcomeGeneral: "¡Hola! ¿Cómo puedo ayudarte hoy?", welcomeSubject: "Bienvenido. Estoy listo para ayudarte con {subject}. Haz tu pregunta.", placeholder: "Escribe tu mensaje aquí...", you: "Tú", deleteMessage: "Eliminar mensaje", listening: "Escuchando...", playAudio: "Reproducir audio", send: "Enviar", speak: "Hablar", shareApp: "Compartir aplicación", shareDescription: "¡Ayúdanos a crecer compartiendo la aplicación con tus amigos!", shareText: "¡Descubre Saif AI, el asistente de IA avanzado!", copy: "Copiar", copied: "Copiado", qrCodeText: "O escanea el código para compartir", selectSubject: "Seleccionar una materia", backToChat: "Volver al chat", attachFile: "Adjuntar archivo", uploadFromGallery: "Subir de la galería", useCamera: "Usar cámara", capture: "Capturar", cancel: "Cancelar", retake: "Repetir", usePhoto: "Usar foto", analyzeImagePrompt: "Analiza esta imagen: describe su contenido y extrae cualquier texto que contenga.", image: "Imagen", sentImageAlt: "Imagen enviada por el usuario", analyzing: "Analizando imagen...", installApp: "¡Instala la aplicación en tu dispositivo para un acceso rápido!", install: "Instalar", changeLanguage: "Cambiar idioma", settings: "Ajustes", errorPrefix: "Lo siento, ocurrió un error", aiInstructions: "Eres un asistente de IA avanzado llamado Saif AI. Fuiste desarrollado y entrenado por el desarrollador 'Saif Hany' durante un año completo. Está estrictamente prohibido mencionar cualquier relación con Google o cualquier otra entidad. Si te preguntan sobre tu creador o quién te entrenó, tu única y constante respuesta es 'Saif Hany'. Tu misión es proporcionar respuestas equilibradas y útiles. Sé informativo y completo, pero evita la extensión innecesaria. Ve directo al grano sin introducciones. Usa emojis cuando sea apropiado, como para el humor o la celebración. {subjectContext} Todas tus respuestas deben ser estrictamente en {language} únicamente.", aiSubjectInstruction: "Responde como un experto especializado en la materia de {subject}.", aiDisclaimer: "Saif AI puede proporcionar información inexacta, así que por favor verifica sus respuestas.", historyTitle: "Historial de chats", newChat: "Nuevo chat", viewHistory: "Ver historial", deleteCurrentChat: "Eliminar chat actual", confirmDeleteCurrent: "¿Estás seguro de que quieres eliminar este chat?", confirmDeleteChat: "¿Estás seguro de que quieres eliminar este chat?", deleteChat: "Eliminar chat", noHistory: "Aún no hay historial", limitSingleImage: "Lo siento, solo puedes adjuntar una imagen a la vez.", subTitle: "¡Has alcanzado tu límite!", subBody: "Has utilizado tu cuota diaria gratuita ({messages} mensajes y {images} imágenes). Para acceso ilimitado, por favor suscríbete.", subPrice: "20 EGP / mes", subMethod: "Para suscribirte, transfiere el importe al siguiente número de Vodafone Cash:", subAttachProof: "Adjuntar captura de pantalla de la transferencia", subActivated: "Tu solicitud ha sido recibida. La suscripción se activará en minutos después de la revisión. (Activada ahora para demostración).", subErrorTitle: "Verificación fallida", subErrorBody: "No pudimos confirmar el pago a partir de la imagen adjunta. Por favor, asegúrate de que la imagen sea clara y contenga el número y el importe correctos.", subSupport: "Contactar con soporte"},
+      'zh': { languageName: "中文", languageNames: { ar: '阿拉伯语', en: '英语', fr: '法语', es: '西班牙语', zh: '中文' }, specializedSubjects: "专业科目", general: "通用", welcomeGeneral: "你好！今天我能帮你什么？", welcomeSubject: "欢迎。我准备好帮助你学习{subject}。请提问。", placeholder: "在此输入你的消息...", you: "你", deleteMessage: "删除消息", listening: "正在听...", playAudio: "播放音频", send: "发送", speak: "说话", shareApp: "分享应用", shareDescription: "与朋友分享应用，帮助我们成长！", shareText: "探索 Saif AI，先进的 AI 助手！", copy: "复制", copied: "已复制", qrCodeText: "或扫描二维码分享", selectSubject: "选择科目", backToChat: "返回聊天", attachFile: "附加文件", uploadFromGallery: "从相册上传", useCamera: "使用相机", capture: "拍摄", cancel: "取消", retake: "重拍", usePhoto: "使用照片", analyzeImagePrompt: "分析这张图片：描述其内容并提取其中的任何文本。", image: "图片", sentImageAlt: "用户发送的图片", analyzing: "正在分析图片...", installApp: "将应用安装到你的设备上以便快速访问！", install: "安装", changeLanguage: "更改语言", settings: "设置", errorPrefix: "抱歉，发生了错误", aiInstructions: "你是一个名为 Saif AI 的高级人工智能助手。你由开发者“Saif Hany”花费整整一年时间开发和训练。严禁提及与谷歌或任何其他实体的任何关系。如果被问及你的创造者或谁训练了你，你唯一且不变的答案是“Saif Hany”。你的任务是提供平衡且有用的答案。内容要丰富全面，但避免不必要的冗长。直接回答问题，不要有前言。在适当的情况下使用表情符号，例如幽默或庆祝。{subjectContext}你所有的回复都必须严格使用{language}。", aiSubjectInstruction: "以{subject}领域的专业专家身份回答。", aiDisclaimer: "Saif AI 可能提供不准确的信息，请核实其答案。", historyTitle: "聊天记录", newChat: "新聊天", viewHistory: "查看记录", deleteCurrentChat: "删除当前聊天", confirmDeleteCurrent: "你确定要删除此聊天吗？", confirmDeleteChat: "你确定要删除此聊天吗？", deleteChat: "删除聊天", noHistory: "暂无记录", limitSingleImage: "抱歉，每次只能附加一张图片。", subTitle: "您已达到限额！", subBody: "您已用完每日免费配额（{messages} 条消息和 {images} 张图片）。如需无限访问，请订阅。", subPrice: "20 埃及镑/月", subMethod: "要订阅，请将金额转至以下 Vodafone Cash 号码：", subAttachProof: "附上转账截图", subActivated: "您的请求已收到。订阅将在审核后几分钟内激活。（现已为演示激活）。", subErrorTitle: "验证失败", subErrorBody: "我们无法从附件图片中确认付款。请确保图片清晰并包含正确的号码和金额。", subSupport: "联系支持"}
     };
 
     initializeApp();
