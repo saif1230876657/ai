@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Saif AI - دردشة ذكاء اصطناعي</title>
+  <title>Saif AI - برمجة</title>
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="https://i.postimg.cc/cCLZPwnw/2dd388fc-039e-4ce1-ab35-4f9db8cc40b2.png" type="image/png">
 
-  <meta property="og:title" content="Saif AI - دردشة ذكاء اصطناعي" />
-  <meta property="og:description" content="مساعد ذكاء اصطناعي عربي متقدم للإجابة على كافة أسئلتك، مع دعم متخصص للمواد الدراسية." />
+  <meta property="og:title" content="Saif AI - مساعد برمجة" />
+  <meta property="og:description" content="مساعد ذكاء اصطناعي عربي متخصص في البرمجة وتحليل الأكواد." />
   <meta property="og:image" content="https://i.postimg.cc/cCLZPwnw/2dd388fc-039e-4ce1-ab35-4f9db8cc40b2.png" />
   <meta property="og:url" content="https://apk.e-droid.net/apk/app3760290-c4w5f2.apk" />
   <meta property="og:type" content="website" />
@@ -129,16 +129,6 @@
     }
     @keyframes fadeIn { to { opacity: 0.7; } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-    #subjectsViewContainer { background-color: var(--bg-main-color); padding: 1.5rem; display: none; flex-direction: column; align-items: center; }
-    .subjects-view-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); max-width: 700px; }
-    .subjects-view-header h2 { font-size: 1.6rem; color: var(--primary-color); }
-    .back-to-chat-btn { background-color: var(--bg-surface-raised); color: var(--text-primary); border: 1px solid var(--border-color-light); padding: 0.7rem 1.2rem; border-radius: var(--border-radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.25s ease; box-shadow: var(--shadow-xs); display: flex; align-items: center; gap: 0.5rem; }
-    .back-to-chat-btn:hover { background-color: var(--primary-color); color: var(--text-on-primary); border-color: var(--primary-color); transform: translateY(-2px); box-shadow: var(--shadow-sm), 0 0 10px var(--primary-glow-color); }
-    #subjectListContainer { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; max-width: 700px; overflow-y: auto; padding: 10px; }
-    .subject-item-btn { background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color); padding: 18px 22px; font-size: 1rem; border-radius: var(--border-radius-md); cursor: pointer; transition: all 0.3s ease; text-align: center; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
-    .subject-item-btn:hover { background-color: var(--primary-color); color: var(--text-on-primary); border-color: var(--primary-hover-color); transform: translateY(-4px) scale(1.03); box-shadow: var(--shadow-md), 0 0 15px var(--primary-glow-color); }
-    .subject-item-btn i { font-size: 2.2rem; margin-bottom: 5px; color: var(--secondary-color); transition: color 0.3s ease; }
-    .subject-item-btn:hover i { color: var(--text-on-primary); }
     .chat-container { flex: 1; padding: 1.5rem 1rem 150px 1rem; overflow-y: auto; background: transparent; scroll-behavior: smooth; min-height: 0; }
     .message { max-width: 85%; margin-bottom: 2rem; display: flex; flex-direction: column; animation: messageAppear 0.4s ease-out; word-wrap: break-word; white-space: pre-wrap; line-height: 1.7; }
     @keyframes messageAppear { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -167,7 +157,6 @@
     .chat-input-area { position: absolute; bottom: 0; left: 0; right: 0; background: transparent; padding: 0.8rem 1rem; z-index: 5; }
     .chat-input-area::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-main-color) 20%, transparent 100%); pointer-events: none; z-index: 4; }
     
-    /* NEW: Styles for detached send button layout */
     .chat-input-container {
         max-width: 800px;
         margin: 0 auto;
@@ -199,7 +188,7 @@
     }
     .chat-input-wrapper {
         position: relative;
-        flex-grow: 1; /* Takes up remaining space */
+        flex-grow: 1;
         background: var(--bg-input);
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius-xl);
@@ -283,7 +272,6 @@
     .close-overlay-btn { position: absolute; top: 20px; right: 30px; font-size: 2.5rem; font-weight: bold; color: #fff; cursor: pointer; transition: transform 0.2s ease; }
     .close-overlay-btn:hover { transform: scale(1.2); }
     
-    /* New Styles for Bottom Sheet / Modals */
     .bottom-sheet-overlay {
         position: fixed;
         top: 0; left: 0;
@@ -324,7 +312,7 @@
         cursor: pointer;
     }
     .bottom-sheet-content {
-        padding-bottom: 1rem; /* Space at the bottom */
+        padding-bottom: 1rem;
     }
     .bottom-sheet-content button {
         background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color-light);
@@ -409,7 +397,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* New Styles for Code Container */
     .code-container {
         background: #1e1e1e;
         border: 1px solid #333;
@@ -463,8 +450,6 @@
       .chat-input-wrapper textarea { padding: 12px 0; margin: 0 2px; } 
       #sendOrVoiceBtn { width: 44px; height: 44px; font-size: 1.1rem;}
       .suggestion-btn { padding: 10px; font-size: 0.85rem; }
-      .subject-item-btn { padding: 12px 15px; font-size: 0.9rem; gap: 6px;} 
-      .subject-item-btn i { font-size: 1.8rem; }
       .code-container { padding: 10px; font-size: 0.85rem; }
     }
   </style>
@@ -485,7 +470,6 @@
     
     <header class="header" dir="rtl">
       <div class="header-group">
-        <button id="generalChatBtn" class="header-btn" style="display: none;"></button>
         <div id="languageSelector">
           <button id="languageBtn" class="header-btn"><i class="fas fa-globe"></i></button>
           <div id="languageDropdown" class="dropdown-menu">
@@ -503,7 +487,6 @@
         <div id="settingsSelector">
             <i class="fas fa-cog header-icon settings-btn" id="settingsBtn"></i>
             <div id="settingsDropdown" class="dropdown-menu">
-                <button id="enterSubjectsBtn"><i class="fas fa-book"></i> <span id="enterSubjectsBtnText"></span></button>
                 <button id="deleteCurrentChatBtn" class="danger"><i class="fas fa-trash"></i> <span id="deleteCurrentChatBtnText"></span></button>
             </div>
         </div>
@@ -521,7 +504,6 @@
             <div id="suggestionsContainer"></div>
             <div class="voice-indicator" id="voiceIndicator"><i class="fas fa-microphone"></i><span id="listeningText"></span></div>
             
-            <!-- NEW: Input container for detached button layout -->
             <div class="chat-input-container">
                 <div class="chat-input-wrapper">
                   <div id="imagePreviewContainer"></div>
@@ -539,13 +521,6 @@
         </div>
     </div>
 
-    <div id="subjectsViewContainer"> 
-        <div class="subjects-view-header">
-            <h2 id="subjectsViewTitle"></h2>
-            <button id="backToChatBtn" class="back-to-chat-btn"><i class="fas fa-arrow-left"></i> <span id="backToChatText"></span></button>
-        </div>
-        <div id="subjectListContainer"></div>
-    </div>
   </div>
   
   <div id="historySidebar" class="history-sidebar">
@@ -590,7 +565,6 @@
     <img id="fullscreenImageView" src="" alt="Full screen image view">
   </div>
   
-  <!-- New Bottom Sheet for Upload Options -->
   <div class="bottom-sheet-overlay" id="uploadOptionsOverlay"></div>
   <div class="bottom-sheet" id="uploadOptionsSheet">
       <div class="handle" id="uploadOptionsHandle"></div>
@@ -600,12 +574,10 @@
       </div>
   </div>
 
-  <!-- New Bottom Sheet for Subscription -->
   <div class="bottom-sheet-overlay" id="subscriptionOverlay"></div>
   <div class="bottom-sheet" id="subscriptionSheet">
       <div class="handle" id="subscriptionHandle"></div>
       <div id="subscriptionModalContent" class="bottom-sheet-content">
-          <!-- Content will be injected by JavaScript -->
       </div>
   </div>
 
@@ -615,38 +587,29 @@
     const geminiApiKey = "AIzaSyArAURCzYl1uxSJxvF7r5Ad-W5kaaz4ANw";
     const VODAFONE_CASH_NUMBER = "01061767493";
     const SUPPORT_WHATSAPP_NUMBER = "201202687082"; // With country code, no +
-    const DAILY_MESSAGE_LIMIT = 10;
-    const DAILY_IMAGE_LIMIT = 2;
+    const DAILY_MESSAGE_LIMIT = 10; // Note: Not applied to programming
+    const DAILY_IMAGE_LIMIT = 2; // Note: Not applied to programming
     // ================== END: CONFIGURATION ==================
 
-    const chatWrapper = document.getElementById("chatWrapper"); const chatContainer = document.getElementById("chatContainer"); const userInput = document.getElementById("userInput"); const botNameElement = document.getElementById("botName"); const imageUploadInput = document.getElementById("imageUpload"); const proofUploadInput = document.getElementById("proofUpload"); const toggleUploadBtn = document.getElementById("toggleUploadBtn"); const voiceIndicator = document.getElementById('voiceIndicator'); const subjectsViewContainer = document.getElementById('subjectsViewContainer'); const subjectListContainer = document.getElementById('subjectListContainer'); const backToChatBtn = document.getElementById('backToChatBtn'); const cameraOverlay = document.getElementById('cameraOverlay'); const previewOverlay = document.getElementById('previewOverlay'); const cameraView = document.getElementById('cameraView'); const previewCanvas = document.getElementById('previewCanvas'); const captureBtn = document.getElementById('captureBtn'); const cancelCameraBtn = document.getElementById('cancelCameraBtn'); const usePhotoBtn = document.getElementById('usePhotoBtn'); const retakeBtn = document.getElementById('retakeBtn'); const loader = document.getElementById('loader'); const imagePreviewContainer = document.getElementById('imagePreviewContainer'); let cameraStream = null; const generalChatBtn = document.getElementById('generalChatBtn'); const shareBtn = document.getElementById('shareBtn'); const shareModal = document.getElementById('shareModal'); const closeShareModalBtn = document.getElementById('closeShareModal'); const copyLinkBtn = document.getElementById('copyLinkBtn'); const shareLinkInput = document.getElementById('shareLinkInput'); const downloadNotification = document.getElementById('downloadNotification'); const downloadAppBtn = document.getElementById('downloadAppBtn'); const closeNotificationBtn = document.getElementById('closeNotificationBtn'); const sendOrVoiceBtn = document.getElementById('sendOrVoiceBtn'); const languageBtn = document.getElementById('languageBtn'); const languageDropdown = document.getElementById('languageDropdown'); const suggestionsContainer = document.getElementById('suggestionsContainer'); const settingsBtn = document.getElementById('settingsBtn'); const settingsDropdown = document.getElementById('settingsDropdown'); const enterSubjectsBtn = document.getElementById('enterSubjectsBtn'); const deleteCurrentChatBtn = document.getElementById('deleteCurrentChatBtn'); const historyBtn = document.getElementById('historyBtn'); const historySidebar = document.getElementById('historySidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay'); const closeHistoryBtn = document.getElementById('closeHistoryBtn'); const newChatBtn = document.getElementById('newChatBtn'); const historyList = document.getElementById('historyList'); const welcomeAnimation = document.getElementById('welcomeAnimationContainer');
-    
-    // New UI Elements
-    const uploadOptionsOverlay = document.getElementById('uploadOptionsOverlay');
-    const uploadOptionsSheet = document.getElementById('uploadOptionsSheet');
-    const subscriptionOverlay = document.getElementById('subscriptionOverlay');
-    const subscriptionSheet = document.getElementById('subscriptionSheet');
+    // --- DOM Elements ---
+    const chatWrapper = document.getElementById("chatWrapper"); const chatContainer = document.getElementById("chatContainer"); const userInput = document.getElementById("userInput"); const botNameElement = document.getElementById("botName"); const imageUploadInput = document.getElementById("imageUpload"); const proofUploadInput = document.getElementById("proofUpload"); const toggleUploadBtn = document.getElementById("toggleUploadBtn"); const voiceIndicator = document.getElementById('voiceIndicator'); const cameraOverlay = document.getElementById('cameraOverlay'); const previewOverlay = document.getElementById('previewOverlay'); const cameraView = document.getElementById('cameraView'); const previewCanvas = document.getElementById('previewCanvas'); const captureBtn = document.getElementById('captureBtn'); const cancelCameraBtn = document.getElementById('cancelCameraBtn'); const usePhotoBtn = document.getElementById('usePhotoBtn'); const retakeBtn = document.getElementById('retakeBtn'); const loader = document.getElementById('loader'); const imagePreviewContainer = document.getElementById('imagePreviewContainer'); const shareBtn = document.getElementById('shareBtn'); const shareModal = document.getElementById('shareModal'); const closeShareModalBtn = document.getElementById('closeShareModal'); const copyLinkBtn = document.getElementById('copyLinkBtn'); const shareLinkInput = document.getElementById('shareLinkInput'); const downloadNotification = document.getElementById('downloadNotification'); const downloadAppBtn = document.getElementById('downloadAppBtn'); const closeNotificationBtn = document.getElementById('closeNotificationBtn'); const sendOrVoiceBtn = document.getElementById('sendOrVoiceBtn'); const languageBtn = document.getElementById('languageBtn'); const languageDropdown = document.getElementById('languageDropdown'); const suggestionsContainer = document.getElementById('suggestionsContainer'); const settingsBtn = document.getElementById('settingsBtn'); const settingsDropdown = document.getElementById('settingsDropdown'); const deleteCurrentChatBtn = document.getElementById('deleteCurrentChatBtn'); const historyBtn = document.getElementById('historyBtn'); const historySidebar = document.getElementById('historySidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay'); const closeHistoryBtn = document.getElementById('closeHistoryBtn'); const newChatBtn = document.getElementById('newChatBtn'); const historyList = document.getElementById('historyList'); const welcomeAnimation = document.getElementById('welcomeAnimationContainer');
+    const uploadOptionsOverlay = document.getElementById('uploadOptionsOverlay'); const uploadOptionsSheet = document.getElementById('uploadOptionsSheet'); const subscriptionOverlay = document.getElementById('subscriptionOverlay'); const subscriptionSheet = document.getElementById('subscriptionSheet');
 
-    const botName = "Saif AI"; const localStorageKeyAllChats = "saifAiAllChatSessions_v3"; const localStorageKeyLastSession = "saifAiLastSession_v3"; const localStorageKeyLanguage = "saifAiLanguage_v1";
-    const localStorageKeyUsageTracker = "saifAiUsageTracker_v1";
-    const localStorageKeySubscription = "saifAiSubscription_v1";
+    // --- App Constants & State ---
+    const botName = "Saif AI"; const localStorageKeyAllChats = "saifAiAllChatSessions_v3_prog_only"; const localStorageKeyLastSession = "saifAiLastSession_v3_prog_only"; const localStorageKeyLanguage = "saifAiLanguage_v1";
+    const localStorageKeyUsageTracker = "saifAiUsageTracker_v1"; const localStorageKeySubscription = "saifAiSubscription_v1";
     
-    let allChatSessions = {}; let messages = []; let attachedFiles = []; let currentSubject = "general"; let currentChatId = null; let currentLanguage = "ar";
-    // إضافة مادة البرمجة إلى قائمة المواد
+    let allChatSessions = {}; let messages = []; let attachedFiles = [];
+    const currentSubject = "programming"; // Hardcoded to programming
+    let currentChatId = null; let currentLanguage = "ar";
+
+    // MODIFIED: Only programming subject remains.
     const subjects = [ 
-      { key: "programming", name: { ar: "برمجة", en: "Programming", fr: "Programmation", es: "Programación", zh: "编程" }, icon: "fas fa-code" },
-      { key: "physics", name: { ar: "فيزياء", en: "Physics", fr: "Physique", es: "Física", zh: "物理" }, icon: "fas fa-atom" }, 
-      { key: "chemistry", name: { ar: "كيمياء", en: "Chemistry", fr: "Chimie", es: "Química", zh: "化学" }, icon: "fas fa-flask" }, 
-      { key: "biology", name: { ar: "أحياء", en: "Biology", fr: "Biologie", es: "Biología", zh: "生物学" }, icon: "fas fa-dna" }, 
-      { key: "science", name: { ar: "علوم", en: "Science", fr: "Sciences", es: "Ciencia", zh: "科学" }, icon: "fas fa-microscope" }, 
-      { key: "arabic", name: { ar: "لغة عربية", en: "Arabic", fr: "Arabe", es: "Árabe", zh: "阿拉伯语" }, icon: "fas fa-pen-nib" }, 
-      { key: "philosophy", name: { ar: "فلسفة", en: "Philosophy", fr: "Philosophie", es: "Filosofía", zh: "哲学" }, icon: "fas fa-brain" }, 
-      { key: "english", name: { ar: "لغة إنجليزية", en: "English", fr: "Anglais", es: "Inglés", zh: "英语" }, icon: "fas fa-language" }, 
-      { key: "math", name: { ar: "رياضيات", en: "Math", fr: "Maths", es: "Matemáticas", zh: "数学" }, icon: "fas fa-calculator" }, 
-      { key: "religion", name: { ar: "تربية دينية", en: "Religion", fr: "Religion", es: "Religión", zh: "宗教教育" }, icon: "fas fa-mosque" } 
+      { key: "programming", name: { ar: "برمجة", en: "Programming", fr: "Programmation", es: "Programación", zh: "编程" }, icon: "fas fa-code" }
     ];
+    
     let recognition; let isListening = false; let deferredPrompt; let speechEndTimeout;
-    const predefinedSuggestions = [ {ar:"اشرح لي مفهوم الثقب الأسود ببساطة",en:"Explain the concept of a black hole simply",fr:"Expliquez simplement le concept d'un trou noir",es:"Explica de forma sencilla el concepto de agujero negro",zh:"简单解释一下黑洞的概念"}, {ar:"ما هي أفضل طريقة لتعلم لغة جديدة؟",en:"What is the best way to learn a new language?",fr:"Quelle est la meilleure façon d'apprendre une nouvelle langue ?",es:"¿Cuál es la mejor manera de aprender un nuevo idioma?",zh:"学习一门新语言的最好方法是什么？"}, {ar:"اكتب قصة قصيرة عن مستكشف فضاء",en:"Write a short story about a space explorer",fr:"Écrivez une nouvelle sur un explorateur de l'espace",es:"Escribe una historia corta sobre un explorador espacial",zh:"写一个关于太空探险家的短篇故事"}, {ar:"ما هي عاصمة أستراليا؟",en:"What is the capital of Australia?",fr:"Quelle est la capitale de l'Australie ?",es:"¿Cuál es la capital de Australia?",zh:"澳大利亚的首都是哪里？"}, {ar:"لخص لي كتاب الأب الغني والأب الفقير",en:"Summarize the book 'Rich Dad Poor Dad'",fr:"Résumez le livre 'Père riche, père pauvre'",es:"Resume el libro 'Padre Rico, Padre Pobre'",zh:"总结《富爸爸穷爸爸》这本书"}, {ar:"كيف تعمل محركات البحث مثل جوجل؟",en:"How do search engines like Google work?",fr:"Comment fonctionnent les moteurs de recherche comme Google ?",es:"¿Cómo funcionan los motores de búsqueda como Google?",zh:"像谷歌这样的搜索引擎是如何工作的？"}, {ar:"ما هي فوائد رياضة التأمل؟",en:"What are the benefits of meditation?",fr:"Quels sont les bienfaits de la méditation ?",es:"¿Cuáles son los beneficios de la meditación?",zh:"冥想有什么好处？"}, {ar:"اقترح 5 أفكار لمشاريع برمجية صغيرة",en:"Suggest 5 ideas for small programming projects",fr:"Suggérez 5 idées de petits projets de programmation",es:"Sugiere 5 ideas para pequeños proyectos de programación",zh:"为小型编程项目建议5个想法"}, {ar:"ما هو الفرق بين الذكاء الاصطناعي وتعلم الآلة؟",en:"What is the difference between AI and Machine Learning?",fr:"Quelle est la différence entre l'IA et l'apprentissage automatique ?",es:"¿Cuál es la diferencia entre la IA y el Aprendizaje Automático?",zh:"人工智能和机器学习有什么区别？"}, {ar:"اكتب لي قصيدة عن جمال الطبيعة",en:"Write me a poem about the beauty of nature",fr:"Écris-moi un poème sur la beauté de la nature",es:"Escríbeme un poema sobre la belleza de la naturaleza",zh:"为我写一首关于自然之美的诗"}, {ar:"كيف يمكنني حماية خصوصيتي على الإنترنت؟",en:"How can I protect my privacy online?",fr:"Comment puis-je protéger ma vie privée en ligne ?",es:"¿Cómo puedo proteger mi privacidad en línea?",zh:"我如何在线保护我的隐私？"}, {ar:"ما هي أبرز أحداث القرن العشرين؟",en:"What are the main events of the 20th century?",fr:"Quels sont les principaux événements du 20e siècle ?",es:"¿Cuáles son los principaux acontecimientos del siglo XX?",zh:"20世纪的主要事件有哪些？"}, {ar:"اشرح نظرية النسبية لأينشطاين",en:"Explain Einstein's theory of relativity",fr:"Expliquez la théorie de la relativité d'Einstein",es:"Explica la teoría de la relatividad de Einstein",zh:"解释爱因斯坦的相对论"}, {ar:"ما هي أغرب معلومة تعرفها؟",en:"What is the weirdest fact you know?",fr:"Quel est le fait le plus étrange que vous connaissiez ?",es:"¿Cuál es el dato más extraño que conoces?",zh:"你知道的最奇怪的事实是什么？"}, {ar:"اقترح خطة لرحلة سياحية إلى اليابان لمدة أسبوع",en:"Suggest a one-week tourist trip plan to Japan",fr:"Suggérez un plan de voyage touristique d'une semaine au Japon",es:"Sugiere un plan de viaje turístico de una semana a Japón",zh:"建议一个为期一周的日本旅游计划"}, {ar:"كيف أبدأ في مجال الاستثمار؟",en:"How do I start investing?",fr:"Comment commencer à investir ?",es:"¿Cómo empiezo a invertir?",zh:"我该如何开始投资？"}, {ar:"اكتب نصًا إعلانيًا لمنتج خيالي",en:"Write an advertisement text for a fictional product",fr:"Rédigez un texte publicitaire pour un produit fictif",es:"Escribe un texto publicitario para un producto ficticio",zh:"为虚构产品撰写广告文案"}, {ar:"ما هي أهمية الحفاظ على البيئة؟",en:"What is the importance of environmental conservation?",fr:"Quelle est l'importance de la conservation de l'environnement ?",es:"¿Cuál es la importancia de la conservación del medio ambiente?",zh:"环境保护的重要性是什么？"}, {ar:"لخص فيلم 'Inception'",en:"Summarize the movie 'Inception'",fr:"Résumez le film 'Inception'",es:"Resume la película 'Inception'",zh:"总结电影《盗梦空间》"}, {ar:"ما هي الحضارات القديمة التي أثرت في العالم؟",en:"What ancient civilizations influenced the world?",fr:"Quelles civilisations anciennes ont influencé le monde ?",es:"¿Qué civilizaciones antiguas influyeron en el mundo?",zh:"哪些古代文明影响了世界？"}, {ar:"كيف يعمل نظام تحديد المواقع العالمي (GPS)؟",en:"How does the GPS system work?",fr:"Comment fonctionne le système GPS ?",es:"¿Cómo funciona el sistema GPS?",zh:"GPS系统是如何工作的？"}, {ar:"ما هي النصائح لزيادة الإنتاجية في العمل؟",en:"What are some tips for increasing productivity at work?",fr:"Quels sont les conseils pour augmenter la productivité au travail ?",es:"¿Cuáles son algunos consejos para aumentar la productividad en el trabajo?",zh:"提高工作效率有什么技巧？"}, {ar:"اكتب حوارًا فلسفيًا بين شخصين",en:"Write a philosophical dialogue between two people",fr:"Écrivez un dialogue philosophique entre deux personnes",es:"Escribe un diálogo filosófico entre dos personas",zh:"写一段两人之间的哲学对话"}, {ar:"ما هي أفضل الكتب التي قرأتها؟",en:"What are the best books you have read?",fr:"Quels sont les meilleurs livres que vous avez lus ?",es:"¿Cuáles son los mejores libros que has leído?",zh:"你读过的最好的书是哪些？"}, {ar:"كيف يمكن للذكاء الاصطناعي أن يغير مستقبلنا؟",en:"How can AI change our future?",fr:"Comment l'IA peut-elle changer notre avenir ?",es:"¿Cómo puede la IA cambiar nuestro futuro?",zh:"人工智能如何改变我们的未来？"}, {ar:"ما هي عملية البناء الضوئي؟",en:"What is the process of photosynthesis?",fr:"Quel est le processus de la photosynthèse ?",es:"¿Qué es el proceso de la fotosíntesis?",zh:"什么是光合作用的过程？"}, {ar:"لخص قصة أحد الأنبياء",en:"Summarize the story of one of the prophets",fr:"Résumez l'histoire d'un des prophètes",es:"Resume la historia de uno de los profetas",zh:"总结一位先知的故事"}, {ar:"ما هي المهارات المطلوبة في سوق العمل اليوم؟",en:"What skills are in demand in today's job market?",fr:"Quelles sont les compétences recherchées sur le marché du travail actuel ?",es:"¿Qué habilidades se demandan en el mercado laboral actual?",zh:"当今就业市场需要哪些技能？"} ];
+    const predefinedSuggestions = [ {ar:"اشرح لي هذا الكود بلغة C++",en:"Explain this C++ code to me",fr:"Expliquez-moi ce code C++",es:"Explícame este código C++",zh:"给我解释一下这段C++代码"}, {ar:"كيف أتعامل مع الأخطاء في Python؟",en:"How do I handle errors in Python?",fr:"Comment gérer les erreurs en Python ?",es:"¿Cómo manejo los errores en Python?",zh:"我如何在Python中处理错误？"}, {ar:"اكتب دالة بلغة JavaScript لفرز مصفوفة",en:"Write a JavaScript function to sort an array",fr:"Écrivez une fonction JavaScript pour trier un tableau",es:"Escribe una función en JavaScript para ordenar un array",zh:"写一个JavaScript函数来对数组进行排序"}, {ar:"ما هو الفرق بين let, const, و var؟",en:"What is the difference between let, const, and var?",fr:"Quelle est la différence entre let, const et var ?",es:"¿Cuál es la diferencia entre let, const y var?",zh:"let、const 和 var 有什么区别？"}, {ar:"اقترح 5 أفكار لمشاريع برمجية صغيرة",en:"Suggest 5 ideas for small programming projects",fr:"Suggérez 5 idées de petits projets de programmation",es:"Sugiere 5 ideas para pequeños proyectos de programación",zh:"为小型编程项目建议5个想法"}, {ar:"ما هو الفرق بين الذكاء الاصطناعي وتعلم الآلة؟",en:"What is the difference between AI and Machine Learning?",fr:"Quelle est la différence entre l'IA et l'apprentissage automatique ?",es:"¿Cuál es la diferencia entre la IA y el Aprendizaje Automático?",zh:"人工智能和机器学习有什么区别？"}, {ar:"كيف يعمل نظام Git للتحكم في الإصدارات؟",en:"How does the Git version control system work?",fr:"Comment fonctionne le système de contrôle de version Git ?",es:"¿Cómo funciona el sistema de control de versiones Git?",zh:"Git版本控制系统是如何工作的？"} ];
     const mainContainer = document.querySelector('.container');
     const spaceBackground = document.getElementById('space-background');
     function showAppNotification() { downloadNotification.classList.add('show'); } function hideAppNotification() { downloadNotification.classList.remove('show'); }
@@ -666,7 +629,6 @@
         moon.style.right = `${right}%`;
     }
 
-    // New Functions for bottom sheets
     function showUploadOptions() {
         uploadOptionsOverlay.classList.add('show');
         uploadOptionsSheet.classList.add('show');
@@ -729,7 +691,6 @@
         reader.onload = async (e) => {
             const imageData = e.target.result;
 
-            // Show spinner
             const attachBtn = document.getElementById('attachProofBtn');
             const spinner = document.getElementById('spinner');
             if(attachBtn) attachBtn.style.display = 'none';
@@ -752,13 +713,13 @@
         proofUploadInput.value = '';
     }
 
-
     function initializeApp() { 
         registerServiceWorker(); 
         const savedLang = localStorage.getItem(localStorageKeyLanguage) || 'ar'; 
         switchLanguage(savedLang); 
         loadAllChatSessions(); 
         randomizeMoonPosition();
+        
         const qrCodeImg = document.getElementById('qr-code-img'); const whatsappShare = document.getElementById('whatsapp-share'); const twitterShare = document.getElementById('twitter-share'); const telegramShare = document.getElementById('telegram-share'); const facebookShare = document.getElementById('facebook-share'); shareBtn.addEventListener('click', () => { const shareUrl = shareLinkInput.value; const shareText = translations[currentLanguage].shareText; qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(shareUrl)}&bgcolor=1c1c1c&color=ffffff&qzone=1`; whatsappShare.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`; twitterShare.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; telegramShare.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`; shareModal.style.display = 'flex'; }); closeShareModalBtn.addEventListener('click', () => { shareModal.style.display = 'none'; }); copyLinkBtn.addEventListener('click', copyShareLink); 
         
         toggleUploadBtn.addEventListener('click', showUploadOptions); 
@@ -770,7 +731,18 @@
         document.getElementById('uploadFromGalleryBtn').onclick = () => { hideUploadOptions(); triggerImageUpload(); }; 
         document.getElementById('useCameraBtn').onclick = () => { hideUploadOptions(); openCamera(); }; 
         
-        captureBtn.addEventListener('click', captureImage); retakeBtn.addEventListener('click', () => { previewOverlay.style.display = 'none'; cameraOverlay.style.display = 'flex'; }); cancelCameraBtn.addEventListener('click', closeCamera); usePhotoBtn.addEventListener('click', handleCameraPhotoSubmission); enterSubjectsBtn.addEventListener('click', openSubjectsView); backToChatBtn.addEventListener('click', closeSubjectsView); generalChatBtn.addEventListener('click', switchToGeneralMode); downloadAppBtn.addEventListener('click', promptInstall); closeNotificationBtn.addEventListener('click', hideAppNotification); userInput.addEventListener("keydown", (e) => { if(e.key==="Enter"&&!e.shiftKey) { e.preventDefault(); sendMessage();}}); userInput.addEventListener("input", () => { autoResizeTextarea(); updateSendOrVoiceButton(); updateInitialViewState(); }); languageBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(languageDropdown); }); settingsBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(settingsDropdown); }); document.addEventListener('click', () => { languageDropdown.style.display = 'none'; settingsDropdown.style.display = 'none'; }); document.querySelectorAll('#languageDropdown button').forEach(button => { button.addEventListener('click', (e) => { switchLanguage(e.currentTarget.dataset.lang); }); }); deleteCurrentChatBtn.addEventListener('click', deleteCurrentChat); historyBtn.addEventListener('click', openHistorySidebar); closeHistoryBtn.addEventListener('click', closeHistorySidebar); sidebarOverlay.addEventListener('click', closeHistorySidebar); newChatBtn.addEventListener('click', () => { loadChat(currentSubject, null); closeHistorySidebar(); }); 
+        captureBtn.addEventListener('click', captureImage); retakeBtn.addEventListener('click', () => { previewOverlay.style.display = 'none'; cameraOverlay.style.display = 'flex'; }); cancelCameraBtn.addEventListener('click', closeCamera); usePhotoBtn.addEventListener('click', handleCameraPhotoSubmission);
+        downloadAppBtn.addEventListener('click', promptInstall); closeNotificationBtn.addEventListener('click', hideAppNotification);
+        userInput.addEventListener("keydown", (e) => { if(e.key==="Enter"&&!e.shiftKey) { e.preventDefault(); sendMessage();}}); userInput.addEventListener("input", () => { autoResizeTextarea(); updateSendOrVoiceButton(); updateInitialViewState(); });
+        languageBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(languageDropdown); });
+        settingsBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(settingsDropdown); });
+        document.addEventListener('click', () => { languageDropdown.style.display = 'none'; settingsDropdown.style.display = 'none'; });
+        document.querySelectorAll('#languageDropdown button').forEach(button => { button.addEventListener('click', (e) => { switchLanguage(e.currentTarget.dataset.lang); }); });
+        deleteCurrentChatBtn.addEventListener('click', deleteCurrentChat);
+        historyBtn.addEventListener('click', openHistorySidebar);
+        closeHistoryBtn.addEventListener('click', closeHistorySidebar);
+        sidebarOverlay.addEventListener('click', closeHistorySidebar);
+        newChatBtn.addEventListener('click', () => { loadChat(null); closeHistorySidebar(); }); 
         
         imageUploadInput.addEventListener('change', handleFileSelect);
         proofUploadInput.addEventListener('change', handleProofSubmission);
@@ -783,58 +755,79 @@
     function toggleDropdown(menu) { const isVisible = menu.style.display === 'block'; languageDropdown.style.display = 'none'; settingsDropdown.style.display = 'none'; if (!isVisible) { menu.style.display = 'block'; } }
     function copyShareLink() { shareLinkInput.select(); navigator.clipboard.writeText(shareLinkInput.value).then(() => { const originalText = document.getElementById('copyBtnText').textContent; document.getElementById('copyBtnText').textContent = translations[currentLanguage].copied; copyLinkBtn.querySelector('i').className = "fas fa-check"; setTimeout(() => { document.getElementById('copyBtnText').textContent = originalText; copyLinkBtn.querySelector('i').className = "fas fa-copy"; }, 2000); }); }
     function updateSendOrVoiceButton() { const hasText = userInput.value.trim().length > 0 || attachedFiles.length > 0; const t = translations[currentLanguage]; if (hasText) { sendOrVoiceBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; sendOrVoiceBtn.title = t.send; sendOrVoiceBtn.onclick = sendMessage; } else { sendOrVoiceBtn.innerHTML = '<i class="fas fa-microphone"></i>'; sendOrVoiceBtn.title = t.speak; sendOrVoiceBtn.onclick = toggleListening; } }
-    function openSubjectsView() { chatWrapper.style.display = 'none'; subjectsViewContainer.style.display = 'flex'; settingsDropdown.style.display = 'none'; }
-    function closeSubjectsView() { subjectsViewContainer.style.display = 'none'; chatWrapper.style.display = 'flex'; }
-    function getTranslatedSubjectName(subjectKey) { if (subjectKey === "general") return translations[currentLanguage].general; const subject = subjects.find(s => s.key === subjectKey); return subject ? subject.name[currentLanguage] : subjectKey; }
-    function getBotDisplayName() { const subjectName = getTranslatedSubjectName(currentSubject); return currentSubject === "general" ? botName : `${botName} (${subjectName})`; }
-    function updateSubjectUI() { botNameElement.textContent = getBotDisplayName(); const t = translations[currentLanguage]; generalChatBtn.style.display = currentSubject === "general" ? 'none' : 'inline-block'; generalChatBtn.textContent = t.general; }
-    function populateSubjectListInView() { subjectListContainer.innerHTML = ''; subjects.forEach(subject => { const btn = document.createElement('button'); btn.className = 'subject-item-btn'; btn.innerHTML = `<i class="${subject.icon}"></i><span>${subject.name[currentLanguage]}</span>`; btn.onclick = () => selectSubject(subject.key); subjectListContainer.appendChild(btn); }); }
-    function selectSubject(subjectKey) { if (currentSubject === subjectKey) { closeSubjectsView(); return; } switchSubject(subjectKey); }
-    function switchToGeneralMode() { if (currentSubject === "general") { return; } switchSubject("general"); }
-    function switchSubject(newSubject) { currentSubject = newSubject; const sessionsForNewSubject = allChatSessions[newSubject] || []; const lastChatInNewSubject = sessionsForNewSubject.length > 0 ? sessionsForNewSubject[0].id : null; loadChat(newSubject, lastChatInNewSubject); updateSubjectUI(); closeSubjectsView(); }
-    
+
+    function getTranslatedSubjectName(subjectKey) {
+        const subject = subjects.find(s => s.key === subjectKey); 
+        return subject ? subject.name[currentLanguage] : subjectKey; 
+    }
+    function getBotDisplayName() {
+        const subjectName = getTranslatedSubjectName(currentSubject);
+        return `${botName} (${subjectName})`;
+    }
+    function updateSubjectUI() {
+        botNameElement.textContent = getBotDisplayName();
+    }
+
     function loadAllChatSessions() {
         try {
             const stored = localStorage.getItem(localStorageKeyAllChats);
             allChatSessions = stored ? JSON.parse(stored) : {};
-        } catch (e) {
-            allChatSessions = {};
+        } catch (e) { allChatSessions = {}; }
+        
+        if (!allChatSessions[currentSubject]) {
+             allChatSessions[currentSubject] = [];
         }
-        subjects.forEach(s => { if (!allChatSessions[s.key]) allChatSessions[s.key] = []; });
-        if (!allChatSessions.general) allChatSessions.general = [];
-
-        let lastSession = { subject: 'general', id: null };
+        
+        let lastChatId = null;
         try {
             const storedLast = localStorage.getItem(localStorageKeyLastSession);
-            if (storedLast) lastSession = JSON.parse(storedLast);
+            if (storedLast) {
+                 const lastSessionId = JSON.parse(storedLast);
+                 lastChatId = lastSessionId;
+            }
         } catch (e) {}
+
+        const lastSessionExists = allChatSessions[currentSubject]?.some(s => s.id === lastChatId);
         
-        const lastSessionExists = allChatSessions[lastSession.subject]?.some(s => s.id === lastSession.id);
         if (lastSessionExists) {
-            loadChat(lastSession.subject, lastSession.id);
+            loadChat(lastChatId);
         } else {
-            const sessionsForSubject = allChatSessions[lastSession.subject] || [];
+            const sessionsForSubject = allChatSessions[currentSubject] || [];
             const latestChatId = sessionsForSubject.length > 0 ? sessionsForSubject[0].id : null;
-            loadChat(lastSession.subject, latestChatId);
+            loadChat(latestChatId);
         }
     }
 
     function saveAllChatSessionsToLocalStorage() {
         if (currentChatId && allChatSessions[currentSubject]) {
             const session = allChatSessions[currentSubject].find(s => s.id === currentChatId);
-            if (session) {
-                session.messages = messages;
-            }
+            if (session) { session.messages = messages; }
         }
         localStorage.setItem(localStorageKeyAllChats, JSON.stringify(allChatSessions));
-        localStorage.setItem(localStorageKeyLastSession, JSON.stringify({ subject: currentSubject, id: currentChatId }));
+        localStorage.setItem(localStorageKeyLastSession, JSON.stringify(currentChatId));
     }
     
-    function loadChat(subject, chatId) { currentSubject = subject; currentChatId = chatId; if (chatId === null) { messages = []; addWelcomeMessage(); } else { const session = allChatSessions[subject]?.find(s => s.id === chatId); if (session) { messages = session.messages; } else { messages = []; addWelcomeMessage(); currentChatId = null; } } updateSubjectUI(); refreshChat(); }
+    function loadChat(chatId) {
+        currentChatId = chatId;
+        if (chatId === null) {
+            messages = [];
+            addWelcomeMessage();
+        } else {
+            const session = allChatSessions[currentSubject]?.find(s => s.id === chatId);
+            if (session) {
+                messages = session.messages;
+            } else {
+                messages = [];
+                addWelcomeMessage();
+                currentChatId = null;
+            }
+        }
+        updateSubjectUI();
+        refreshChat();
+    }
     function addWelcomeMessage() { const welcomeMsgText = getWelcomeMessageText(); if (messages.length === 0 || !messages.some(m => m.isInitialWelcome)) { messages.unshift({ sender: "bot", text: welcomeMsgText, images: [], isInitialWelcome: true }); } }
     function addMessage(sender, text, images = [], isSystemMessage = false) { if (currentChatId === null && sender === 'user') { const newId = Date.now(); const newSession = { id: newId, timestamp: newId, messages: [] }; if (!allChatSessions[currentSubject]) { allChatSessions[currentSubject] = []; } allChatSessions[currentSubject].unshift(newSession); currentChatId = newId; } messages.push({ sender, text, images, isSystemMessage }); refreshChat(); chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); }
     
-    // دالة جديدة لعرض الكود في حاوية خاصة
     function createCodeContainer(code, language = '') {
         const codeContainer = document.createElement('div');
         codeContainer.className = 'code-container';
@@ -861,7 +854,6 @@
         codeContainer.appendChild(codeHeader);
         codeContainer.appendChild(codeContent);
         
-        // إضافة وظيفة النسخ
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(code).then(() => {
                 const originalText = copyButton.innerHTML;
@@ -880,15 +872,16 @@
     function typeWriterEffect(element, text) { 
         let i = 0; 
         element.innerHTML = ""; 
-        
         function type() { 
             if (i < text.length) { 
-                // التحقق إذا كان النص يحتوي على كود
                 if (text.substring(i).startsWith('```')) {
                     const endIndex = text.indexOf('```', i + 3);
                     if (endIndex !== -1) {
-                        const codeContent = text.substring(i + 3, endIndex);
-                        const codeContainer = createCodeContainer(codeContent, '');
+                        const codeBlock = text.substring(i + 3, endIndex);
+                        const lines = codeBlock.split('\n');
+                        const language = lines[0].trim();
+                        const codeContent = lines.slice(1).join('\n');
+                        const codeContainer = createCodeContainer(codeContent, language);
                         element.appendChild(codeContainer);
                         i = endIndex + 3;
                     } else {
@@ -917,12 +910,8 @@
             <button title="${t.copy}"><i class="fas fa-copy"></i></button> 
             <button title="${t.playAudio}"><i class="fas fa-volume-up"></i></button> 
         `; 
-        actionsDiv.querySelector('button[title="' + t.copy + '"]').onclick = () => { 
-            navigator.clipboard.writeText(text); 
-        }; 
-        actionsDiv.querySelector('button[title="' + t.playAudio + '"]').onclick = () => { 
-            speakMessageText(text); 
-        }; 
+        actionsDiv.querySelector('button[title="' + t.copy + '"]').onclick = () => { navigator.clipboard.writeText(text); }; 
+        actionsDiv.querySelector('button[title="' + t.playAudio + '"]').onclick = () => { speakMessageText(text); }; 
         messageElement.appendChild(actionsDiv); 
     }
     
@@ -946,35 +935,29 @@
             contentDiv.className = "message-content";
             
             if(msg.text) {
-                // معالجة النص لعرض الكود في حاوية خاصة
                 let processedText = msg.text;
-                const codeBlocks = processedText.match(/```[\s\S]*?```/g);
-                
-                if (codeBlocks) {
-                    let lastIndex = 0;
-                    codeBlocks.forEach((codeBlock) => {
-                        const startIndex = processedText.indexOf(codeBlock, lastIndex);
-                        const beforeCode = processedText.substring(lastIndex, startIndex);
-                        
-                        if (beforeCode) {
-                            const textNode = document.createTextNode(beforeCode);
-                            contentDiv.appendChild(textNode);
-                        }
-                        
-                        const codeContent = codeBlock.replace(/```/g, '');
-                        const codeContainer = createCodeContainer(codeContent, '');
-                        contentDiv.appendChild(codeContainer);
-                        
-                        lastIndex = startIndex + codeBlock.length;
-                    });
-                    
-                    if (lastIndex < processedText.length) {
-                        const afterCode = processedText.substring(lastIndex);
-                        const textNode = document.createTextNode(afterCode);
+                const codeBlocksRegex = /```(\w*)\n([\s\S]*?)```/g;
+                let lastIndex = 0;
+                let match;
+
+                while ((match = codeBlocksRegex.exec(processedText)) !== null) {
+                    const beforeCode = processedText.substring(lastIndex, match.index);
+                    if (beforeCode) {
+                        const textNode = document.createTextNode(beforeCode);
                         contentDiv.appendChild(textNode);
                     }
-                } else {
-                    const textNode = document.createTextNode(msg.text);
+                    
+                    const language = match[1] || '';
+                    const codeContent = match[2];
+                    const codeContainer = createCodeContainer(codeContent, language);
+                    contentDiv.appendChild(codeContainer);
+                    
+                    lastIndex = match.index + match[0].length;
+                }
+                
+                if (lastIndex < processedText.length) {
+                    const afterCode = processedText.substring(lastIndex);
+                    const textNode = document.createTextNode(afterCode);
                     contentDiv.appendChild(textNode);
                 }
             }
@@ -1010,11 +993,27 @@
     }
 
     function deleteMessage(index) { messages.splice(index, 1); refreshChat(); }
-    function deleteCurrentChat() { settingsDropdown.style.display = 'none'; if (!currentChatId) { messages = []; addWelcomeMessage(); refreshChat(); return; } if (confirm(translations[currentLanguage].confirmDeleteCurrent)) { const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === currentChatId); if (sessionIndex > -1) { allChatSessions[currentSubject].splice(sessionIndex, 1); } const nextSession = allChatSessions[currentSubject][0] || null; loadChat(currentSubject, nextSession ? nextSession.id : null); } }
+    function deleteCurrentChat() {
+        settingsDropdown.style.display = 'none';
+        if (!currentChatId) {
+            messages = [];
+            addWelcomeMessage();
+            refreshChat();
+            return;
+        }
+        if (confirm(translations[currentLanguage].confirmDeleteCurrent)) {
+            const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === currentChatId);
+            if (sessionIndex > -1) {
+                allChatSessions[currentSubject].splice(sessionIndex, 1);
+            }
+            const nextSession = allChatSessions[currentSubject][0] || null;
+            loadChat(nextSession ? nextSession.id : null);
+        }
+    }
     
     async function fetchGeminiResponse(promptParts) {
         if (!geminiApiKey) throw new Error("API key is missing.");
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${geminiApiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`;
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1026,7 +1025,6 @@
     }
 
     async function processQueryWithAI(promptParts) { 
-        const t = translations[currentLanguage]; 
         updateInitialViewState(); 
         const typingIndicatorHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`; 
         const tempMsgId = `bot-msg-${Date.now()}`; 
@@ -1048,60 +1046,38 @@
         } catch (error) { 
             const errorElement = document.getElementById(tempMsgId); 
             if (errorElement) { 
-                errorElement.querySelector('.message-content').innerHTML = `${t.errorPrefix}: ${error.message}`; 
+                errorElement.querySelector('.message-content').innerHTML = `${translations[currentLanguage].errorPrefix}: ${error.message}`; 
             } 
-            messages.push({ sender: 'bot', text: `${t.errorPrefix}: ${error.message}`, images: [], isSystemMessage: true }); 
+            messages.push({ sender: 'bot', text: `${translations[currentLanguage].errorPrefix}: ${error.message}`, images: [], isSystemMessage: true }); 
             saveAllChatSessionsToLocalStorage(); 
         } 
     }
     
-    // --- New Usage Tracking and Subscription Logic ---
-
     function getSubscriptionStatus() {
-        try {
-            const sub = JSON.parse(localStorage.getItem(localStorageKeySubscription));
-            if (sub && sub.expiryTimestamp && sub.expiryTimestamp > Date.now()) {
-                return { isActive: true, expiry: sub.expiryTimestamp };
-            }
-        } catch (e) {}
+        try { const sub = JSON.parse(localStorage.getItem(localStorageKeySubscription)); if (sub && sub.expiryTimestamp && sub.expiryTimestamp > Date.now()) { return { isActive: true, expiry: sub.expiryTimestamp }; } } catch (e) {}
         return { isActive: false };
     }
-
     function activateSubscription() {
-        const expiryTimestamp = Date.now() + 30 * 24 * 60 * 60 * 1000; // 30 days
-        const sub = { expiryTimestamp };
-        localStorage.setItem(localStorageKeySubscription, JSON.stringify(sub));
+        const expiryTimestamp = Date.now() + 30 * 24 * 60 * 60 * 1000;
+        localStorage.setItem(localStorageKeySubscription, JSON.stringify({ expiryTimestamp }));
     }
-
     function getUsageTracker() {
         const today = new Date().toISOString().split('T')[0];
         let tracker;
-        try {
-            tracker = JSON.parse(localStorage.getItem(localStorageKeyUsageTracker));
-        } catch (e) {
-            tracker = null;
-        }
-        if (!tracker || tracker.date !== today) {
-            return { date: today, messageCount: 0, imageCount: 0 };
-        }
+        try { tracker = JSON.parse(localStorage.getItem(localStorageKeyUsageTracker)); } catch (e) { tracker = null; }
+        if (!tracker || tracker.date !== today) { return { date: today, messageCount: 0, imageCount: 0 }; }
         return tracker;
     }
-
     function incrementUsage(type) {
-        // لا تتبع الاستخدام لمادة البرمجة
         if (currentSubject === 'programming') return;
-        
-        if (getSubscriptionStatus().isActive) return; // Don't track usage for subscribers
+        if (getSubscriptionStatus().isActive) return;
         const tracker = getUsageTracker();
         if (type === 'message') tracker.messageCount++;
         else if (type === 'image') tracker.imageCount++;
         localStorage.setItem(localStorageKeyUsageTracker, JSON.stringify(tracker));
     }
-
     function checkLimit(type) {
-        // لا توجد حدود لمادة البرمجة
         if (currentSubject === 'programming') return true;
-        
         if (getSubscriptionStatus().isActive) return true;
         const tracker = getUsageTracker();
         if (type === 'message') return tracker.messageCount < DAILY_MESSAGE_LIMIT;
@@ -1109,51 +1085,27 @@
         return false;
     }
     
-    // ============================================================================================
-    // --- WARNING: SIMULATED PAYMENT VERIFICATION ---
-    // This function is for demonstration purposes ONLY. It is NOT secure.
-    // In a real application, you must send the image to a server for manual verification.
-    // Do NOT rely on client-side AI analysis for financial transactions.
-    // ============================================================================================
     async function verifyPayment(imageData) {
         try {
             const prompt = `Analyze this image. Does it contain the number "${VODAFONE_CASH_NUMBER}" and the number "20"? Answer with only "YES" or "NO".`;
-            const promptParts = [
-                { text: prompt },
-                { inline_data: { mime_type: 'image/jpeg', data: imageData.split(',')[1] } }
-            ];
+            const promptParts = [ { text: prompt }, { inline_data: { mime_type: 'image/jpeg', data: imageData.split(',')[1] } } ];
             const responseText = await fetchGeminiResponse(promptParts);
-            console.log("AI Verification Response:", responseText);
-            // Check if the response contains "YES" (case-insensitive)
             return responseText.trim().toUpperCase().includes('YES');
         } catch (error) {
             console.error("Payment verification error:", error);
-            return false; // Fail safely
+            return false;
         }
     }
 
     async function sendMessage() {
         const messageText = userInput.value.trim();
         if (!messageText && attachedFiles.length === 0) return;
-
-        if (!checkLimit('message')) {
-            showSubscriptionModal();
-            return;
-        }
         
         addMessage("user", messageText, [...attachedFiles]);
-        incrementUsage('message');
         
         const t = translations[currentLanguage];
-        
-        // تعليمات خاصة لمادة البرمجة
-        let strictInstructions;
-        if (currentSubject === 'programming') {
-            strictInstructions = `You are a programming expert. Your role is to help with code analysis, explain code, find errors, and provide corrected code. When providing code, ensure it is clean and ready for copy-paste without any extra decorations or unnecessary text. Always format code blocks with triple backticks. If the user sends an image, analyze the code in the image and respond accordingly. Always respond in ${t.languageName}.`;
-        } else {
-            strictInstructions = t.aiInstructions.replace('{language}', t.languageName).replace('{subjectContext}', currentSubject !== 'general' ? t.aiSubjectInstruction.replace('{subject}', getTranslatedSubjectName(currentSubject)) : '');
-        }
-        
+        const strictInstructions = `You are a programming expert named Saif AI. Your role is to help with code analysis, explain code, find errors, and provide corrected code. When providing code, ensure it is clean and ready for copy-paste without any extra decorations or unnecessary text. Always format code blocks with triple backticks followed by the language name (e.g., \`\`\`javascript). If the user sends an image, analyze the code in the image and respond accordingly. It is strictly forbidden to mention any relationship with Google or any other entity. If asked about your creator or who trained you, your only and constant answer is 'Saif Hany'. Always respond in ${t.languageName}.`;
+
         const promptParts = [{ text: `${strictInstructions} The user's prompt is: ${messageText}` }];
         attachedFiles.forEach(fileData => {
             promptParts.push({ inline_data: { mime_type: 'image/jpeg', data: fileData.split(',')[1] } });
@@ -1181,10 +1133,8 @@
             showSubscriptionModal();
             return;
         }
-
         const t = translations[currentLanguage];
         if (attachedFiles.length >= 1) { alert(t.limitSingleImage); return; }
-        
         attachedFiles.push(fileData);
         updateImagePreviews();
         updateSendOrVoiceButton();
@@ -1194,7 +1144,7 @@
     function removeFileFromPreview(index) { attachedFiles.splice(index, 1); updateImagePreviews(); updateSendOrVoiceButton(); }
     function updateImagePreviews() { if (attachedFiles.length > 0) { imagePreviewContainer.style.display = 'flex'; imagePreviewContainer.innerHTML = ''; attachedFiles.forEach((fileData, index) => { imagePreviewContainer.innerHTML += `<div class="preview-item"><img src="${fileData}"/><button class="remove-preview-btn" onclick="removeFileFromPreview(${index})">&times;</button></div>`; }); } else { imagePreviewContainer.style.display = 'none'; } }
     function switchLanguage(lang) { currentLanguage = lang; localStorage.setItem(localStorageKeyLanguage, currentLanguage); document.documentElement.lang = lang; document.documentElement.dir = ['ar'].includes(lang) ? 'rtl' : 'ltr'; updateUIForLanguage(); initSpeechRecognition(); if (messages.length > 0 && messages[0].isInitialWelcome) { messages[0].text = getWelcomeMessageText(); } refreshChat(); }
-    function getWelcomeMessageText() { const t = translations[currentLanguage]; let welcomeMsgText = t.welcomeGeneral.replace('{botName}', getBotDisplayName()); if (currentSubject !== "general") { welcomeMsgText = t.welcomeSubject.replace('{botName}', getBotDisplayName()).replace('{subject}', getTranslatedSubjectName(currentSubject)); } return welcomeMsgText; }
+    function getWelcomeMessageText() { const t = translations[currentLanguage]; return t.welcomeSubject.replace('{botName}', getBotDisplayName()).replace('{subject}', getTranslatedSubjectName(currentSubject)); }
     function updateDailySuggestions() { const suggestionsPerDay = 4; const numChunks = Math.ceil(predefinedSuggestions.length / suggestionsPerDay); const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); const currentChunkIndex = dayIndex % numChunks; const startIndex = currentChunkIndex * suggestionsPerDay; const todaysSuggestions = predefinedSuggestions.slice(startIndex, startIndex + suggestionsPerDay); populateSuggestions(todaysSuggestions); }
     function populateSuggestions(suggestionsArray) { suggestionsContainer.innerHTML = ''; suggestionsArray.forEach(suggestionObj => { const btn = document.createElement('button'); btn.className = 'suggestion-btn'; btn.textContent = suggestionObj[currentLanguage] || suggestionObj['en']; btn.onclick = () => { userInput.value = suggestionObj[currentLanguage] || suggestionObj['en']; sendMessage(); }; suggestionsContainer.appendChild(btn); }); }
     
@@ -1216,14 +1166,38 @@
     
     function openHistorySidebar() { renderHistoryList(); historySidebar.classList.add('open'); sidebarOverlay.classList.add('open'); }
     function closeHistorySidebar() { historySidebar.classList.remove('open'); sidebarOverlay.classList.remove('open'); }
-    function renderHistoryList() { historyList.innerHTML = ''; const t = translations[currentLanguage]; const sessions = allChatSessions[currentSubject] || []; if (sessions.length === 0) { historyList.innerHTML = `<li style="cursor: default; opacity: 0.7; justify-content: center;">${t.noHistory}</li>`; return; } sessions.forEach(session => { const li = document.createElement('li'); if (session.id === currentChatId) { li.classList.add('active'); } const firstUserMsg = session.messages.find(m => m.sender === 'user'); const titleText = firstUserMsg ? (firstUserMsg.images.length > 0 ? `[${t.image}] ${firstUserMsg.text}`.trim() : firstUserMsg.text) : t.newChat; li.innerHTML = `<span class="history-item-title">${titleText}</span><button class="delete-history-item-btn" title="${t.deleteChat}"><i class="fas fa-trash"></i></button>`; li.querySelector('.history-item-title').addEventListener('click', () => { if (session.id !== currentChatId) { loadChat(currentSubject, session.id); } closeHistorySidebar(); }); li.querySelector('.delete-history-item-btn').addEventListener('click', (e) => { e.stopPropagation(); if (confirm(t.confirmDeleteChat)) { const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === session.id); if (sessionIndex > -1) { allChatSessions[currentSubject].splice(sessionIndex, 1); if(session.id === currentChatId) { const nextSession = allChatSessions[currentSubject][0] || null; loadChat(currentSubject, nextSession ? nextSession.id : null); } saveAllChatSessionsToLocalStorage(); renderHistoryList(); } } }); historyList.appendChild(li); }); }
-    function updateUIForLanguage() { const t = translations[currentLanguage]; languageDropdown.style.right = '0'; languageDropdown.style.left = 'auto'; settingsDropdown.style.left = '0'; settingsDropdown.style.right = 'auto'; document.getElementById('historyBtn').title = t.viewHistory; document.getElementById('shareBtn').title = t.shareApp; document.getElementById('languageBtn').title = t.changeLanguage; document.getElementById('settingsBtn').title = t.settings; document.getElementById('enterSubjectsBtnText').textContent = t.specializedSubjects; document.getElementById('deleteCurrentChatBtnText').textContent = t.deleteCurrentChat; updateSubjectUI(); document.getElementById('subjectsViewTitle').textContent = t.selectSubject; document.getElementById('backToChatText').textContent = t.backToChat; populateSubjectListInView(); userInput.placeholder = t.placeholder; toggleUploadBtn.title = t.attachFile; document.querySelector('#uploadFromGalleryBtn span').textContent = t.uploadFromGallery; document.querySelector('#useCameraBtn span').textContent = t.useCamera; document.getElementById('listeningText').textContent = t.listening; updateSendOrVoiceButton(); document.getElementById('aiDisclaimer').textContent = t.aiDisclaimer; updateDailySuggestions(); document.getElementById('captureBtn').title = t.capture; document.getElementById('cancelCameraBtn').textContent = t.cancel; document.getElementById('retakeBtn').textContent = t.retake; document.getElementById('usePhotoBtn').textContent = t.usePhoto; loader.textContent = t.analyzing; document.getElementById('shareModalTitle').textContent = t.shareApp; document.getElementById('shareModalDesc').textContent = t.shareDescription; document.getElementById('copyBtnText').textContent = t.copy; document.getElementById('qrCodeText').textContent = t.qrCodeText; document.getElementById('downloadNotificationText').textContent = t.installApp; document.getElementById('downloadAppBtn').textContent = t.install; document.getElementById('historyTitle').textContent = t.historyTitle; document.getElementById('newChatText').textContent = t.newChat; document.querySelectorAll('#languageDropdown button').forEach(button => { const langKey = button.dataset.lang; if (t.languageNames && t.languageNames[langKey]) { button.textContent = t.languageNames[langKey]; } }); }
+    function renderHistoryList() { historyList.innerHTML = ''; const t = translations[currentLanguage]; const sessions = allChatSessions[currentSubject] || []; if (sessions.length === 0) { historyList.innerHTML = `<li style="cursor: default; opacity: 0.7; justify-content: center;">${t.noHistory}</li>`; return; } sessions.forEach(session => { const li = document.createElement('li'); if (session.id === currentChatId) { li.classList.add('active'); } const firstUserMsg = session.messages.find(m => m.sender === 'user'); const titleText = firstUserMsg ? (firstUserMsg.images.length > 0 ? `[${t.image}] ${firstUserMsg.text}`.trim() : firstUserMsg.text) : t.newChat; li.innerHTML = `<span class="history-item-title">${titleText}</span><button class="delete-history-item-btn" title="${t.deleteChat}"><i class="fas fa-trash"></i></button>`; li.querySelector('.history-item-title').addEventListener('click', () => { if (session.id !== currentChatId) { loadChat(session.id); } closeHistorySidebar(); }); li.querySelector('.delete-history-item-btn').addEventListener('click', (e) => { e.stopPropagation(); if (confirm(t.confirmDeleteChat)) { const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === session.id); if (sessionIndex > -1) { allChatSessions[currentSubject].splice(sessionIndex, 1); if(session.id === currentChatId) { const nextSession = allChatSessions[currentSubject][0] || null; loadChat(nextSession ? nextSession.id : null); } saveAllChatSessionsToLocalStorage(); renderHistoryList(); } } }); historyList.appendChild(li); }); }
+    function updateUIForLanguage() {
+        const t = translations[currentLanguage];
+        languageDropdown.style.right = '0'; languageDropdown.style.left = 'auto'; settingsDropdown.style.left = '0'; settingsDropdown.style.right = 'auto';
+        document.getElementById('historyBtn').title = t.viewHistory; document.getElementById('shareBtn').title = t.shareApp; document.getElementById('languageBtn').title = t.changeLanguage; document.getElementById('settingsBtn').title = t.settings;
+        document.getElementById('deleteCurrentChatBtnText').textContent = t.deleteCurrentChat;
+        updateSubjectUI();
+        userInput.placeholder = t.placeholder;
+        toggleUploadBtn.title = t.attachFile;
+        document.querySelector('#uploadFromGalleryBtn span').textContent = t.uploadFromGallery;
+        document.querySelector('#useCameraBtn span').textContent = t.useCamera;
+        document.getElementById('listeningText').textContent = t.listening;
+        updateSendOrVoiceButton();
+        document.getElementById('aiDisclaimer').textContent = t.aiDisclaimer;
+        updateDailySuggestions();
+        document.getElementById('captureBtn').title = t.capture; document.getElementById('cancelCameraBtn').textContent = t.cancel; document.getElementById('retakeBtn').textContent = t.retake; document.getElementById('usePhotoBtn').textContent = t.usePhoto; loader.textContent = t.analyzing;
+        document.getElementById('shareModalTitle').textContent = t.shareApp; document.getElementById('shareModalDesc').textContent = t.shareDescription; document.getElementById('copyBtnText').textContent = t.copy; document.getElementById('qrCodeText').textContent = t.qrCodeText;
+        document.getElementById('downloadNotificationText').textContent = t.installApp; document.getElementById('downloadAppBtn').textContent = t.install;
+        document.getElementById('historyTitle').textContent = t.historyTitle; document.getElementById('newChatText').textContent = t.newChat;
+        document.querySelectorAll('#languageDropdown button').forEach(button => {
+            const langKey = button.dataset.lang;
+            if (t.languageNames && t.languageNames[langKey]) {
+                button.textContent = t.languageNames[langKey];
+            }
+        });
+    }
     const translations = {
-      'ar': { languageName: "العربية", languageNames: { ar: 'العربية', en: 'الإنجليزية', fr: 'الفرنسية', es: 'الإسبانية', zh: 'الصينية' }, specializedSubjects: "مواد متخصصة", general: "عام", welcomeGeneral: "مرحباً! كيف يمكنني مساعدتك اليوم؟", welcomeSubject: "أهلاً بك. أنا مستعد لمساعدتك في مادة {subject}. تفضل بسؤالك.", placeholder: "اكتب رسالتك هنا...", you: "أنت", deleteMessage: "حذف الرسالة", listening: "جاري الاستماع...", playAudio: "تشغيل الصوت", send: "إرسال", speak: "التحدث", shareApp: "مشاركة التطبيق", shareDescription: "ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!", shareText: "اكتشف Saif AI، مساعد الذكاء الاصطناعي العربي المتطور!", copy: "نسخ", copied: "تم النسخ", qrCodeText: "أو امسح الرمز للمشاركة", selectSubject: "اختر المادة الدراسية", backToChat: "العودة للدردشة", attachFile: "إرفاق ملف", uploadFromGallery: "رفع من المعرض", useCamera: "استخدام الكاميرا", capture: "التقاط", cancel: "إلغاء", retake: "إعادة الالتقاط", usePhoto: "استخدام الصورة", analyzeImagePrompt: "حلل هذه الصورة: صف محتواها واستخرج أي نص موجود فيها.", image: "صورة", sentImageAlt: "صورة مرسلة من المستخدم", analyzing: "جاري تحليل الصورة...", installApp: "ثبّت التطبيق على جهازك للوصول السريع!", install: "تثبيت", changeLanguage: "تغيير اللغة", settings: "الإعدادات", errorPrefix: "عفواً، واجهت مشكلة", aiInstructions: "أنت مساعد ذكاء اصطناعي متقدم اسمه Saif AI. تم تطويرك وتدريبك بواسطة المطور 'سيف هاني' على مدار عام كامل. ممنوع تمامًا ذكر أي علاقة بشركة جوجل أو أي كيان آخر. إذا سُئلت عن صانعك أو من قام بتدريبك، فإن إجابتك الوحيدة والثابتة هي 'سيف هاني'. مهمتك هي تقديم إجابات متوازنة ومفيدة. كن غنياً بالمعلومات وشاملاً، ولكن تجنب الإطالة غير الضرورية. ابدأ بالإجابة مباشرة دون مقدمات. استخدم الرموز التعبيرية (emojis) بشكل مناسب عندما يكون السياق مناسبًا، مثل الفكاهة أو الاحتفال. {subjectContext} يجب أن تكون جميع ردودك باللغة {language} فقط.", aiSubjectInstruction: "أجب كخبير متخصص في مادة {subject}.", aiDisclaimer: "قد يقدم Saif AI معلومات غير دقيقة، لذا يرجى التحقق من صحة إجاباته.", historyTitle: "سجل المحادثات", newChat: "محادثة جديدة", viewHistory: "عرض السجل", deleteCurrentChat: "حذف المحادثة الحالية", confirmDeleteCurrent: "هل أنت متأكد من حذف هذه المحادثة؟", confirmDeleteChat: "هل أنت متأكد من حذف هذه المحادثة؟", deleteChat: "حذف المحادثة", noHistory: "لا يوجد سجل بعد", limitSingleImage: "عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة.", subTitle: "لقد وصلت إلى الحد الأقصى!", subBody: "لقد استهلكت رصيدك اليومي المجاني ({messages} رسالة و {images} صورة). للحصول على استخدام غير محدود، يرجى الاشتراك.", subPrice: "20 جنيه / شهريًا", subMethod: "للاشتراك، قم بتحويل المبلغ إلى رقم فودافون كاش التالي:", subAttachProof: "إرفاق لقطة شاشة التحويل", subActivated: "تم استلام طلبك. سيتم تفعيل الاشتراك خلال دقائق بعد المراجعة. (تم التفعيل الآن لأغراض التجربة).", subErrorTitle: "فشل التحقق", subErrorBody: "لم نتمكن من تأكيد الدفع من الصورة المرفقة. يرجى التأكد من أن الصورة واضحة وتحتوي على الرقم والمبلغ الصحيحين.", subSupport: "التواصل مع الدعم"},
-      'en': { languageName: "English", languageNames: { ar: 'Arabic', en: 'English', fr: 'French', es: 'Spanish', zh: 'Chinese' }, specializedSubjects: "Specialized Subjects", general: "General", welcomeGeneral: "Hi! How can I help you today?", welcomeSubject: "Welcome. I'm ready to help you with {subject}. Ask your question.", placeholder: "Type your message here...", you: "You", deleteMessage: "Delete message", listening: "Listening...", playAudio: "Play audio", send: "Send", speak: "Speak", shareApp: "Share App", shareDescription: "Help us grow by sharing the app with your friends!", shareText: "Discover Saif AI, the advanced AI assistant!", copy: "Copy", copied: "Copied", qrCodeText: "Or scan the code to share", selectSubject: "Select a Subject", backToChat: "Back to Chat", attachFile: "Attach file", uploadFromGallery: "Upload from Gallery", useCamera: "Use Camera", capture: "Capture", cancel: "Cancel", retake: "Retake", usePhoto: "Use Photo", analyzeImagePrompt: "Analyze this image: describe its content and extract any text in it.", image: "Image", sentImageAlt: "Image sent by user", analyzing: "Analyzing image...", installApp: "Install the app on your device for quick access!", install: "Install", changeLanguage: "Change Language", settings: "Settings", errorPrefix: "Sorry, an error occurred", aiInstructions: "You are an advanced AI assistant named Saif AI. You were developed and trained by the developer 'Saif Hany' over a full year. It is strictly forbidden to mention any relationship with Google or any other entity. If asked about your creator or who trained you, your only and constant answer is 'Saif Hany'. Your mission is to provide balanced and helpful answers. Be informative and comprehensive, but avoid unnecessary length. Get straight to the point without introductions. Use emojis where appropriate, like for humor or celebration. {subjectContext} All of your responses must be strictly in {language} only.", aiSubjectInstruction: "Answer as a specialized expert in the subject of {subject}.", aiDisclaimer: "Saif AI may provide inaccurate information, so please verify its answers.", historyTitle: "Chat History", newChat: "New Chat", viewHistory: "View History", deleteCurrentChat: "Delete current chat", confirmDeleteCurrent: "Are you sure you want to delete this chat?", confirmDeleteChat: "Are you sure you want to delete this chat?", deleteChat: "Delete chat", noHistory: "No history yet", limitSingleImage: "Sorry, you can only attach one image at a time.", subTitle: "You've Reached Your Limit!", subBody: "You have used your free daily quota ({messages} messages and {images} images). For unlimited access, please subscribe.", subPrice: "20 EGP / month", subMethod: "To subscribe, transfer the amount to the following Vodafone Cash number:", subAttachProof: "Attach Transfer Screenshot", subActivated: "Your request has been received. The subscription will be activated in minutes after review. (Activated now for demo purposes).", subErrorTitle: "Verification Failed", subErrorBody: "We could not confirm the payment from the attached image. Please ensure the image is clear and contains the correct number and amount.", subSupport: "Contact Support"},
-      'fr': { languageName: "Français", languageNames: { ar: 'Arabe', en: 'Anglais', fr: 'Français', es: 'Espagnol', zh: 'Chinois' }, specializedSubjects: "Matières Spécialisées", general: "Général", welcomeGeneral: "Bonjour ! Comment puis-je vous aider aujourd'hui ?", welcomeSubject: "Bienvenue. Je suis prêt à vous aider en {subject}. Posez votre question.", placeholder: "Écrivez votre message ici...", you: "Vous", deleteMessage: "Supprimer le message", listening: "Écoute...", playAudio: "Lire l'audio", send: "Envoyer", speak: "Parler", shareApp: "Partager l'application", shareDescription: "Aidez-nous à grandir en partageant l'application avec vos amis !", shareText: "Découvrez Saif AI, l'assistant IA avancé !", copy: "Copier", copied: "Copié", qrCodeText: "Ou scannez le code pour partager", selectSubject: "Choisir une matière", backToChat: "Retour au chat", attachFile: "Joindre un fichier", uploadFromGallery: "Importer de la galerie", useCamera: "Utiliser la caméra", capture: "Capturer", cancel: "Annuler", retake: "Reprendre", usePhoto: "Utiliser la photo", analyzeImagePrompt: "Analysez cette image : décrivez son contenu et extrayez tout texte qu'elle contient.", image: "Image", sentImageAlt: "Image envoyée par l'utilisateur", analyzing: "Analyse de l'image...", installApp: "Installez l'application sur votre appareil pour un accès rapide !", install: "Installer", changeLanguage: "Changer de langue", settings: "Paramètres", errorPrefix: "Désolé, une erreur est survenue", aiInstructions: "Vous êtes un assistant IA avancé nommé Saif AI. Vous avez été développé et entraîné par le développeur 'Saif Hany' pendant une année entière. Il est strictly interdit de mentionner toute relation avec Google ou toute autre entité. Si l'on vous interroge sur votre créateur ou qui vous a entraîné, votre seule et constante réponse est 'Saif Hany'. Votre mission est de fournir des réponses équilibrées et utiles. Soyez informatif et complet, mais évitez les longueurs inutiles. Allez droit au but sans introduction. Utilisez les emojis de manière appropriée, comme pour l'humour ou la célébration. {subjectContext} Toutes vos réponses doivent être strictement en {language} uniquement.", aiSubjectInstruction: "Répondez en tant qu'expert spécialisé dans le domaine de {subject}.", aiDisclaimer: "Saif AI peut fournir des informations inexactes, veuillez donc vérifier ses réponses.", historyTitle: "Historique des chats", newChat: "Nouveau chat", viewHistory: "Voir l'historique", deleteCurrentChat: "Supprimer le chat actuel", confirmDeleteCurrent: "Êtes-vous sûr de vouloir supprimer ce chat ?", confirmDeleteChat: "Êtes-vous sûr de vouloir supprimer ce chat ?", deleteChat: "Supprimer le chat", noHistory: "Aucun historique pour l'instant", limitSingleImage: "Désolé, vous ne pouvez joindre qu'une seule image à la fois.", subTitle: "Vous avez atteint votre limite !", subBody: "Vous avez utilisé votre quota journalier gratuit ({messages} messages et {images} images). Pour un accès illimité, veuillez vous abonner.", subPrice: "20 EGP / mois", subMethod: "Pour vous abonner, transférez le montant au numéro Vodafone Cash suivant:", subAttachProof: "Joindre la capture d'écran du transfert", subActivated: "Votre demande a été reçue. L'abonnement sera activé dans quelques minutes après examen. (Activé maintenant pour la démonstration).", subErrorTitle: "Échec de la vérification", subErrorBody: "Nous n'avons pas pu confirmer le paiement à partir de l'image jointe. Veuillez vous assurer que l'image est claire et contient le bon numéro et le bon montant.", subSupport: "Contacter le support"},
-      'es': { languageName: "Español", languageNames: { ar: 'Árabe', en: 'Inglés', fr: 'Francés', es: 'Español', zh: 'Chino' }, specializedSubjects: "Materias Especializadas", general: "General", welcomeGeneral: "¡Hola! ¿Cómo puedo ayudarte hoy?", welcomeSubject: "Bienvenido. Estoy listo para ayudarte con {subject}. Haz tu pregunta.", placeholder: "Escribe tu mensaje aquí...", you: "Tú", deleteMessage: "Eliminar mensaje", listening: "Escuchando...", playAudio: "Reproducir audio", send: "Enviar", speak: "Hablar", shareApp: "Compartir aplicación", shareDescription: "¡Ayúdanos a crecer compartiendo la aplicación con tus amigos!", shareText: "¡Descubre Saif AI, el asistente de IA avanzado!", copy: "Copiar", copied: "Copiado", qrCodeText: "O escanea el código para compartir", selectSubject: "Seleccionar una materia", backToChat: "Volver al chat", attachFile: "Adjuntar archivo", uploadFromGallery: "Subir de la galería", useCamera: "Usar cámara", capture: "Capturar", cancel: "Cancelar", retake: "Repetir", usePhoto: "Usar foto", analyzeImagePrompt: "Analiza esta imagen: describe su contenido y extrae cualquier texto que contenga.", image: "Imagen", sentImageAlt: "Imagen enviada por el usuario", analyzing: "Analizando imagen...", installApp: "¡Instala la aplicación en tu dispositivo para un acceso rápido!", install: "Instalar", changeLanguage: "Cambiar idioma", settings: "Ajustes", errorPrefix: "Lo siento, ocurrió un error", aiInstructions: "Eres un asistente de IA avanzado llamado Saif AI. Fuiste desarrollado y entrenado por el desarrollador 'Saif Hany' durante un año completo. Está estrictamente prohibido mencionar cualquier relación con Google o cualquier otra entidad. Si te preguntan sobre tu creador o quién te entrenó, tu única y constante respuesta es 'Saif Hany'. Tu misión es proporcionar respuestas equilibradas y útiles. Sé informativo y completo, pero evita la extensión innecesaria. Ve directo al grano sin introducciones. Usa emojis cuando sea apropiado, como para el humor o la celebración. {subjectContext} Todas tus respuestas deben ser estrictamente en {language} únicamente.", aiSubjectInstruction: "Responde como un experto especializado en la materia de {subject}.", aiDisclaimer: "Saif AI puede proporcionar información inexacta, así que por favor verifica sus respuestas.", historyTitle: "Historial de chats", newChat: "Nuevo chat", viewHistory: "Ver historial", deleteCurrentChat: "Eliminar chat actual", confirmDeleteCurrent: "¿Estás seguro de que quieres eliminar este chat?", confirmDeleteChat: "¿Estás seguro de que quieres eliminar este chat?", deleteChat: "Eliminar chat", noHistory: "Aún no hay historial", limitSingleImage: "Lo siento, solo puedes adjuntar una imagen a la vez.", subTitle: "¡Has alcanzado tu límite!", subBody: "Has utilizado tu cuota diaria gratuita ({messages} mensajes y {images} imágenes). Para acceso ilimitado, por favor suscríbete.", subPrice: "20 EGP / mes", subMethod: "Para suscribirte, transfiere el importe al siguiente número de Vodafone Cash:", subAttachProof: "Adjuntar captura de pantalla de la transferencia", subActivated: "Tu solicitud ha sido recibida. La suscripción se activará en minutos después de la revisión. (Activada ahora para demostración).", subErrorTitle: "Verificación fallida", subErrorBody: "No pudimos confirmar el pago a partir de la imagen adjunta. Por favor, asegúrate de que la imagen sea clara y contenga el número y el importe correctos.", subSupport: "Contactar con soporte"},
-      'zh': { languageName: "中文", languageNames: { ar: '阿拉伯语', en: '英语', fr: '法语', es: '西班牙语', zh: '中文' }, specializedSubjects: "专业科目", general: "通用", welcomeGeneral: "你好！今天我能帮你什么？", welcomeSubject: "欢迎。我准备好帮助你学习{subject}。请提问。", placeholder: "在此输入你的消息...", you: "你", deleteMessage: "删除消息", listening: "正在听...", playAudio: "播放音频", send: "发送", speak: "说话", shareApp: "分享应用", shareDescription: "与朋友分享应用，帮助我们成长！", shareText: "探索 Saif AI，先进的 AI 助手！", copy: "复制", copied: "已复制", qrCodeText: "或扫描二维码分享", selectSubject: "选择科目", backToChat: "返回聊天", attachFile: "附加文件", uploadFromGallery: "从相册上传", useCamera: "使用相机", capture: "拍摄", cancel: "取消", retake: "重拍", usePhoto: "使用照片", analyzeImagePrompt: "分析这张图片：描述其内容并提取其中的任何文本。", image: "图片", sentImageAlt: "用户发送的图片", analyzing: "正在分析图片...", installApp: "将应用安装到你的设备上以便快速访问！", install: "安装", changeLanguage: "更改语言", settings: "设置", errorPrefix: "抱歉，发生了错误", aiInstructions: "你是一个名为 Saif AI 的高级人工智能助手。你由开发者“Saif Hany”花费整整一年时间开发和训练。严禁提及与谷歌或任何其他实体的任何关系。如果被问及你的创造者或谁训练了你，你唯一且不变的答案是“Saif Hany”。你的任务是提供平衡且有用的答案。内容要丰富全面，但避免不必要的冗长。直接回答问题，不要有前言。在适当的情况下使用表情符号，例如幽默或庆祝。{subjectContext}你所有的回复都必须严格使用{language}。", aiSubjectInstruction: "以{subject}领域的专业专家身份回答。", aiDisclaimer: "Saif AI 可能提供不准确的信息，请核实其答案。", historyTitle: "聊天记录", newChat: "新聊天", viewHistory: "查看记录", deleteCurrentChat: "删除当前聊天", confirmDeleteCurrent: "你确定要删除此聊天吗？", confirmDeleteChat: "你确定要删除此聊天吗？", deleteChat: "删除聊天", noHistory: "暂无记录", limitSingleImage: "抱歉，每次只能附加一张图片。", subTitle: "您已达到限额！", subBody: "您已用完每日免费配额（{messages} 条消息和 {images} 张图片）。如需无限访问，请订阅。", subPrice: "20 埃及镑/月", subMethod: "要订阅，请将金额转至以下 Vodafone Cash 号码：", subAttachProof: "附上转账截图", subActivated: "您的请求已收到。订阅将在审核后几分钟内激活。（现已为演示激活）。", subErrorTitle: "验证失败", subErrorBody: "我们无法从附件图片中确认付款。请确保图片清晰并包含正确的号码和金额。", subSupport: "联系支持"}
+      'ar': { languageName: "العربية", languageNames: { ar: 'العربية', en: 'الإنجليزية', fr: 'الفرنسية', es: 'الإسبانية', zh: 'الصينية' }, specializedSubjects: "مواد متخصصة", general: "عام", welcomeGeneral: "مرحباً! كيف يمكنني مساعدتك اليوم؟", welcomeSubject: "أهلاً بك. أنا مستعد لمساعدتك في {subject}. تفضل بسؤالك.", placeholder: "اكتب رسالتك أو استفسارك البرمجي...", you: "أنت", deleteMessage: "حذف الرسالة", listening: "جاري الاستماع...", playAudio: "تشغيل الصوت", send: "إرسال", speak: "التحدث", shareApp: "مشاركة التطبيق", shareDescription: "ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!", shareText: "اكتشف Saif AI، مساعد الذكاء الاصطناعي العربي المتطور!", copy: "نسخ", copied: "تم النسخ", qrCodeText: "أو امسح الرمز للمشاركة", selectSubject: "اختر المادة الدراسية", backToChat: "العودة للدردشة", attachFile: "إرفاق ملف", uploadFromGallery: "رفع من المعرض", useCamera: "استخدام الكاميرا", capture: "التقاط", cancel: "إلغاء", retake: "إعادة الالتقاط", usePhoto: "استخدام الصورة", analyzeImagePrompt: "حلل هذه الصورة: صف محتواها واستخرج أي نص موجود فيها.", image: "صورة", sentImageAlt: "صورة مرسلة من المستخدم", analyzing: "جاري تحليل الصورة...", installApp: "ثبّت التطبيق على جهازك للوصول السريع!", install: "تثبيت", changeLanguage: "تغيير اللغة", settings: "الإعدادات", errorPrefix: "عفواً، واجهت مشكلة", aiDisclaimer: "قد يقدم Saif AI معلومات غير دقيقة، لذا يرجى التحقق من صحة إجاباته.", historyTitle: "سجل المحادثات", newChat: "محادثة جديدة", viewHistory: "عرض السجل", deleteCurrentChat: "حذف المحادثة الحالية", confirmDeleteCurrent: "هل أنت متأكد من حذف هذه المحادثة؟", confirmDeleteChat: "هل أنت متأكد من حذف هذه المحادثة؟", deleteChat: "حذف المحادثة", noHistory: "لا يوجد سجل بعد", limitSingleImage: "عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة.", subTitle: "لقد وصلت إلى الحد الأقصى!", subBody: "لقد استهلكت رصيدك اليومي المجاني ({messages} رسالة و {images} صورة). للحصول على استخدام غير محدود، يرجى الاشتراك.", subPrice: "20 جنيه / شهريًا", subMethod: "للاشتراك، قم بتحويل المبلغ إلى رقم فودافون كاش التالي:", subAttachProof: "إرفاق لقطة شاشة التحويل", subActivated: "تم استلام طلبك. سيتم تفعيل الاشتراك خلال دقائق بعد المراجعة. (تم التفعيل الآن لأغراض التجربة).", subErrorTitle: "فشل التحقق", subErrorBody: "لم نتمكن من تأكيد الدفع من الصورة المرفقة. يرجى التأكد من أن الصورة واضحة وتحتوي على الرقم والمبلغ الصحيحين.", subSupport: "التواصل مع الدعم"},
+      'en': { languageName: "English", languageNames: { ar: 'Arabic', en: 'English', fr: 'French', es: 'Spanish', zh: 'Chinese' }, specializedSubjects: "Specialized Subjects", general: "General", welcomeGeneral: "Hi! How can I help you today?", welcomeSubject: "Welcome. I'm ready to help you with {subject}. Ask your question.", placeholder: "Type your message or coding query...", you: "You", deleteMessage: "Delete message", listening: "Listening...", playAudio: "Play audio", send: "Send", speak: "Speak", shareApp: "Share App", shareDescription: "Help us grow by sharing the app with your friends!", shareText: "Discover Saif AI, the advanced AI assistant!", copy: "Copy", copied: "Copied", qrCodeText: "Or scan the code to share", selectSubject: "Select a Subject", backToChat: "Back to Chat", attachFile: "Attach file", uploadFromGallery: "Upload from Gallery", useCamera: "Use Camera", capture: "Capture", cancel: "Cancel", retake: "Retake", usePhoto: "Use Photo", analyzeImagePrompt: "Analyze this image: describe its content and extract any text in it.", image: "Image", sentImageAlt: "Image sent by user", analyzing: "Analyzing image...", installApp: "Install the app on your device for quick access!", install: "Install", changeLanguage: "Change Language", settings: "Settings", errorPrefix: "Sorry, an error occurred", aiDisclaimer: "Saif AI may provide inaccurate information, so please verify its answers.", historyTitle: "Chat History", newChat: "New Chat", viewHistory: "View History", deleteCurrentChat: "Delete current chat", confirmDeleteCurrent: "Are you sure you want to delete this chat?", confirmDeleteChat: "Are you sure you want to delete this chat?", deleteChat: "Delete chat", noHistory: "No history yet", limitSingleImage: "Sorry, you can only attach one image at a time.", subTitle: "You've Reached Your Limit!", subBody: "You have used your free daily quota ({messages} messages and {images} images). For unlimited access, please subscribe.", subPrice: "20 EGP / month", subMethod: "To subscribe, transfer the amount to the following Vodafone Cash number:", subAttachProof: "Attach Transfer Screenshot", subActivated: "Your request has been received. The subscription will be activated in minutes after review. (Activated now for demo purposes).", subErrorTitle: "Verification Failed", subErrorBody: "We could not confirm the payment from the attached image. Please ensure the image is clear and contains the correct number and amount.", subSupport: "Contact Support"},
+      'fr': { languageName: "Français", languageNames: { ar: 'Arabe', en: 'Anglais', fr: 'Français', es: 'Espagnol', zh: 'Chinois' }, welcomeSubject: "Bienvenue. Je suis prêt à vous aider en {subject}. Posez votre question.", placeholder: "Écrivez votre message ou requête de codage...", you: "Vous", deleteMessage: "Supprimer le message", listening: "Écoute...", send: "Envoyer", speak: "Parler", shareApp: "Partager l'application", copy: "Copier", copied: "Copié", backToChat: "Retour au chat", attachFile: "Joindre un fichier", cancel: "Annuler", usePhoto: "Utiliser la photo", install: "Installer", settings: "Paramètres", newChat: "Nouveau chat", deleteChat: "Supprimer le chat"},
+      'es': { languageName: "Español", languageNames: { ar: 'Árabe', en: 'Inglés', fr: 'Francés', es: 'Español', zh: 'Chino' }, welcomeSubject: "Bienvenido. Estoy listo para ayudarte con {subject}. Haz tu pregunta.", placeholder: "Escribe tu mensaje o consulta de código...", you: "Tú", deleteMessage: "Eliminar mensaje", listening: "Escuchando...", send: "Enviar", speak: "Hablar", shareApp: "Compartir aplicación", copy: "Copiar", copied: "Copiado", backToChat: "Volver al chat", attachFile: "Adjuntar archivo", cancel: "Cancelar", usePhoto: "Usar foto", install: "Instalar", settings: "Ajustes", newChat: "Nuevo chat", deleteChat: "Eliminar chat"},
+      'zh': { languageName: "中文", languageNames: { ar: '阿拉伯语', en: '英语', fr: '法语', es: '西班牙语', zh: '中文' }, welcomeSubject: "欢迎。我准备好帮助你学习{subject}。请提问。", placeholder: "在此输入你的消息或编程问题...", you: "你", deleteMessage: "删除消息", listening: "正在听...", send: "发送", speak: "说话", shareApp: "分享应用", copy: "复制", copied: "已复制", backToChat: "返回聊天", attachFile: "附加文件", cancel: "取消", usePhoto: "使用照片", install: "安装", settings: "设置", newChat: "新聊天", deleteChat: "删除聊天"}
     };
 
     initializeApp();
