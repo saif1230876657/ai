@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Saif AI - برمجة</title>
+  <title>Saif AI - مساعد البرمجة</title>
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="https://i.postimg.cc/cCLZPwnw/2dd388fc-039e-4ce1-ab35-4f9db8cc40b2.png" type="image/png">
 
-  <meta property="og:title" content="Saif AI - مساعد برمجة" />
-  <meta property="og:description" content="مساعد ذكاء اصطناعي عربي متخصص في البرمجة وتحليل الأكواد." />
+  <meta property="og:title" content="Saif AI - مساعد البرمجة" />
+  <meta property="og:description" content="مساعد ذكاء اصطناعي متخصص في البرمجة وتحليل الكود." />
   <meta property="og:image" content="https://i.postimg.cc/cCLZPwnw/2dd388fc-039e-4ce1-ab35-4f9db8cc40b2.png" />
   <meta property="og:url" content="https://apk.e-droid.net/apk/app3760290-c4w5f2.apk" />
   <meta property="og:type" content="website" />
@@ -41,10 +41,118 @@
     .container { 
         width: 100%; height: 100%; background: var(--bg-main); border: 1px solid var(--border-color); 
         border-radius: 0; display: flex; flex-direction: column; overflow: hidden; position: relative;
-        transition: background 0.5s ease-in-out;
     }
-    .container.is-focused {
-        background: #050505;
+    
+    /* أنماط نافذة رمز الدخول */
+    .login-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-main);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        flex-direction: column;
+        padding: 2rem;
+    }
+    
+    .login-content {
+        background: var(--bg-surface-raised);
+        border-radius: var(--border-radius-lg);
+        padding: 2.5rem;
+        max-width: 450px;
+        width: 100%;
+        text-align: center;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+    }
+    
+    .login-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1.5rem;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .login-title {
+        font-family: 'Aref Ruqaa', serif;
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .login-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .login-input {
+        width: 100%;
+        padding: 1rem;
+        background: var(--bg-input);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        color: var(--text-primary);
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        transition: border-color 0.3s ease;
+    }
+    
+    .login-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px var(--primary-glow-color);
+    }
+    
+    .login-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary-color);
+        color: var(--text-on-primary);
+        border: none;
+        border-radius: var(--border-radius-md);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+    }
+    
+    .login-btn:hover {
+        background: var(--primary-hover-color);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .get-code-btn {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        padding: 0.8rem 1.5rem;
+        border-radius: var(--border-radius-md);
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .get-code-btn:hover {
+        background: var(--bg-input);
+        color: var(--text-primary);
+        border-color: var(--primary-color);
+    }
+    
+    .login-error {
+        color: var(--error-color);
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        display: none;
     }
     
     .space-background {
@@ -72,13 +180,6 @@
         from { opacity: 0.4; } to { opacity: 1; }
     }
 
-    .download-notification { display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface-raised); color: var(--text-primary); text-align: center; font-weight: 500; z-index: 100; box-shadow: var(--shadow-md); border-bottom: 1px solid var(--border-color); overflow: hidden; max-height: 0; padding: 0 15px; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; }
-    .download-notification.show { max-height: 80px; padding: 10px 15px; }
-    .notification-buttons { display: flex; align-items: center; gap: 10px; margin-right: auto; padding-right: 15px; }
-    .download-btn { background-color: var(--primary-color); color: var(--text-on-primary); border: none; padding: 6px 14px; border-radius: var(--border-radius-md); cursor: pointer; font-weight: 700; transition: all 0.25s ease; }
-    .download-btn:hover { background-color: var(--primary-hover-color); transform: scale(1.05); }
-    .close-btn { background: none; border: none; color: var(--text-secondary); font-size: 1.8rem; cursor: pointer; padding: 0 5px; line-height: 1; opacity: 0.8; transition: all 0.25s ease; }
-    .close-btn:hover { opacity: 1; transform: rotate(90deg) scale(1.1); }
     .header { background: transparent; padding: 0.4rem 0.8rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; z-index: 10; height: var(--header-height); position: absolute; top: 0; left: 0; right: 0; }
     .header-group { display: flex; align-items: center; gap: 0.5rem; position: relative; }
     .header .header-icon { cursor: pointer; transition: color 0.2s ease-in-out, transform 0.2s ease; color: var(--text-secondary); font-size: 1.2rem; z-index: 11; padding: 5px; }
@@ -106,7 +207,6 @@
     .dropdown-menu button:hover { background-color: var(--primary-color); color: var(--text-on-primary); }
     .dropdown-menu button i { width: 15px; text-align: center; }
     .dropdown-menu button.danger:hover { background-color: var(--error-color); color: white; }
-    #languageBtn { padding: 0.4rem; width: 34px; height: 34px; font-size: 1.1rem; }
     .chat-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; padding-top: var(--header-height); position: relative; }
     #welcomeAnimationContainer { 
         position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
@@ -130,16 +230,16 @@
     @keyframes fadeIn { to { opacity: 0.7; } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
     .chat-container { flex: 1; padding: 1.5rem 1rem 150px 1rem; overflow-y: auto; background: transparent; scroll-behavior: smooth; min-height: 0; }
-    .message { max-width: 85%; margin-bottom: 2rem; display: flex; flex-direction: column; animation: messageAppear 0.4s ease-out; word-wrap: break-word; white-space: pre-wrap; line-height: 1.7; }
-    @keyframes messageAppear { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-    .message-content { padding: 0.2rem 0.5rem; }
+    .message { max-width: 85%; margin-bottom: 1rem; display: flex; flex-direction: column; animation: messageAppear 0.2s ease-out; word-wrap: break-word; white-space: pre-wrap; line-height: 1.5; }
+    @keyframes messageAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .message-content { padding: 0.5rem; font-size: 0.95rem; }
     .message-content .sent-image { display: block; max-width: 250px; width: 100%; border-radius: var(--border-radius-md); margin-top: 10px; cursor: pointer; border: 1px solid var(--border-color-light); transition: transform 0.2s ease; }
     .message-content .sent-image:hover { transform: scale(1.03); }
-    .typing-indicator span { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: var(--text-secondary); margin: 0 2px; animation: typing-bounce 1.4s infinite ease-in-out both; }
+    .typing-indicator span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: var(--text-secondary); margin: 0 2px; animation: typing-bounce 1.4s infinite ease-in-out both; }
     .typing-indicator span:nth-child(1) { animation-delay: -0.32s; } .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
     @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
-    .message-header { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; font-weight: 500; }
-    .delete-btn { color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; transition: color 0.2s, transform 0.2s; opacity: 0.4; padding: 3px 5px; }
+    .message-header { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+    .delete-btn { color: var(--text-secondary); font-size: 0.7rem; cursor: pointer; transition: color 0.2s, transform 0.2s; opacity: 0.4; padding: 3px 5px; }
     .message:hover .delete-btn { opacity: 0.8; }
     .delete-btn:hover { opacity: 1; color: var(--error-color); transform: scale(1.15); }
     .message.user { margin-left: auto; align-items: flex-end; }
@@ -150,9 +250,9 @@
     .message.user .message-content { color: #e5e7eb; }
     .message.bot .message-content { color: var(--text-primary); }
     .message.bot .message-content strong { color: var(--primary-color); }
-    .message-actions { margin-top: 10px; display: flex; gap: 8px; padding: 0 8px; flex-wrap: wrap; }
+    .message-actions { margin-top: 8px; display: flex; gap: 6px; padding: 0 6px; flex-wrap: wrap; }
     .message.user .message-actions { justify-content: flex-end; }
-    .message-actions button { background: var(--bg-surface-raised); border: 1px solid var(--border-color); cursor: pointer; font-size: 0.85rem; padding: 5px 9px; color: var(--text-secondary); transition: all 0.25s ease; border-radius: var(--border-radius-sm); display: flex; align-items: center; gap: 5px; }
+    .message-actions button { background: var(--bg-surface-raised); border: 1px solid var(--border-color); cursor: pointer; font-size: 0.8rem; padding: 4px 8px; color: var(--text-secondary); transition: all 0.25s ease; border-radius: var(--border-radius-sm); display: flex; align-items: center; gap: 4px; }
     .message-actions button:hover { color: var(--text-on-primary); background-color: var(--primary-color); border-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-glow-color); }
     .chat-input-area { position: absolute; bottom: 0; left: 0; right: 0; background: transparent; padding: 0.8rem 1rem; z-index: 5; }
     .chat-input-area::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-main-color) 20%, transparent 100%); pointer-events: none; z-index: 4; }
@@ -186,6 +286,10 @@
         transform: scale(1.1);
         box-shadow: var(--shadow-md);
     }
+    #sendOrVoiceBtn.recording {
+        background-color: var(--error-color);
+        color: white;
+    }
     .chat-input-wrapper {
         position: relative;
         flex-grow: 1;
@@ -199,7 +303,7 @@
     }
     .chat-input-wrapper:focus-within { border-color: var(--primary-color); box-shadow: var(--shadow-md), 0 0 0 3px var(--primary-glow-color); }
     .chat-input-main { display: flex; align-items: flex-end; width: 100%; }
-    .chat-input-wrapper textarea { flex: 1; padding: 13px 0; margin: 0 5px; border: none; resize: none; font-size: 0.95rem; outline: none; background: transparent; color: var(--text-primary); max-height: 150px; line-height: 1.6; }
+    .chat-input-wrapper textarea { flex: 1; padding: 12px 0; margin: 0 5px; border: none; resize: none; font-size: 0.95rem; outline: none; background: transparent; color: var(--text-primary); max-height: 120px; line-height: 1.5; }
     .chat-input-wrapper textarea::placeholder { color: var(--text-secondary); opacity: 0.6; }
     #imagePreviewContainer { display: none; padding: 8px 12px 0; gap: 10px; flex-wrap: wrap; }
     .preview-item { position: relative; }
@@ -212,10 +316,6 @@
     .voice-indicator.active { display: flex; opacity: 1; }
     .voice-indicator i { color: var(--error-color); animation: pulseMic 1.5s infinite ease-in-out; }
     @keyframes pulseMic { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-    #sendOrVoiceBtn.recording {
-        background-color: var(--error-color);
-        color: white;
-    }
 
     #suggestionsContainer { display: none; flex-direction: row; gap: 8px; padding-bottom: 8px; max-width: 800px; margin: 0 auto; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
     #suggestionsContainer::-webkit-scrollbar { display: none; }
@@ -272,141 +372,17 @@
     .close-overlay-btn { position: absolute; top: 20px; right: 30px; font-size: 2.5rem; font-weight: bold; color: #fff; cursor: pointer; transition: transform 0.2s ease; }
     .close-overlay-btn:hover { transform: scale(1.2); }
     
-    .bottom-sheet-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.6);
-        z-index: 100;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        backdrop-filter: blur(2px);
-    }
-    .bottom-sheet-overlay.show {
-        opacity: 1;
-        visibility: visible;
-    }
-    .bottom-sheet {
-        position: fixed;
-        bottom: 0; left: 0; right: 0;
-        background-color: var(--bg-surface-raised);
-        border-top: 1px solid var(--border-color);
-        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
-        z-index: 101;
-        transform: translateY(100%);
-        transition: transform 0.3s ease-out;
-        padding: 1rem;
-        padding-top: 0.5rem;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-    }
-    .bottom-sheet.show {
-        transform: translateY(0);
-    }
-    .handle {
-        width: 40px;
-        height: 5px;
-        background-color: var(--border-color-light);
-        border-radius: 2.5px;
-        margin: 0 auto 1rem;
-        cursor: pointer;
-    }
-    .bottom-sheet-content {
-        padding-bottom: 1rem;
-    }
-    .bottom-sheet-content button {
-        background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border-color-light);
-        border-radius: var(--border-radius-md); padding: 12px 15px; cursor: pointer;
-        display: flex; align-items: center; gap: 12px; font-size: 1rem;
-        transition: all 0.2s ease; text-align: right; width: 100%;
-    }
-    html[dir="ltr"] .bottom-sheet-content button { text-align: left; }
-    .bottom-sheet-content button:not(:last-child) {
-        margin-bottom: 10px;
-    }
-    .bottom-sheet-content button:hover {
-        background-color: var(--primary-color); color: var(--text-on-primary); border-color: var(--primary-color);
-        transform: scale(1.02);
-    }
-    #subscriptionSheet .bottom-sheet-content {
-        padding: 1rem;
-        text-align: center;
-    }
-    #subscriptionSheet h2 {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-    }
-    #subscriptionSheet p {
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-    .price-tag {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--success-color);
-        margin-bottom: 1rem;
-        display: block;
-    }
-    .vodafone-cash-info {
-        background: var(--bg-input);
-        padding: 1rem;
-        border-radius: var(--border-radius-md);
-        border: 1px solid var(--border-color);
-        margin-bottom: 1.5rem;
-    }
-    .vodafone-cash-info span {
-        display: block;
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    .vodafone-cash-number {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        letter-spacing: 2px;
-        background: var(--bg-surface);
-        padding: 8px;
-        border-radius: var(--border-radius-sm);
-        user-select: all;
-    }
-    .subscribe-btn {
-        box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 10px var(--primary-glow-color) !important;
-        border-color: var(--primary-color) !important;
-        background-color: var(--primary-color) !important;
-        color: var(--text-on-primary) !important;
-        font-weight: 700;
-        transform: scale(1.05);
-    }
-    .support-btn {
-        background-color: var(--bg-input) !important;
-        color: var(--text-primary) !important;
-        border-color: var(--border-color-light) !important;
-    }
-    #spinner {
-        display: none;
-        margin: 1.5rem auto;
-        width: 40px;
-        height: 40px;
-        border: 4px solid var(--border-color);
-        border-top-color: var(--primary-color);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
+    /* New Styles for Code Container */
     .code-container {
         background: #1e1e1e;
         border: 1px solid #333;
         border-radius: var(--border-radius-md);
-        padding: 15px;
-        margin: 10px 0;
+        padding: 12px;
+        margin: 8px 0;
         position: relative;
         font-family: 'Courier New', monospace;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.85rem;
+        line-height: 1.4;
         overflow-x: auto;
         white-space: pre-wrap;
         word-break: break-all;
@@ -415,27 +391,27 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
-        padding-bottom: 8px;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
         border-bottom: 1px solid #333;
     }
     .code-language {
         color: var(--success-color);
         font-weight: bold;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     .copy-code-btn {
         background: var(--primary-color);
         color: var(--text-on-primary);
         border: none;
-        padding: 5px 10px;
+        padding: 4px 8px;
         border-radius: var(--border-radius-sm);
         cursor: pointer;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         transition: all 0.2s ease;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 4px;
     }
     .copy-code-btn:hover {
         background: var(--primary-hover-color);
@@ -447,39 +423,51 @@
     
     @media (max-width: 480px) { 
       .header h1 { font-size: 1.1rem; } .message { max-width: 95%; } 
-      .chat-input-wrapper textarea { padding: 12px 0; margin: 0 2px; } 
+      .chat-input-wrapper textarea { padding: 10px 0; margin: 0 2px; font-size: 0.9rem; } 
       #sendOrVoiceBtn { width: 44px; height: 44px; font-size: 1.1rem;}
-      .suggestion-btn { padding: 10px; font-size: 0.85rem; }
-      .code-container { padding: 10px; font-size: 0.85rem; }
+      .suggestion-btn { padding: 8px 10px; font-size: 0.8rem; }
+      .code-container { padding: 8px; font-size: 0.8rem; }
+      .login-content { padding: 2rem 1.5rem; }
+      .login-title { font-size: 1.7rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- نافذة رمز الدخول -->
+  <div id="loginModal" class="login-modal">
+    <div class="space-background">
+        <img src="https://i.postimg.cc/Y9qbgjmX/moon-PNG20.png" alt="Moon" class="moon" id="login-moon-img">
+        <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+    </div>
+    <div class="login-content">
+        <img src="https://i.postimg.cc/15L2K4wT/1000137153.png" alt="Saif AI" class="login-logo">
+        <h1 class="login-title">Saif AI</h1>
+        <p class="login-subtitle">مساعد البرمجة المتخصص - إجابات سريعة ومختصرة</p>
+        
+        <input type="text" id="loginCodeInput" class="login-input" placeholder="أدخل رمز الدخول" maxlength="20">
+        <button id="loginSubmitBtn" class="login-btn">دخول إلى المنصة</button>
+        
+        <p style="color: var(--text-secondary); margin: 1.5rem 0; font-size: 0.9rem;">إذا لم يكن لديك رمز الدخول</p>
+        <a href="https://saifheny.github.io/subscription/" target="_blank" class="get-code-btn">
+            <i class="fas fa-key"></i> الحصول على رمز الدخول
+        </a>
+        
+        <p id="loginError" class="login-error">
+            <i class="fas fa-exclamation-circle"></i> رمز الدخول غير صحيح. يرجى المحاولة مرة أخرى.
+        </p>
+    </div>
+  </div>
+
+  <div class="container" style="display: none;">
     <div id="space-background" class="space-background">
         <img src="https://i.postimg.cc/Y9qbgjmX/moon-PNG20.png" alt="Moon" class="moon" id="moon-img">
         <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
     </div>
-    <div id="downloadNotification" class="download-notification">
-      <span id="downloadNotificationText"></span>
-      <div class="notification-buttons">
-          <button id="downloadAppBtn" class="download-btn"></button>
-          <button id="closeNotificationBtn" class="close-btn">×</button>
-      </div>
-    </div>
     
     <header class="header" dir="rtl">
       <div class="header-group">
-        <div id="languageSelector">
-          <button id="languageBtn" class="header-btn"><i class="fas fa-globe"></i></button>
-          <div id="languageDropdown" class="dropdown-menu">
-            <button data-lang="ar"></button> <button data-lang="en"></button> <button data-lang="fr"></button> <button data-lang="es"></button> <button data-lang="zh"></button>
-          </div>
-        </div>
-      </div>
-      <div class="header-group">
         <img src="https://i.postimg.cc/15L2K4wT/1000137153.png" alt="Astronaut Icon" class="header-astronaut-icon">
-        <h1 id="botName">Saif AI</h1>
+        <h1 id="botName">مساعد البرمجة</h1>
       </div>
       <div id="headerIcons" class="header-group">
         <i class="fas fa-share-alt header-icon share-btn-header" id="shareBtn"></i>
@@ -487,7 +475,7 @@
         <div id="settingsSelector">
             <i class="fas fa-cog header-icon settings-btn" id="settingsBtn"></i>
             <div id="settingsDropdown" class="dropdown-menu">
-                <button id="deleteCurrentChatBtn" class="danger"><i class="fas fa-trash"></i> <span id="deleteCurrentChatBtnText"></span></button>
+                <button id="deleteCurrentChatBtn" class="danger"><i class="fas fa-trash"></i> <span>حذف المحادثة</span></button>
             </div>
         </div>
       </div>
@@ -502,30 +490,29 @@
         <div id="chatContainer" class="chat-container"></div>
         <div class="chat-input-area"> 
             <div id="suggestionsContainer"></div>
-            <div class="voice-indicator" id="voiceIndicator"><i class="fas fa-microphone"></i><span id="listeningText"></span></div>
             
             <div class="chat-input-container">
                 <div class="chat-input-wrapper">
                   <div id="imagePreviewContainer"></div>
                   <div class="chat-input-main">
-                    <textarea id="userInput" rows="1" dir="auto"></textarea>
+                    <textarea id="userInput" rows="1" dir="auto" placeholder="اكتب سؤالك البرمجي هنا..."></textarea>
                     <button class="chat-input-btn" id="toggleUploadBtn"><i class="fas fa-paperclip"></i></button>
                   </div>
                   <input id="imageUpload" type="file" accept="image/*" style="display: none;" />
-                  <input id="proofUpload" type="file" accept="image/*" style="display: none;" />
                 </div>
-                <button id="sendOrVoiceBtn"></button>
+                <button id="sendOrVoiceBtn"><i class="fas fa-microphone"></i></button>
             </div>
 
-            <div id="aiDisclaimer" class="ai-disclaimer"></div>
+            <div class="voice-indicator" id="voiceIndicator"><i class="fas fa-microphone"></i><span>جاري الاستماع...</span></div>
+
+            <div id="aiDisclaimer" class="ai-disclaimer">مساعد برمجي متخصص - إجابات مختصرة وسريعة</div>
         </div>
     </div>
-
   </div>
   
   <div id="historySidebar" class="history-sidebar">
-    <div class="history-header"><h3 id="historyTitle"></h3><button id="closeHistoryBtn">&times;</button></div>
-    <button id="newChatBtn" class="new-chat-btn"><i class="fas fa-plus"></i> <span id="newChatText"></span></button>
+    <div class="history-header"><h3>سجل المحادثات</h3><button id="closeHistoryBtn">&times;</button></div>
+    <button id="newChatBtn" class="new-chat-btn"><i class="fas fa-plus"></i> <span>محادثة جديدة</span></button>
     <ul id="historyList"></ul>
   </div>
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -533,7 +520,7 @@
   <div class="fullscreen-overlay" id="cameraOverlay">
     <video id="cameraView" autoplay playsinline></video>
     <div class="camera-controls">
-        <button id="cancelCameraBtn" class="camera-action-btn"></button>
+        <button id="cancelCameraBtn" class="camera-action-btn">إلغاء</button>
         <button id="captureBtn" class="shutter-btn"></button>
     </div>
     <div class="shutter-flash"></div>
@@ -541,22 +528,21 @@
 
   <div class="fullscreen-overlay" id="previewOverlay">
       <canvas id="previewCanvas"></canvas>
-      <div id="loader" style="display: none; color: white;"></div>
       <div class="camera-controls">
-          <button id="retakeBtn" class="camera-action-btn"></button>
-          <button id="usePhotoBtn" class="camera-action-btn"></button>
+          <button id="retakeBtn" class="camera-action-btn">إعادة</button>
+          <button id="usePhotoBtn" class="camera-action-btn">استخدام الصورة</button>
       </div>
   </div>
 
   <div id="shareModal" class="share-modal">
     <div class="share-modal-content">
-      <span class="close-share-modal" id="closeShareModal">&times;</span><h2 id="shareModalTitle"></h2><p id="shareModalDesc"></p>
-      <div class="share-link-container"><button id="copyLinkBtn"><i class="fas fa-copy"></i> <span id="copyBtnText"></span></button><input type="text" value="https://apk.e-droid.net/apk/app3760290-c4w5f2.apk" id="shareLinkInput" readonly></div>
+      <span class="close-share-modal" id="closeShareModal">&times;</span><h2>مشاركة التطبيق</h2><p>ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!</p>
+      <div class="share-link-container"><button id="copyLinkBtn"><i class="fas fa-copy"></i> <span>نسخ</span></button><input type="text" value="https://apk.e-droid.net/apk/app3760290-c4w5f2.apk" id="shareLinkInput" readonly></div>
       <hr class="share-divider">
       <div class="social-share-buttons">
           <a href="#" target="_blank" class="share-icon whatsapp" id="whatsapp-share"><i class="fab fa-whatsapp"></i></a><a href="#" target="_blank" class="share-icon twitter" id="twitter-share"><i class="fab fa-twitter"></i></a><a href="#" target="_blank" class="share-icon telegram" id="telegram-share"><i class="fab fa-telegram-plane"></i></a><a href="#" target="_blank" class="share-icon facebook" id="facebook-share"><i class="fab fa-facebook-f"></i></a>
       </div>
-      <div class="qr-code-container"><img id="qr-code-img" src="" alt="QR Code" width="140" height="140"><p id="qrCodeText"></p></div>
+      <div class="qr-code-container"><img id="qr-code-img" src="" alt="QR Code" width="140" height="140"><p>أو امسح الرمز للمشاركة</p></div>
     </div>
   </div>
 
@@ -564,62 +550,153 @@
     <span id="closeOverlayBtn" class="close-overlay-btn">&times;</span>
     <img id="fullscreenImageView" src="" alt="Full screen image view">
   </div>
-  
-  <div class="bottom-sheet-overlay" id="uploadOptionsOverlay"></div>
-  <div class="bottom-sheet" id="uploadOptionsSheet">
-      <div class="handle" id="uploadOptionsHandle"></div>
-      <div class="bottom-sheet-content">
-          <button id="uploadFromGalleryBtn"><i class="fas fa-images"></i> <span></span></button>
-          <button id="useCameraBtn"><i class="fas fa-camera"></i> <span></span></button>
-      </div>
-  </div>
-
-  <div class="bottom-sheet-overlay" id="subscriptionOverlay"></div>
-  <div class="bottom-sheet" id="subscriptionSheet">
-      <div class="handle" id="subscriptionHandle"></div>
-      <div id="subscriptionModalContent" class="bottom-sheet-content">
-      </div>
-  </div>
-
 
   <script>
     // ================== START: CONFIGURATION ==================
     const geminiApiKey = "AIzaSyArAURCzYl1uxSJxvF7r5Ad-W5kaaz4ANw";
-    const VODAFONE_CASH_NUMBER = "01061767493";
-    const SUPPORT_WHATSAPP_NUMBER = "201202687082"; // With country code, no +
-    const DAILY_MESSAGE_LIMIT = 10; // Note: Not applied to programming
-    const DAILY_IMAGE_LIMIT = 2; // Note: Not applied to programming
+    const ACCESS_CODE = "saifSAR";
     // ================== END: CONFIGURATION ==================
 
-    // --- DOM Elements ---
-    const chatWrapper = document.getElementById("chatWrapper"); const chatContainer = document.getElementById("chatContainer"); const userInput = document.getElementById("userInput"); const botNameElement = document.getElementById("botName"); const imageUploadInput = document.getElementById("imageUpload"); const proofUploadInput = document.getElementById("proofUpload"); const toggleUploadBtn = document.getElementById("toggleUploadBtn"); const voiceIndicator = document.getElementById('voiceIndicator'); const cameraOverlay = document.getElementById('cameraOverlay'); const previewOverlay = document.getElementById('previewOverlay'); const cameraView = document.getElementById('cameraView'); const previewCanvas = document.getElementById('previewCanvas'); const captureBtn = document.getElementById('captureBtn'); const cancelCameraBtn = document.getElementById('cancelCameraBtn'); const usePhotoBtn = document.getElementById('usePhotoBtn'); const retakeBtn = document.getElementById('retakeBtn'); const loader = document.getElementById('loader'); const imagePreviewContainer = document.getElementById('imagePreviewContainer'); const shareBtn = document.getElementById('shareBtn'); const shareModal = document.getElementById('shareModal'); const closeShareModalBtn = document.getElementById('closeShareModal'); const copyLinkBtn = document.getElementById('copyLinkBtn'); const shareLinkInput = document.getElementById('shareLinkInput'); const downloadNotification = document.getElementById('downloadNotification'); const downloadAppBtn = document.getElementById('downloadAppBtn'); const closeNotificationBtn = document.getElementById('closeNotificationBtn'); const sendOrVoiceBtn = document.getElementById('sendOrVoiceBtn'); const languageBtn = document.getElementById('languageBtn'); const languageDropdown = document.getElementById('languageDropdown'); const suggestionsContainer = document.getElementById('suggestionsContainer'); const settingsBtn = document.getElementById('settingsBtn'); const settingsDropdown = document.getElementById('settingsDropdown'); const deleteCurrentChatBtn = document.getElementById('deleteCurrentChatBtn'); const historyBtn = document.getElementById('historyBtn'); const historySidebar = document.getElementById('historySidebar'); const sidebarOverlay = document.getElementById('sidebar-overlay'); const closeHistoryBtn = document.getElementById('closeHistoryBtn'); const newChatBtn = document.getElementById('newChatBtn'); const historyList = document.getElementById('historyList'); const welcomeAnimation = document.getElementById('welcomeAnimationContainer');
-    const uploadOptionsOverlay = document.getElementById('uploadOptionsOverlay'); const uploadOptionsSheet = document.getElementById('uploadOptionsSheet'); const subscriptionOverlay = document.getElementById('subscriptionOverlay'); const subscriptionSheet = document.getElementById('subscriptionSheet');
-
-    // --- App Constants & State ---
-    const botName = "Saif AI"; const localStorageKeyAllChats = "saifAiAllChatSessions_v3_prog_only"; const localStorageKeyLastSession = "saifAiLastSession_v3_prog_only"; const localStorageKeyLanguage = "saifAiLanguage_v1";
-    const localStorageKeyUsageTracker = "saifAiUsageTracker_v1"; const localStorageKeySubscription = "saifAiSubscription_v1";
-    
-    let allChatSessions = {}; let messages = []; let attachedFiles = [];
-    const currentSubject = "programming"; // Hardcoded to programming
-    let currentChatId = null; let currentLanguage = "ar";
-
-    // MODIFIED: Only programming subject remains.
-    const subjects = [ 
-      { key: "programming", name: { ar: "برمجة", en: "Programming", fr: "Programmation", es: "Programación", zh: "编程" }, icon: "fas fa-code" }
-    ];
-    
-    let recognition; let isListening = false; let deferredPrompt; let speechEndTimeout;
-    const predefinedSuggestions = [ {ar:"اشرح لي هذا الكود بلغة C++",en:"Explain this C++ code to me",fr:"Expliquez-moi ce code C++",es:"Explícame este código C++",zh:"给我解释一下这段C++代码"}, {ar:"كيف أتعامل مع الأخطاء في Python؟",en:"How do I handle errors in Python?",fr:"Comment gérer les erreurs en Python ?",es:"¿Cómo manejo los errores en Python?",zh:"我如何在Python中处理错误？"}, {ar:"اكتب دالة بلغة JavaScript لفرز مصفوفة",en:"Write a JavaScript function to sort an array",fr:"Écrivez une fonction JavaScript pour trier un tableau",es:"Escribe una función en JavaScript para ordenar un array",zh:"写一个JavaScript函数来对数组进行排序"}, {ar:"ما هو الفرق بين let, const, و var؟",en:"What is the difference between let, const, and var?",fr:"Quelle est la différence entre let, const et var ?",es:"¿Cuál es la diferencia entre let, const y var?",zh:"let、const 和 var 有什么区别？"}, {ar:"اقترح 5 أفكار لمشاريع برمجية صغيرة",en:"Suggest 5 ideas for small programming projects",fr:"Suggérez 5 idées de petits projets de programmation",es:"Sugiere 5 ideas para pequeños proyectos de programación",zh:"为小型编程项目建议5个想法"}, {ar:"ما هو الفرق بين الذكاء الاصطناعي وتعلم الآلة؟",en:"What is the difference between AI and Machine Learning?",fr:"Quelle est la différence entre l'IA et l'apprentissage automatique ?",es:"¿Cuál es la diferencia entre la IA y el Aprendizaje Automático?",zh:"人工智能和机器学习有什么区别？"}, {ar:"كيف يعمل نظام Git للتحكم في الإصدارات؟",en:"How does the Git version control system work?",fr:"Comment fonctionne le système de contrôle de version Git ?",es:"¿Cómo funciona el sistema de control de versiones Git?",zh:"Git版本控制系统是如何工作的？"} ];
+    // عناصر واجهة رمز الدخول
+    const loginModal = document.getElementById('loginModal');
+    const loginCodeInput = document.getElementById('loginCodeInput');
+    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+    const loginError = document.getElementById('loginError');
     const mainContainer = document.querySelector('.container');
-    const spaceBackground = document.getElementById('space-background');
-    function showAppNotification() { downloadNotification.classList.add('show'); } function hideAppNotification() { downloadNotification.classList.remove('show'); }
-    function registerServiceWorker() { if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(err => console.error('Service Worker registration failed:', err)); } }
-    async function promptInstall(e) { e.preventDefault(); if (deferredPrompt) { hideAppNotification(); deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; deferredPrompt = null; } }
-    function initSpeechRecognition() { if (recognition) { recognition.abort(); } const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (SpeechRecognition) { const langMap = { ar: 'ar-SA', en: 'en-US', fr: 'fr-FR', es: 'es-ES', zh: 'zh-CN' }; recognition = new SpeechRecognition(); recognition.continuous = false; recognition.interimResults = true; recognition.lang = langMap[currentLanguage]; recognition.onstart = () => { isListening = true; sendOrVoiceBtn.classList.add('recording'); voiceIndicator.classList.add('active'); }; recognition.onresult = (event) => { let transcript = Array.from(event.results).map(result => result[0].transcript).join(''); userInput.value = transcript; if(event.results[0].isFinal) { autoResizeTextarea(); updateSendOrVoiceButton(); } }; recognition.onerror = (event) => { console.error('Speech recognition error', event.error); stopListening(); }; recognition.onend = () => { stopListening(); }; } else { sendOrVoiceBtn.style.display = 'none'; } }
-    function toggleListening() { if (!recognition) return; if (isListening) { recognition.stop(); } else { try { userInput.value = ""; autoResizeTextarea(); recognition.start(); } catch (e) { stopListening(); } } }
-    function stopListening() { if(isListening) { isListening = false; sendOrVoiceBtn.classList.remove('recording'); voiceIndicator.classList.remove('active'); } }
-    function speakMessageText(text) { if (speechSynthesis.speaking) { speechSynthesis.cancel(); } const utterance = new SpeechSynthesisUtterance(text); const langMap = { ar: 'ar-SA', en: 'en-US', fr: 'fr-FR', es: 'es-ES', zh: 'zh-CN' }; utterance.lang = langMap[currentLanguage]; speechSynthesis.speak(utterance); }
+
+    // دالة التحقق من رمز الدخول
+    function checkAccessCode() {
+        const savedCode = localStorage.getItem('saifAiAccessCode');
+        return savedCode === ACCESS_CODE;
+    }
+
+    // دالة حفظ رمز الدخول
+    function saveAccessCode() {
+        localStorage.setItem('saifAiAccessCode', ACCESS_CODE);
+    }
+
+    // دالة إظهار نافذة الدخول
+    function showLoginModal() {
+        loginModal.style.display = 'flex';
+        mainContainer.style.display = 'none';
+        randomizeLoginMoonPosition();
+    }
+
+    // دالة إخفاء نافذة الدخول
+    function hideLoginModal() {
+        loginModal.style.display = 'none';
+        mainContainer.style.display = 'flex';
+    }
+
+    // دالة عشوائية لموضع القمر في نافذة الدخول
+    function randomizeLoginMoonPosition() {
+        const moon = document.getElementById('login-moon-img');
+        if (!moon) return;
+        const top = Math.random() * 20 + 10;
+        const right = Math.random() * 30 + 10;
+        moon.style.top = `${top}%`;
+        moon.style.right = `${right}%`;
+    }
+
+    // التحقق من رمز الدخول عند الضغط على زر الدخول
+    loginSubmitBtn.addEventListener('click', function() {
+        const enteredCode = loginCodeInput.value.trim();
+        
+        if (enteredCode === ACCESS_CODE) {
+            saveAccessCode();
+            hideLoginModal();
+            initializeApp();
+        } else {
+            loginError.style.display = 'block';
+            loginCodeInput.style.borderColor = 'var(--error-color)';
+            loginCodeInput.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                loginCodeInput.style.animation = '';
+            }, 500);
+        }
+    });
+
+    // السماح بالدخول عند الضغط على Enter
+    loginCodeInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            loginSubmitBtn.click();
+        }
+    });
+
+    // إعادة تعيين حالة الخطأ عند الكتابة
+    loginCodeInput.addEventListener('input', function() {
+        loginError.style.display = 'none';
+        loginCodeInput.style.borderColor = 'var(--border-color)';
+    });
+
+    // التحقق من رمز الدخول عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        if (checkAccessCode()) {
+            hideLoginModal();
+            initializeApp();
+        } else {
+            showLoginModal();
+        }
+    });
+
+    // إضافة تأثير الاهتزاز في CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // المتغيرات الأساسية
+    const chatWrapper = document.getElementById("chatWrapper"); 
+    const chatContainer = document.getElementById("chatContainer"); 
+    const userInput = document.getElementById("userInput"); 
+    const imageUploadInput = document.getElementById("imageUpload"); 
+    const toggleUploadBtn = document.getElementById("toggleUploadBtn"); 
+    const sendOrVoiceBtn = document.getElementById("sendOrVoiceBtn"); 
+    const voiceIndicator = document.getElementById('voiceIndicator');
+    const shareBtn = document.getElementById('shareBtn'); 
+    const shareModal = document.getElementById('shareModal'); 
+    const closeShareModalBtn = document.getElementById('closeShareModal'); 
+    const copyLinkBtn = document.getElementById('copyLinkBtn'); 
+    const shareLinkInput = document.getElementById('shareLinkInput'); 
+    const settingsBtn = document.getElementById('settingsBtn'); 
+    const settingsDropdown = document.getElementById('settingsDropdown'); 
+    const deleteCurrentChatBtn = document.getElementById('deleteCurrentChatBtn'); 
+    const historyBtn = document.getElementById('historyBtn'); 
+    const historySidebar = document.getElementById('historySidebar'); 
+    const sidebarOverlay = document.getElementById('sidebar-overlay'); 
+    const closeHistoryBtn = document.getElementById('closeHistoryBtn'); 
+    const newChatBtn = document.getElementById('newChatBtn'); 
+    const historyList = document.getElementById('historyList'); 
+    const welcomeAnimation = document.getElementById('welcomeAnimationContainer');
+    const cameraOverlay = document.getElementById('cameraOverlay'); 
+    const previewOverlay = document.getElementById('previewOverlay'); 
+    const cameraView = document.getElementById('cameraView'); 
+    const previewCanvas = document.getElementById('previewCanvas'); 
+    const captureBtn = document.getElementById('captureBtn'); 
+    const cancelCameraBtn = document.getElementById('cancelCameraBtn'); 
+    const usePhotoBtn = document.getElementById('usePhotoBtn'); 
+    const retakeBtn = document.getElementById('retakeBtn'); 
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer'); 
+
+    const botName = "مساعد البرمجة"; 
+    const localStorageKeyAllChats = "saifAiProgrammingChats_v1"; 
+    const localStorageKeyLastSession = "saifAiLastProgrammingSession_v1"; 
     
+    let allChatSessions = []; 
+    let messages = []; 
+    let attachedFiles = []; 
+    let currentChatId = null; 
+    let cameraStream = null;
+    let recognition;
+    let isListening = false;
+
+    const spaceBackground = document.getElementById('space-background');
+
     function randomizeMoonPosition() {
         const moon = document.getElementById('moon-img');
         if (!moon) return;
@@ -629,205 +706,259 @@
         moon.style.right = `${right}%`;
     }
 
-    function showUploadOptions() {
-        uploadOptionsOverlay.classList.add('show');
-        uploadOptionsSheet.classList.add('show');
-    }
-    function hideUploadOptions() {
-        uploadOptionsOverlay.classList.remove('show');
-        uploadOptionsSheet.classList.remove('show');
-    }
-
-    function showSubscriptionModal(isError = false, errorMessage = '') {
-        const t = translations[currentLanguage];
-        let content;
-
-        if (isError) {
-            content = `
-                <h2>${t.subErrorTitle}</h2>
-                <p>${errorMessage}</p>
-                <button id="supportBtn" class="support-btn"><i class="fab fa-whatsapp"></i> ${t.subSupport}</button>
-            `;
-        } else {
-            content = `
-                <h2>${t.subTitle}</h2>
-                <p>${t.subBody.replace('{messages}', DAILY_MESSAGE_LIMIT).replace('{images}', DAILY_IMAGE_LIMIT)}</p>
-                <span class="price-tag">${t.subPrice}</span>
-                <div class="vodafone-cash-info">
-                    <span>${t.subMethod}</span>
-                    <div class="vodafone-cash-number">${VODAFONE_CASH_NUMBER}</div>
-                </div>
-                <button id="attachProofBtn" class="subscribe-btn"><i class="fas fa-paperclip"></i> ${t.subAttachProof}</button>
-                <div id="spinner"></div>
-            `;
-        }
-        
-        document.getElementById('subscriptionModalContent').innerHTML = content;
-        
-        subscriptionOverlay.classList.add('show');
-        subscriptionSheet.classList.add('show');
-
-        if (isError) {
-            document.getElementById('supportBtn').addEventListener('click', () => {
-                window.open(`https://wa.me/${SUPPORT_WHATSAPP_NUMBER}`, '_blank');
-            });
-        } else {
-            document.getElementById('attachProofBtn').addEventListener('click', () => {
-                proofUploadInput.click();
-            });
-        }
-    }
-
-    function hideSubscriptionModal() {
-        subscriptionOverlay.classList.remove('show');
-        subscriptionSheet.classList.remove('show');
-    }
-
-    function handleProofSubmission(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-            const imageData = e.target.result;
-
-            const attachBtn = document.getElementById('attachProofBtn');
-            const spinner = document.getElementById('spinner');
-            if(attachBtn) attachBtn.style.display = 'none';
-            if(spinner) spinner.style.display = 'block';
-
-            const isVerified = await verifyPayment(imageData);
-            
-            if(spinner) spinner.style.display = 'none';
-
-            if (isVerified) {
-                activateSubscription();
-                hideSubscriptionModal();
-                alert(translations[currentLanguage].subActivated);
-            } else {
-                showSubscriptionModal(true, translations[currentLanguage].subErrorBody);
-            }
-        };
-        reader.readAsDataURL(file);
-        
-        proofUploadInput.value = '';
-    }
-
     function initializeApp() { 
-        registerServiceWorker(); 
-        const savedLang = localStorage.getItem(localStorageKeyLanguage) || 'ar'; 
-        switchLanguage(savedLang); 
+        mainContainer.style.display = 'flex';
+        
         loadAllChatSessions(); 
         randomizeMoonPosition();
         
-        const qrCodeImg = document.getElementById('qr-code-img'); const whatsappShare = document.getElementById('whatsapp-share'); const twitterShare = document.getElementById('twitter-share'); const telegramShare = document.getElementById('telegram-share'); const facebookShare = document.getElementById('facebook-share'); shareBtn.addEventListener('click', () => { const shareUrl = shareLinkInput.value; const shareText = translations[currentLanguage].shareText; qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(shareUrl)}&bgcolor=1c1c1c&color=ffffff&qzone=1`; whatsappShare.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`; twitterShare.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; telegramShare.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`; shareModal.style.display = 'flex'; }); closeShareModalBtn.addEventListener('click', () => { shareModal.style.display = 'none'; }); copyLinkBtn.addEventListener('click', copyShareLink); 
+        // إعداد الأحداث
+        setupEventListeners();
         
-        toggleUploadBtn.addEventListener('click', showUploadOptions); 
-        uploadOptionsOverlay.addEventListener('click', hideUploadOptions);
-        document.getElementById('uploadOptionsHandle').addEventListener('click', hideUploadOptions);
-        subscriptionOverlay.addEventListener('click', hideSubscriptionModal);
-        document.getElementById('subscriptionHandle').addEventListener('click', hideSubscriptionModal);
+        // إعداد التعرف على الصوت
+        initSpeechRecognition();
+    }
 
-        document.getElementById('uploadFromGalleryBtn').onclick = () => { hideUploadOptions(); triggerImageUpload(); }; 
-        document.getElementById('useCameraBtn').onclick = () => { hideUploadOptions(); openCamera(); }; 
+    function setupEventListeners() {
+        // مشاركة
+        shareBtn.addEventListener('click', () => { 
+            const shareUrl = shareLinkInput.value; 
+            const shareText = "اكتشف مساعد البرمجة Saif AI - إجابات سريعة ومختصرة!"; 
+            const qrCodeImg = document.getElementById('qr-code-img');
+            const whatsappShare = document.getElementById('whatsapp-share'); 
+            const twitterShare = document.getElementById('twitter-share'); 
+            const telegramShare = document.getElementById('telegram-share'); 
+            const facebookShare = document.getElementById('facebook-share'); 
+            
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(shareUrl)}&bgcolor=1c1c1c&color=ffffff&qzone=1`; 
+            whatsappShare.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + shareUrl)}`; 
+            twitterShare.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; 
+            telegramShare.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`; 
+            facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`; 
+            shareModal.style.display = 'flex'; 
+        }); 
         
-        captureBtn.addEventListener('click', captureImage); retakeBtn.addEventListener('click', () => { previewOverlay.style.display = 'none'; cameraOverlay.style.display = 'flex'; }); cancelCameraBtn.addEventListener('click', closeCamera); usePhotoBtn.addEventListener('click', handleCameraPhotoSubmission);
-        downloadAppBtn.addEventListener('click', promptInstall); closeNotificationBtn.addEventListener('click', hideAppNotification);
-        userInput.addEventListener("keydown", (e) => { if(e.key==="Enter"&&!e.shiftKey) { e.preventDefault(); sendMessage();}}); userInput.addEventListener("input", () => { autoResizeTextarea(); updateSendOrVoiceButton(); updateInitialViewState(); });
-        languageBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(languageDropdown); });
-        settingsBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleDropdown(settingsDropdown); });
-        document.addEventListener('click', () => { languageDropdown.style.display = 'none'; settingsDropdown.style.display = 'none'; });
-        document.querySelectorAll('#languageDropdown button').forEach(button => { button.addEventListener('click', (e) => { switchLanguage(e.currentTarget.dataset.lang); }); });
-        deleteCurrentChatBtn.addEventListener('click', deleteCurrentChat);
-        historyBtn.addEventListener('click', openHistorySidebar);
-        closeHistoryBtn.addEventListener('click', closeHistorySidebar);
-        sidebarOverlay.addEventListener('click', closeHistorySidebar);
+        closeShareModalBtn.addEventListener('click', () => { shareModal.style.display = 'none'; }); 
+        copyLinkBtn.addEventListener('click', copyShareLink); 
+        
+        // رفع الصور
+        toggleUploadBtn.addEventListener('click', () => imageUploadInput.click()); 
+        
+        // الكاميرا
+        captureBtn.addEventListener('click', captureImage); 
+        retakeBtn.addEventListener('click', () => { previewOverlay.style.display = 'none'; cameraOverlay.style.display = 'flex'; }); 
+        cancelCameraBtn.addEventListener('click', closeCamera); 
+        usePhotoBtn.addEventListener('click', handleCameraPhotoSubmission); 
+        
+        // المحادثات
+        deleteCurrentChatBtn.addEventListener('click', deleteCurrentChat); 
+        historyBtn.addEventListener('click', openHistorySidebar); 
+        closeHistoryBtn.addEventListener('click', closeHistorySidebar); 
+        sidebarOverlay.addEventListener('click', closeHistorySidebar); 
         newChatBtn.addEventListener('click', () => { loadChat(null); closeHistorySidebar(); }); 
         
-        imageUploadInput.addEventListener('change', handleFileSelect);
-        proofUploadInput.addEventListener('change', handleProofSubmission);
+        // الإدخال
+        userInput.addEventListener("keydown", (e) => { 
+            if(e.key==="Enter"&&!e.shiftKey) { 
+                e.preventDefault(); 
+                sendMessage();
+            }
+        }); 
+        
+        userInput.addEventListener("input", () => { 
+            autoResizeTextarea(); 
+            updateSendOrVoiceButton();
+            updateInitialViewState(); 
+        }); 
+        
+        // الإعدادات
+        settingsBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            toggleDropdown(settingsDropdown); 
+        }); 
+        
+        document.addEventListener('click', () => { 
+            settingsDropdown.style.display = 'none'; 
+        }); 
 
-        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; showAppNotification(); }); window.addEventListener('appinstalled', () => { deferredPrompt = null; hideAppNotification(); }); window.addEventListener('click', (event) => { if (event.target == shareModal) shareModal.style.display = 'none'; });
+        imageUploadInput.addEventListener('change', handleFileSelect);
+
+        window.addEventListener('click', (event) => { if (event.target == shareModal) shareModal.style.display = 'none'; });
+        
         const imageOverlay = document.getElementById('imageOverlay');
         document.getElementById('closeOverlayBtn').onclick = () => { imageOverlay.style.display = 'none'; };
         imageOverlay.onclick = (e) => { if (e.target.id === 'imageOverlay') { imageOverlay.style.display = 'none'; } };
     }
-    function toggleDropdown(menu) { const isVisible = menu.style.display === 'block'; languageDropdown.style.display = 'none'; settingsDropdown.style.display = 'none'; if (!isVisible) { menu.style.display = 'block'; } }
-    function copyShareLink() { shareLinkInput.select(); navigator.clipboard.writeText(shareLinkInput.value).then(() => { const originalText = document.getElementById('copyBtnText').textContent; document.getElementById('copyBtnText').textContent = translations[currentLanguage].copied; copyLinkBtn.querySelector('i').className = "fas fa-check"; setTimeout(() => { document.getElementById('copyBtnText').textContent = originalText; copyLinkBtn.querySelector('i').className = "fas fa-copy"; }, 2000); }); }
-    function updateSendOrVoiceButton() { const hasText = userInput.value.trim().length > 0 || attachedFiles.length > 0; const t = translations[currentLanguage]; if (hasText) { sendOrVoiceBtn.innerHTML = '<i class="fas fa-paper-plane"></i>'; sendOrVoiceBtn.title = t.send; sendOrVoiceBtn.onclick = sendMessage; } else { sendOrVoiceBtn.innerHTML = '<i class="fas fa-microphone"></i>'; sendOrVoiceBtn.title = t.speak; sendOrVoiceBtn.onclick = toggleListening; } }
 
-    function getTranslatedSubjectName(subjectKey) {
-        const subject = subjects.find(s => s.key === subjectKey); 
-        return subject ? subject.name[currentLanguage] : subjectKey; 
+    function toggleDropdown(menu) { 
+        const isVisible = menu.style.display === 'block'; 
+        settingsDropdown.style.display = 'none'; 
+        if (!isVisible) { 
+            menu.style.display = 'block'; 
+        } 
     }
-    function getBotDisplayName() {
-        const subjectName = getTranslatedSubjectName(currentSubject);
-        return `${botName} (${subjectName})`;
+
+    function copyShareLink() { 
+        shareLinkInput.select(); 
+        navigator.clipboard.writeText(shareLinkInput.value).then(() => { 
+            const copyBtnText = document.querySelector('#copyLinkBtn span');
+            const copyBtnIcon = copyLinkBtn.querySelector('i');
+            const originalText = copyBtnText.textContent; 
+            copyBtnText.textContent = "تم النسخ!"; 
+            copyBtnIcon.className = "fas fa-check"; 
+            setTimeout(() => { 
+                copyBtnText.textContent = originalText; 
+                copyBtnIcon.className = "fas fa-copy"; 
+            }, 2000); 
+        }); 
     }
-    function updateSubjectUI() {
-        botNameElement.textContent = getBotDisplayName();
+
+    function initSpeechRecognition() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'ar-SA';
+            
+            recognition.onstart = () => {
+                isListening = true;
+                sendOrVoiceBtn.classList.add('recording');
+                voiceIndicator.classList.add('active');
+            };
+            
+            recognition.onresult = (event) => {
+                let transcript = Array.from(event.results).map(result => result[0].transcript).join('');
+                userInput.value = transcript;
+                if(event.results[0].isFinal) {
+                    autoResizeTextarea();
+                    updateSendOrVoiceButton();
+                }
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error', event.error);
+                stopListening();
+            };
+            
+            recognition.onend = () => {
+                stopListening();
+            };
+        } else {
+            // إذا لم يكن مدعوماً، إخفاء المؤشر الصوتي
+            sendOrVoiceBtn.style.display = 'none';
+        }
+    }
+
+    function toggleListening() {
+        if (!recognition) return;
+        if (isListening) {
+            recognition.stop();
+        } else {
+            try {
+                userInput.value = "";
+                autoResizeTextarea();
+                updateSendOrVoiceButton();
+                recognition.start();
+            } catch (e) {
+                stopListening();
+            }
+        }
+    }
+
+    function stopListening() {
+        if(isListening) {
+            isListening = false;
+            sendOrVoiceBtn.classList.remove('recording');
+            voiceIndicator.classList.remove('active');
+        }
+    }
+
+    function updateSendOrVoiceButton() {
+        const hasText = userInput.value.trim().length > 0 || attachedFiles.length > 0;
+        if (hasText) {
+            sendOrVoiceBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendOrVoiceBtn.onclick = sendMessage;
+        } else {
+            sendOrVoiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            sendOrVoiceBtn.onclick = toggleListening;
+        }
     }
 
     function loadAllChatSessions() {
         try {
             const stored = localStorage.getItem(localStorageKeyAllChats);
-            allChatSessions = stored ? JSON.parse(stored) : {};
-        } catch (e) { allChatSessions = {}; }
-        
-        if (!allChatSessions[currentSubject]) {
-             allChatSessions[currentSubject] = [];
+            allChatSessions = stored ? JSON.parse(stored) : [];
+        } catch (e) {
+            allChatSessions = [];
         }
-        
-        let lastChatId = null;
+
+        let lastSessionId = null;
         try {
             const storedLast = localStorage.getItem(localStorageKeyLastSession);
-            if (storedLast) {
-                 const lastSessionId = JSON.parse(storedLast);
-                 lastChatId = lastSessionId;
-            }
+            if (storedLast) lastSessionId = JSON.parse(storedLast);
         } catch (e) {}
-
-        const lastSessionExists = allChatSessions[currentSubject]?.some(s => s.id === lastChatId);
         
+        const lastSessionExists = allChatSessions.some(s => s.id === lastSessionId);
         if (lastSessionExists) {
-            loadChat(lastChatId);
+            loadChat(lastSessionId);
         } else {
-            const sessionsForSubject = allChatSessions[currentSubject] || [];
-            const latestChatId = sessionsForSubject.length > 0 ? sessionsForSubject[0].id : null;
+            const latestChatId = allChatSessions.length > 0 ? allChatSessions[0].id : null;
             loadChat(latestChatId);
         }
     }
 
     function saveAllChatSessionsToLocalStorage() {
-        if (currentChatId && allChatSessions[currentSubject]) {
-            const session = allChatSessions[currentSubject].find(s => s.id === currentChatId);
-            if (session) { session.messages = messages; }
-        }
-        localStorage.setItem(localStorageKeyAllChats, JSON.stringify(allChatSessions));
-        localStorage.setItem(localStorageKeyLastSession, JSON.stringify(currentChatId));
-    }
-    
-    function loadChat(chatId) {
-        currentChatId = chatId;
-        if (chatId === null) {
-            messages = [];
-            addWelcomeMessage();
-        } else {
-            const session = allChatSessions[currentSubject]?.find(s => s.id === chatId);
+        if (currentChatId) {
+            const session = allChatSessions.find(s => s.id === currentChatId);
             if (session) {
-                messages = session.messages;
-            } else {
-                messages = [];
-                addWelcomeMessage();
-                currentChatId = null;
+                session.messages = messages;
             }
         }
-        updateSubjectUI();
-        refreshChat();
+        localStorage.setItem(localStorageKeyAllChats, JSON.stringify(allChatSessions));
+        if (currentChatId) {
+            localStorage.setItem(localStorageKeyLastSession, JSON.stringify(currentChatId));
+        }
     }
-    function addWelcomeMessage() { const welcomeMsgText = getWelcomeMessageText(); if (messages.length === 0 || !messages.some(m => m.isInitialWelcome)) { messages.unshift({ sender: "bot", text: welcomeMsgText, images: [], isInitialWelcome: true }); } }
-    function addMessage(sender, text, images = [], isSystemMessage = false) { if (currentChatId === null && sender === 'user') { const newId = Date.now(); const newSession = { id: newId, timestamp: newId, messages: [] }; if (!allChatSessions[currentSubject]) { allChatSessions[currentSubject] = []; } allChatSessions[currentSubject].unshift(newSession); currentChatId = newId; } messages.push({ sender, text, images, isSystemMessage }); refreshChat(); chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); }
     
+    function loadChat(chatId) { 
+        currentChatId = chatId; 
+        if (chatId === null) { 
+            messages = []; 
+            addWelcomeMessage(); 
+        } else { 
+            const session = allChatSessions.find(s => s.id === chatId); 
+            if (session) { 
+                messages = session.messages; 
+            } else { 
+                messages = []; 
+                addWelcomeMessage(); 
+                currentChatId = null; 
+            } 
+        } 
+        refreshChat(); 
+    }
+
+    function addWelcomeMessage() { 
+        const welcomeMsgText = "مرحباً! أنا مساعدك البرمجي المتخصص. يمكنني مساعدتك في:\n• تحليل الأخطاء البرمجية\n• شرح الكود\n• تحسين الكود\n• الإجابة على أسئلة البرمجة\n\nاطرح سؤالك البرمجي وسأجيب بسرعة وإيجاز."; 
+        if (messages.length === 0 || !messages.some(m => m.isInitialWelcome)) { 
+            messages.unshift({ sender: "bot", text: welcomeMsgText, images: [], isInitialWelcome: true }); 
+        } 
+    }
+
+    function addMessage(sender, text, images = [], isSystemMessage = false) { 
+        if (currentChatId === null && sender === 'user') { 
+            const newId = Date.now(); 
+            const newSession = { id: newId, timestamp: newId, messages: [] }; 
+            allChatSessions.unshift(newSession); 
+            currentChatId = newId; 
+        } 
+        messages.push({ sender, text, images, isSystemMessage }); 
+        refreshChat(); 
+        chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); 
+    }
+    
+    // دالة لعرض الكود في حاوية خاصة
     function createCodeContainer(code, language = '') {
         const codeContainer = document.createElement('div');
         codeContainer.className = 'code-container';
@@ -837,7 +968,7 @@
         
         const codeLanguage = document.createElement('span');
         codeLanguage.className = 'code-language';
-        codeLanguage.textContent = language || 'Code';
+        codeLanguage.textContent = language || 'كود';
         
         const copyButton = document.createElement('button');
         copyButton.className = 'copy-code-btn';
@@ -854,6 +985,7 @@
         codeContainer.appendChild(codeHeader);
         codeContainer.appendChild(codeContent);
         
+        // إضافة وظيفة النسخ
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(code).then(() => {
                 const originalText = copyButton.innerHTML;
@@ -872,16 +1004,15 @@
     function typeWriterEffect(element, text) { 
         let i = 0; 
         element.innerHTML = ""; 
+        
         function type() { 
             if (i < text.length) { 
+                // التحقق إذا كان النص يحتوي على كود
                 if (text.substring(i).startsWith('```')) {
                     const endIndex = text.indexOf('```', i + 3);
                     if (endIndex !== -1) {
-                        const codeBlock = text.substring(i + 3, endIndex);
-                        const lines = codeBlock.split('\n');
-                        const language = lines[0].trim();
-                        const codeContent = lines.slice(1).join('\n');
-                        const codeContainer = createCodeContainer(codeContent, language);
+                        const codeContent = text.substring(i + 3, endIndex);
+                        const codeContainer = createCodeContainer(codeContent, '');
                         element.appendChild(codeContainer);
                         i = endIndex + 3;
                     } else {
@@ -893,7 +1024,7 @@
                     i++;
                 }
                 chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'auto' }); 
-                setTimeout(type, 20); 
+                setTimeout(type, 10);
             } else { 
                 const messageElem = element.closest('.message'); 
                 if(messageElem) addBotMessageActions(messageElem, text); 
@@ -903,29 +1034,27 @@
     }
     
     function addBotMessageActions(messageElement, text) { 
-        const t = translations[currentLanguage];
         const actionsDiv = document.createElement("div");
         actionsDiv.className = "message-actions";
         actionsDiv.innerHTML = ` 
-            <button title="${t.copy}"><i class="fas fa-copy"></i></button> 
-            <button title="${t.playAudio}"><i class="fas fa-volume-up"></i></button> 
+            <button title="نسخ"><i class="fas fa-copy"></i></button> 
         `; 
-        actionsDiv.querySelector('button[title="' + t.copy + '"]').onclick = () => { navigator.clipboard.writeText(text); }; 
-        actionsDiv.querySelector('button[title="' + t.playAudio + '"]').onclick = () => { speakMessageText(text); }; 
+        actionsDiv.querySelector('button[title="نسخ"]').onclick = () => { 
+            navigator.clipboard.writeText(text); 
+        }; 
         messageElement.appendChild(actionsDiv); 
     }
     
     function refreshChat() {
         chatContainer.innerHTML = "";
-        const t = translations[currentLanguage];
         messages.forEach((msg, index) => {
             const messageElem = document.createElement("div");
             messageElem.className = `message ${msg.sender}`;
-            let senderName = msg.sender === "bot" ? getBotDisplayName() : t.you;
+            let senderName = msg.sender === "bot" ? botName : "أنت";
             
             const header = document.createElement("div");
             header.className = "message-header";
-            const deleteButtonHTML = (msg.isInitialWelcome || msg.isSystemMessage) ? '' : `<i class="fas fa-trash delete-btn" title="${t.deleteMessage}"></i>`;
+            const deleteButtonHTML = (msg.isInitialWelcome || msg.isSystemMessage) ? '' : `<i class="fas fa-trash delete-btn" title="حذف الرسالة"></i>`;
             header.innerHTML = `<span>${senderName}</span>${deleteButtonHTML}`;
             if (!msg.isInitialWelcome && !msg.isSystemMessage) {
                 header.querySelector('.delete-btn').onclick = () => deleteMessage(index);
@@ -935,29 +1064,35 @@
             contentDiv.className = "message-content";
             
             if(msg.text) {
+                // معالجة النص لعرض الكود في حاوية خاصة
                 let processedText = msg.text;
-                const codeBlocksRegex = /```(\w*)\n([\s\S]*?)```/g;
-                let lastIndex = 0;
-                let match;
-
-                while ((match = codeBlocksRegex.exec(processedText)) !== null) {
-                    const beforeCode = processedText.substring(lastIndex, match.index);
-                    if (beforeCode) {
-                        const textNode = document.createTextNode(beforeCode);
+                const codeBlocks = processedText.match(/```[\s\S]*?```/g);
+                
+                if (codeBlocks) {
+                    let lastIndex = 0;
+                    codeBlocks.forEach((codeBlock) => {
+                        const startIndex = processedText.indexOf(codeBlock, lastIndex);
+                        const beforeCode = processedText.substring(lastIndex, startIndex);
+                        
+                        if (beforeCode) {
+                            const textNode = document.createTextNode(beforeCode);
+                            contentDiv.appendChild(textNode);
+                        }
+                        
+                        const codeContent = codeBlock.replace(/```/g, '');
+                        const codeContainer = createCodeContainer(codeContent, '');
+                        contentDiv.appendChild(codeContainer);
+                        
+                        lastIndex = startIndex + codeBlock.length;
+                    });
+                    
+                    if (lastIndex < processedText.length) {
+                        const afterCode = processedText.substring(lastIndex);
+                        const textNode = document.createTextNode(afterCode);
                         contentDiv.appendChild(textNode);
                     }
-                    
-                    const language = match[1] || '';
-                    const codeContent = match[2];
-                    const codeContainer = createCodeContainer(codeContent, language);
-                    contentDiv.appendChild(codeContainer);
-                    
-                    lastIndex = match.index + match[0].length;
-                }
-                
-                if (lastIndex < processedText.length) {
-                    const afterCode = processedText.substring(lastIndex);
-                    const textNode = document.createTextNode(afterCode);
+                } else {
+                    const textNode = document.createTextNode(msg.text);
                     contentDiv.appendChild(textNode);
                 }
             }
@@ -966,7 +1101,7 @@
                 msg.images.forEach(imgData => {
                     const imageElem = document.createElement('img');
                     imageElem.src = imgData;
-                    imageElem.alt = t.sentImageAlt;
+                    imageElem.alt = "صورة مرسلة من المستخدم";
                     imageElem.className = 'sent-image';
                     imageElem.onclick = () => showFullscreenImage(imgData);
                     contentDiv.appendChild(imageElem);
@@ -992,28 +1127,32 @@
         document.getElementById('imageOverlay').style.display = 'flex';
     }
 
-    function deleteMessage(index) { messages.splice(index, 1); refreshChat(); }
-    function deleteCurrentChat() {
-        settingsDropdown.style.display = 'none';
-        if (!currentChatId) {
-            messages = [];
-            addWelcomeMessage();
-            refreshChat();
-            return;
-        }
-        if (confirm(translations[currentLanguage].confirmDeleteCurrent)) {
-            const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === currentChatId);
-            if (sessionIndex > -1) {
-                allChatSessions[currentSubject].splice(sessionIndex, 1);
-            }
-            const nextSession = allChatSessions[currentSubject][0] || null;
-            loadChat(nextSession ? nextSession.id : null);
-        }
+    function deleteMessage(index) { 
+        messages.splice(index, 1); 
+        refreshChat(); 
+    }
+    
+    function deleteCurrentChat() { 
+        settingsDropdown.style.display = 'none'; 
+        if (!currentChatId) { 
+            messages = []; 
+            addWelcomeMessage(); 
+            refreshChat(); 
+            return; 
+        } 
+        if (confirm("هل أنت متأكد من حذف هذه المحادثة؟")) { 
+            const sessionIndex = allChatSessions.findIndex(s => s.id === currentChatId); 
+            if (sessionIndex > -1) { 
+                allChatSessions.splice(sessionIndex, 1); 
+            } 
+            const nextSession = allChatSessions[0] || null; 
+            loadChat(nextSession ? nextSession.id : null); 
+        } 
     }
     
     async function fetchGeminiResponse(promptParts) {
         if (!geminiApiKey) throw new Error("API key is missing.");
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${geminiApiKey}`;
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1031,7 +1170,7 @@
         const messageElem = document.createElement("div"); 
         messageElem.className = `message bot`; 
         messageElem.id = tempMsgId; 
-        messageElem.innerHTML = `<div class="message-header"><span>${getBotDisplayName()}</span></div><div class="message-content">${typingIndicatorHTML}</div>`; 
+        messageElem.innerHTML = `<div class="message-header"><span>${botName}</span></div><div class="message-content">${typingIndicatorHTML}</div>`; 
         chatContainer.appendChild(messageElem); 
         chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' }); 
         try { 
@@ -1046,55 +1185,11 @@
         } catch (error) { 
             const errorElement = document.getElementById(tempMsgId); 
             if (errorElement) { 
-                errorElement.querySelector('.message-content').innerHTML = `${translations[currentLanguage].errorPrefix}: ${error.message}`; 
+                errorElement.querySelector('.message-content').innerHTML = `عذراً، واجهت مشكلة: ${error.message}`; 
             } 
-            messages.push({ sender: 'bot', text: `${translations[currentLanguage].errorPrefix}: ${error.message}`, images: [], isSystemMessage: true }); 
+            messages.push({ sender: 'bot', text: `عذراً، واجهت مشكلة: ${error.message}`, images: [], isSystemMessage: true }); 
             saveAllChatSessionsToLocalStorage(); 
         } 
-    }
-    
-    function getSubscriptionStatus() {
-        try { const sub = JSON.parse(localStorage.getItem(localStorageKeySubscription)); if (sub && sub.expiryTimestamp && sub.expiryTimestamp > Date.now()) { return { isActive: true, expiry: sub.expiryTimestamp }; } } catch (e) {}
-        return { isActive: false };
-    }
-    function activateSubscription() {
-        const expiryTimestamp = Date.now() + 30 * 24 * 60 * 60 * 1000;
-        localStorage.setItem(localStorageKeySubscription, JSON.stringify({ expiryTimestamp }));
-    }
-    function getUsageTracker() {
-        const today = new Date().toISOString().split('T')[0];
-        let tracker;
-        try { tracker = JSON.parse(localStorage.getItem(localStorageKeyUsageTracker)); } catch (e) { tracker = null; }
-        if (!tracker || tracker.date !== today) { return { date: today, messageCount: 0, imageCount: 0 }; }
-        return tracker;
-    }
-    function incrementUsage(type) {
-        if (currentSubject === 'programming') return;
-        if (getSubscriptionStatus().isActive) return;
-        const tracker = getUsageTracker();
-        if (type === 'message') tracker.messageCount++;
-        else if (type === 'image') tracker.imageCount++;
-        localStorage.setItem(localStorageKeyUsageTracker, JSON.stringify(tracker));
-    }
-    function checkLimit(type) {
-        if (currentSubject === 'programming') return true;
-        if (getSubscriptionStatus().isActive) return true;
-        const tracker = getUsageTracker();
-        if (type === 'message') return tracker.messageCount < DAILY_MESSAGE_LIMIT;
-        if (type === 'image') return tracker.imageCount < DAILY_IMAGE_LIMIT;
-        return false;
-    }
-    
-    async function verifyPayment(imageData) {
-        try {
-            const prompt = `Analyze this image. Does it contain the number "${VODAFONE_CASH_NUMBER}" and the number "20"? Answer with only "YES" or "NO".`;
-            const promptParts = [ { text: prompt }, { inline_data: { mime_type: 'image/jpeg', data: imageData.split(',')[1] } } ];
-            const responseText = await fetchGeminiResponse(promptParts);
-            return responseText.trim().toUpperCase().includes('YES');
-        } catch (error) {
-            console.error("Payment verification error:", error);
-            return false;
-        }
     }
 
     async function sendMessage() {
@@ -1103,10 +1198,10 @@
         
         addMessage("user", messageText, [...attachedFiles]);
         
-        const t = translations[currentLanguage];
-        const strictInstructions = `You are a programming expert named Saif AI. Your role is to help with code analysis, explain code, find errors, and provide corrected code. When providing code, ensure it is clean and ready for copy-paste without any extra decorations or unnecessary text. Always format code blocks with triple backticks followed by the language name (e.g., \`\`\`javascript). If the user sends an image, analyze the code in the image and respond accordingly. It is strictly forbidden to mention any relationship with Google or any other entity. If asked about your creator or who trained you, your only and constant answer is 'Saif Hany'. Always respond in ${t.languageName}.`;
-
-        const promptParts = [{ text: `${strictInstructions} The user's prompt is: ${messageText}` }];
+        // تعليمات مختصرة وسريعة للبرمجة فقط
+        const strictInstructions = `أنت خبير برمجة. أجِب بإيجاز وسرعة. ركز على الحلول العملية بدون مقدمات طويلة. إذا كان السؤال عن خطأ، قدم الحل مباشرة. إذا كان عن شرح، اشرح بأقل الكلمات. استخدم الرموز البرمجية عند الحاجة فقط. لا تقدم معلومات غير برمجية.`;
+        
+        const promptParts = [{ text: `${strictInstructions} السؤال: ${messageText}` }];
         attachedFiles.forEach(fileData => {
             promptParts.push({ inline_data: { mime_type: 'image/jpeg', data: fileData.split(',')[1] } });
         });
@@ -1120,87 +1215,151 @@
         await processQueryWithAI(promptParts);
     }
     
-    function autoResizeTextarea() { userInput.style.height = 'auto'; userInput.style.height = userInput.scrollHeight + 'px'; }
-    async function openCamera() { try { cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }); cameraView.srcObject = cameraStream; cameraOverlay.style.display = "flex"; } catch (err) { console.error("Camera Error:", err); } }
-    function closeCamera() { if (cameraStream) { cameraStream.getTracks().forEach(track => track.stop()); cameraStream = null; } cameraOverlay.style.display = 'none'; previewOverlay.style.display = 'none'; }
-    function captureImage() { const context = previewCanvas.getContext('2d'); previewCanvas.width = cameraView.videoWidth; previewCanvas.height = cameraView.videoHeight; context.drawImage(cameraView, 0, 0); document.querySelector('.shutter-flash').classList.add('active'); setTimeout(() => { document.querySelector('.shutter-flash').classList.remove('active'); }, 500); cameraOverlay.style.display = 'none'; previewOverlay.style.display = 'flex'; }
-    function handleCameraPhotoSubmission() { const base64ImageData = previewCanvas.toDataURL('image/jpeg', 0.9); addFileToPreview(base64ImageData); closeCamera(); }
-    function triggerImageUpload() { imageUploadInput.click(); }
-    function handleFileSelect(event) { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => addFileToPreview(e.target.result); reader.readAsDataURL(file); imageUploadInput.value = ''; }
+    function autoResizeTextarea() { 
+        userInput.style.height = 'auto'; 
+        userInput.style.height = userInput.scrollHeight + 'px'; 
+    }
+    
+    async function openCamera() { 
+        try { 
+            cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }); 
+            cameraView.srcObject = cameraStream; 
+            cameraOverlay.style.display = "flex"; 
+        } catch (err) { 
+            console.error("Camera Error:", err); 
+            alert("تعذر الوصول إلى الكاميرا. يرجى التأكد من الصلاحيات.");
+        } 
+    }
+    
+    function closeCamera() { 
+        if (cameraStream) { 
+            cameraStream.getTracks().forEach(track => track.stop()); 
+            cameraStream = null; 
+        } 
+        cameraOverlay.style.display = 'none'; 
+        previewOverlay.style.display = 'none'; 
+    }
+    
+    function captureImage() { 
+        const context = previewCanvas.getContext('2d'); 
+        previewCanvas.width = cameraView.videoWidth; 
+        previewCanvas.height = cameraView.videoHeight; 
+        context.drawImage(cameraView, 0, 0); 
+        document.querySelector('.shutter-flash').classList.add('active'); 
+        setTimeout(() => { document.querySelector('.shutter-flash').classList.remove('active'); }, 500); 
+        cameraOverlay.style.display = 'none'; 
+        previewOverlay.style.display = 'flex'; 
+    }
+    
+    function handleCameraPhotoSubmission() { 
+        const base64ImageData = previewCanvas.toDataURL('image/jpeg', 0.9); 
+        addFileToPreview(base64ImageData); 
+        closeCamera(); 
+    }
+    
+    function handleFileSelect(event) { 
+        const file = event.target.files[0]; 
+        if (!file) return; 
+        const reader = new FileReader(); 
+        reader.onload = (e) => addFileToPreview(e.target.result); 
+        reader.readAsDataURL(file); 
+        imageUploadInput.value = ''; 
+    }
     
     function addFileToPreview(fileData) {
-        if (!checkLimit('image')) {
-            showSubscriptionModal();
-            return;
+        if (attachedFiles.length >= 1) { 
+            alert("عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة."); 
+            return; 
         }
-        const t = translations[currentLanguage];
-        if (attachedFiles.length >= 1) { alert(t.limitSingleImage); return; }
+        
         attachedFiles.push(fileData);
         updateImagePreviews();
         updateSendOrVoiceButton();
-        incrementUsage('image');
     }
 
-    function removeFileFromPreview(index) { attachedFiles.splice(index, 1); updateImagePreviews(); updateSendOrVoiceButton(); }
-    function updateImagePreviews() { if (attachedFiles.length > 0) { imagePreviewContainer.style.display = 'flex'; imagePreviewContainer.innerHTML = ''; attachedFiles.forEach((fileData, index) => { imagePreviewContainer.innerHTML += `<div class="preview-item"><img src="${fileData}"/><button class="remove-preview-btn" onclick="removeFileFromPreview(${index})">&times;</button></div>`; }); } else { imagePreviewContainer.style.display = 'none'; } }
-    function switchLanguage(lang) { currentLanguage = lang; localStorage.setItem(localStorageKeyLanguage, currentLanguage); document.documentElement.lang = lang; document.documentElement.dir = ['ar'].includes(lang) ? 'rtl' : 'ltr'; updateUIForLanguage(); initSpeechRecognition(); if (messages.length > 0 && messages[0].isInitialWelcome) { messages[0].text = getWelcomeMessageText(); } refreshChat(); }
-    function getWelcomeMessageText() { const t = translations[currentLanguage]; return t.welcomeSubject.replace('{botName}', getBotDisplayName()).replace('{subject}', getTranslatedSubjectName(currentSubject)); }
-    function updateDailySuggestions() { const suggestionsPerDay = 4; const numChunks = Math.ceil(predefinedSuggestions.length / suggestionsPerDay); const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); const currentChunkIndex = dayIndex % numChunks; const startIndex = currentChunkIndex * suggestionsPerDay; const todaysSuggestions = predefinedSuggestions.slice(startIndex, startIndex + suggestionsPerDay); populateSuggestions(todaysSuggestions); }
-    function populateSuggestions(suggestionsArray) { suggestionsContainer.innerHTML = ''; suggestionsArray.forEach(suggestionObj => { const btn = document.createElement('button'); btn.className = 'suggestion-btn'; btn.textContent = suggestionObj[currentLanguage] || suggestionObj['en']; btn.onclick = () => { userInput.value = suggestionObj[currentLanguage] || suggestionObj['en']; sendMessage(); }; suggestionsContainer.appendChild(btn); }); }
+    function removeFileFromPreview(index) { 
+        attachedFiles.splice(index, 1); 
+        updateImagePreviews(); 
+        updateSendOrVoiceButton();
+    }
+    
+    function updateImagePreviews() { 
+        if (attachedFiles.length > 0) { 
+            imagePreviewContainer.style.display = 'flex'; 
+            imagePreviewContainer.innerHTML = ''; 
+            attachedFiles.forEach((fileData, index) => { 
+                imagePreviewContainer.innerHTML += `<div class="preview-item"><img src="${fileData}"/><button class="remove-preview-btn" onclick="removeFileFromPreview(${index})">&times;</button></div>`; 
+            }); 
+        } else { 
+            imagePreviewContainer.style.display = 'none'; 
+        } 
+    }
     
     function updateInitialViewState() {
         const hasUserMessages = messages.some(m => !m.isInitialWelcome);
         const isTyping = userInput.value.trim().length > 0;
         if (!hasUserMessages && currentChatId === null && !isTyping) {
-            suggestionsContainer.style.display = 'flex';
             welcomeAnimation.style.display = 'flex';
             spaceBackground.style.display = 'block';
-            mainContainer.classList.remove('is-focused');
         } else {
-            suggestionsContainer.style.display = 'none';
             welcomeAnimation.style.display = 'none';
             spaceBackground.style.display = 'none';
-            mainContainer.classList.add('is-focused');
         }
     }
     
-    function openHistorySidebar() { renderHistoryList(); historySidebar.classList.add('open'); sidebarOverlay.classList.add('open'); }
-    function closeHistorySidebar() { historySidebar.classList.remove('open'); sidebarOverlay.classList.remove('open'); }
-    function renderHistoryList() { historyList.innerHTML = ''; const t = translations[currentLanguage]; const sessions = allChatSessions[currentSubject] || []; if (sessions.length === 0) { historyList.innerHTML = `<li style="cursor: default; opacity: 0.7; justify-content: center;">${t.noHistory}</li>`; return; } sessions.forEach(session => { const li = document.createElement('li'); if (session.id === currentChatId) { li.classList.add('active'); } const firstUserMsg = session.messages.find(m => m.sender === 'user'); const titleText = firstUserMsg ? (firstUserMsg.images.length > 0 ? `[${t.image}] ${firstUserMsg.text}`.trim() : firstUserMsg.text) : t.newChat; li.innerHTML = `<span class="history-item-title">${titleText}</span><button class="delete-history-item-btn" title="${t.deleteChat}"><i class="fas fa-trash"></i></button>`; li.querySelector('.history-item-title').addEventListener('click', () => { if (session.id !== currentChatId) { loadChat(session.id); } closeHistorySidebar(); }); li.querySelector('.delete-history-item-btn').addEventListener('click', (e) => { e.stopPropagation(); if (confirm(t.confirmDeleteChat)) { const sessionIndex = allChatSessions[currentSubject].findIndex(s => s.id === session.id); if (sessionIndex > -1) { allChatSessions[currentSubject].splice(sessionIndex, 1); if(session.id === currentChatId) { const nextSession = allChatSessions[currentSubject][0] || null; loadChat(nextSession ? nextSession.id : null); } saveAllChatSessionsToLocalStorage(); renderHistoryList(); } } }); historyList.appendChild(li); }); }
-    function updateUIForLanguage() {
-        const t = translations[currentLanguage];
-        languageDropdown.style.right = '0'; languageDropdown.style.left = 'auto'; settingsDropdown.style.left = '0'; settingsDropdown.style.right = 'auto';
-        document.getElementById('historyBtn').title = t.viewHistory; document.getElementById('shareBtn').title = t.shareApp; document.getElementById('languageBtn').title = t.changeLanguage; document.getElementById('settingsBtn').title = t.settings;
-        document.getElementById('deleteCurrentChatBtnText').textContent = t.deleteCurrentChat;
-        updateSubjectUI();
-        userInput.placeholder = t.placeholder;
-        toggleUploadBtn.title = t.attachFile;
-        document.querySelector('#uploadFromGalleryBtn span').textContent = t.uploadFromGallery;
-        document.querySelector('#useCameraBtn span').textContent = t.useCamera;
-        document.getElementById('listeningText').textContent = t.listening;
-        updateSendOrVoiceButton();
-        document.getElementById('aiDisclaimer').textContent = t.aiDisclaimer;
-        updateDailySuggestions();
-        document.getElementById('captureBtn').title = t.capture; document.getElementById('cancelCameraBtn').textContent = t.cancel; document.getElementById('retakeBtn').textContent = t.retake; document.getElementById('usePhotoBtn').textContent = t.usePhoto; loader.textContent = t.analyzing;
-        document.getElementById('shareModalTitle').textContent = t.shareApp; document.getElementById('shareModalDesc').textContent = t.shareDescription; document.getElementById('copyBtnText').textContent = t.copy; document.getElementById('qrCodeText').textContent = t.qrCodeText;
-        document.getElementById('downloadNotificationText').textContent = t.installApp; document.getElementById('downloadAppBtn').textContent = t.install;
-        document.getElementById('historyTitle').textContent = t.historyTitle; document.getElementById('newChatText').textContent = t.newChat;
-        document.querySelectorAll('#languageDropdown button').forEach(button => {
-            const langKey = button.dataset.lang;
-            if (t.languageNames && t.languageNames[langKey]) {
-                button.textContent = t.languageNames[langKey];
-            }
-        });
+    function openHistorySidebar() { 
+        renderHistoryList(); 
+        historySidebar.classList.add('open'); 
+        sidebarOverlay.classList.add('open'); 
     }
-    const translations = {
-      'ar': { languageName: "العربية", languageNames: { ar: 'العربية', en: 'الإنجليزية', fr: 'الفرنسية', es: 'الإسبانية', zh: 'الصينية' }, specializedSubjects: "مواد متخصصة", general: "عام", welcomeGeneral: "مرحباً! كيف يمكنني مساعدتك اليوم؟", welcomeSubject: "أهلاً بك. أنا مستعد لمساعدتك في {subject}. تفضل بسؤالك.", placeholder: "اكتب رسالتك أو استفسارك البرمجي...", you: "أنت", deleteMessage: "حذف الرسالة", listening: "جاري الاستماع...", playAudio: "تشغيل الصوت", send: "إرسال", speak: "التحدث", shareApp: "مشاركة التطبيق", shareDescription: "ساعدنا على النمو بمشاركة التطبيق مع أصدقائك!", shareText: "اكتشف Saif AI، مساعد الذكاء الاصطناعي العربي المتطور!", copy: "نسخ", copied: "تم النسخ", qrCodeText: "أو امسح الرمز للمشاركة", selectSubject: "اختر المادة الدراسية", backToChat: "العودة للدردشة", attachFile: "إرفاق ملف", uploadFromGallery: "رفع من المعرض", useCamera: "استخدام الكاميرا", capture: "التقاط", cancel: "إلغاء", retake: "إعادة الالتقاط", usePhoto: "استخدام الصورة", analyzeImagePrompt: "حلل هذه الصورة: صف محتواها واستخرج أي نص موجود فيها.", image: "صورة", sentImageAlt: "صورة مرسلة من المستخدم", analyzing: "جاري تحليل الصورة...", installApp: "ثبّت التطبيق على جهازك للوصول السريع!", install: "تثبيت", changeLanguage: "تغيير اللغة", settings: "الإعدادات", errorPrefix: "عفواً، واجهت مشكلة", aiDisclaimer: "قد يقدم Saif AI معلومات غير دقيقة، لذا يرجى التحقق من صحة إجاباته.", historyTitle: "سجل المحادثات", newChat: "محادثة جديدة", viewHistory: "عرض السجل", deleteCurrentChat: "حذف المحادثة الحالية", confirmDeleteCurrent: "هل أنت متأكد من حذف هذه المحادثة؟", confirmDeleteChat: "هل أنت متأكد من حذف هذه المحادثة؟", deleteChat: "حذف المحادثة", noHistory: "لا يوجد سجل بعد", limitSingleImage: "عذراً، يمكنك إرفاق صورة واحدة فقط في كل مرة.", subTitle: "لقد وصلت إلى الحد الأقصى!", subBody: "لقد استهلكت رصيدك اليومي المجاني ({messages} رسالة و {images} صورة). للحصول على استخدام غير محدود، يرجى الاشتراك.", subPrice: "20 جنيه / شهريًا", subMethod: "للاشتراك، قم بتحويل المبلغ إلى رقم فودافون كاش التالي:", subAttachProof: "إرفاق لقطة شاشة التحويل", subActivated: "تم استلام طلبك. سيتم تفعيل الاشتراك خلال دقائق بعد المراجعة. (تم التفعيل الآن لأغراض التجربة).", subErrorTitle: "فشل التحقق", subErrorBody: "لم نتمكن من تأكيد الدفع من الصورة المرفقة. يرجى التأكد من أن الصورة واضحة وتحتوي على الرقم والمبلغ الصحيحين.", subSupport: "التواصل مع الدعم"},
-      'en': { languageName: "English", languageNames: { ar: 'Arabic', en: 'English', fr: 'French', es: 'Spanish', zh: 'Chinese' }, specializedSubjects: "Specialized Subjects", general: "General", welcomeGeneral: "Hi! How can I help you today?", welcomeSubject: "Welcome. I'm ready to help you with {subject}. Ask your question.", placeholder: "Type your message or coding query...", you: "You", deleteMessage: "Delete message", listening: "Listening...", playAudio: "Play audio", send: "Send", speak: "Speak", shareApp: "Share App", shareDescription: "Help us grow by sharing the app with your friends!", shareText: "Discover Saif AI, the advanced AI assistant!", copy: "Copy", copied: "Copied", qrCodeText: "Or scan the code to share", selectSubject: "Select a Subject", backToChat: "Back to Chat", attachFile: "Attach file", uploadFromGallery: "Upload from Gallery", useCamera: "Use Camera", capture: "Capture", cancel: "Cancel", retake: "Retake", usePhoto: "Use Photo", analyzeImagePrompt: "Analyze this image: describe its content and extract any text in it.", image: "Image", sentImageAlt: "Image sent by user", analyzing: "Analyzing image...", installApp: "Install the app on your device for quick access!", install: "Install", changeLanguage: "Change Language", settings: "Settings", errorPrefix: "Sorry, an error occurred", aiDisclaimer: "Saif AI may provide inaccurate information, so please verify its answers.", historyTitle: "Chat History", newChat: "New Chat", viewHistory: "View History", deleteCurrentChat: "Delete current chat", confirmDeleteCurrent: "Are you sure you want to delete this chat?", confirmDeleteChat: "Are you sure you want to delete this chat?", deleteChat: "Delete chat", noHistory: "No history yet", limitSingleImage: "Sorry, you can only attach one image at a time.", subTitle: "You've Reached Your Limit!", subBody: "You have used your free daily quota ({messages} messages and {images} images). For unlimited access, please subscribe.", subPrice: "20 EGP / month", subMethod: "To subscribe, transfer the amount to the following Vodafone Cash number:", subAttachProof: "Attach Transfer Screenshot", subActivated: "Your request has been received. The subscription will be activated in minutes after review. (Activated now for demo purposes).", subErrorTitle: "Verification Failed", subErrorBody: "We could not confirm the payment from the attached image. Please ensure the image is clear and contains the correct number and amount.", subSupport: "Contact Support"},
-      'fr': { languageName: "Français", languageNames: { ar: 'Arabe', en: 'Anglais', fr: 'Français', es: 'Espagnol', zh: 'Chinois' }, welcomeSubject: "Bienvenue. Je suis prêt à vous aider en {subject}. Posez votre question.", placeholder: "Écrivez votre message ou requête de codage...", you: "Vous", deleteMessage: "Supprimer le message", listening: "Écoute...", send: "Envoyer", speak: "Parler", shareApp: "Partager l'application", copy: "Copier", copied: "Copié", backToChat: "Retour au chat", attachFile: "Joindre un fichier", cancel: "Annuler", usePhoto: "Utiliser la photo", install: "Installer", settings: "Paramètres", newChat: "Nouveau chat", deleteChat: "Supprimer le chat"},
-      'es': { languageName: "Español", languageNames: { ar: 'Árabe', en: 'Inglés', fr: 'Francés', es: 'Español', zh: 'Chino' }, welcomeSubject: "Bienvenido. Estoy listo para ayudarte con {subject}. Haz tu pregunta.", placeholder: "Escribe tu mensaje o consulta de código...", you: "Tú", deleteMessage: "Eliminar mensaje", listening: "Escuchando...", send: "Enviar", speak: "Hablar", shareApp: "Compartir aplicación", copy: "Copiar", copied: "Copiado", backToChat: "Volver al chat", attachFile: "Adjuntar archivo", cancel: "Cancelar", usePhoto: "Usar foto", install: "Instalar", settings: "Ajustes", newChat: "Nuevo chat", deleteChat: "Eliminar chat"},
-      'zh': { languageName: "中文", languageNames: { ar: '阿拉伯语', en: '英语', fr: '法语', es: '西班牙语', zh: '中文' }, welcomeSubject: "欢迎。我准备好帮助你学习{subject}。请提问。", placeholder: "在此输入你的消息或编程问题...", you: "你", deleteMessage: "删除消息", listening: "正在听...", send: "发送", speak: "说话", shareApp: "分享应用", copy: "复制", copied: "已复制", backToChat: "返回聊天", attachFile: "附加文件", cancel: "取消", usePhoto: "使用照片", install: "安装", settings: "设置", newChat: "新聊天", deleteChat: "删除聊天"}
-    };
+    
+    function closeHistorySidebar() { 
+        historySidebar.classList.remove('open'); 
+        sidebarOverlay.classList.remove('open'); 
+    }
+    
+    function renderHistoryList() { 
+        historyList.innerHTML = ''; 
+        if (allChatSessions.length === 0) { 
+            historyList.innerHTML = `<li style="cursor: default; opacity: 0.7; justify-content: center;">لا يوجد سجل بعد</li>`; 
+            return; 
+        } 
+        allChatSessions.forEach(session => { 
+            const li = document.createElement('li'); 
+            if (session.id === currentChatId) { 
+                li.classList.add('active'); 
+            } 
+            const firstUserMsg = session.messages.find(m => m.sender === 'user'); 
+            const titleText = firstUserMsg ? (firstUserMsg.images.length > 0 ? `[صورة] ${firstUserMsg.text}`.trim() : firstUserMsg.text) : "محادثة جديدة"; 
+            li.innerHTML = `<span class="history-item-title">${titleText}</span><button class="delete-history-item-btn" title="حذف المحادثة"><i class="fas fa-trash"></i></button>`; 
+            li.querySelector('.history-item-title').addEventListener('click', () => { 
+                if (session.id !== currentChatId) { 
+                    loadChat(session.id); 
+                } 
+                closeHistorySidebar(); 
+            }); 
+            li.querySelector('.delete-history-item-btn').addEventListener('click', (e) => { 
+                e.stopPropagation(); 
+                if (confirm("هل أنت متأكد من حذف هذه المحادثة؟")) { 
+                    const sessionIndex = allChatSessions.findIndex(s => s.id === session.id); 
+                    if (sessionIndex > -1) { 
+                        allChatSessions.splice(sessionIndex, 1); 
+                        if(session.id === currentChatId) { 
+                            const nextSession = allChatSessions[0] || null; 
+                            loadChat(nextSession ? nextSession.id : null); 
+                        } 
+                        saveAllChatSessionsToLocalStorage(); 
+                        renderHistoryList(); 
+                    } 
+                } 
+            }); 
+            historyList.appendChild(li); 
+        }); 
+    }
 
-    initializeApp();
+    // جعل الدوال متاحة عالمياً للاستدعاء من HTML
+    window.removeFileFromPreview = removeFileFromPreview;
+    window.openCamera = openCamera;
   </script>
 </body>
 </html>
